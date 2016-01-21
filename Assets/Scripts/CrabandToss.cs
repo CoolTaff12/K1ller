@@ -69,17 +69,17 @@ public class CrabandToss : MonoBehaviour
         }
     }
 
-    void OnCollisionEnter(Collision col)
-    {
-        Debug.Log("Wow");
-        if(GotTheBall == false)
-        {
-            if (col.gameObject.tag == "Ball")
-            {
-                Destroy(col.gameObject);
-                GrabBall.SetActive(true);
-                GotTheBall = true;
-            }
-        }
-    }
+//    void OnCollisionEnter(Collision col)
+//    {
+//        Debug.Log("Wow");
+//        if(GotTheBall == false)
+//        {
+//            if (col.gameObject.tag == "Ball")
+//            {
+//                Destroy(col.gameObject);
+//                GrabBall.SetActive(true);
+//                GotTheBall = true;
+//            }
+//        }
+//    }
 }
