@@ -4,13 +4,15 @@ using System.Collections;
 public class DodgeBallScript : MonoBehaviour
 {
     public AudioClip[] audioClips;
+	public PlayerTarget playerInfo;
+	public int thrownByTeam = 1;
 
     // Use this for initialization
     void Start () {
 	
 	}
 	
-	// Update is called once per frame
+	// Update is called once per frame;
 	void Update () {
 	
 	}
@@ -24,9 +26,18 @@ public class DodgeBallScript : MonoBehaviour
 
     void OnCollisionEnter(Collision col)
     {
-        if (col.gameObject.tag != "Player")
+        if (col.gameObject.tag == "Player")
         {
-            PlaySound(0);
+			playerInfo = col.gameObject.GetComponent<PlayerTarget>();
+			if (playerInfo.teamNumber != thrownByTeam) {
+				playerInfo.health -= 1;
+			}
+
         }
+		else if (col.gameObject.tag != "Player")
+		{
+			PlaySound(0);
+		}
+
     }
 }
