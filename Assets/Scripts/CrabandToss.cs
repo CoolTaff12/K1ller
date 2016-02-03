@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityStandardAssets.CrossPlatformInput;
 using System.Collections;
 
 public class CrabandToss : MonoBehaviour
@@ -7,6 +8,8 @@ public class CrabandToss : MonoBehaviour
     public GameObject GrabBall;
     public GameObject TossBall;
     public bool GotTheBall;
+   /* private bool m_Grab;
+    private bool m_Shoot;*/
     public float speed;
     public GameObject head;
 
@@ -50,13 +53,22 @@ public class CrabandToss : MonoBehaviour
         {
             ShootBall();
         }
+     /*   // the shoot state needs to read here to make sure it is not missed
+        if (!m_Grab)
+        {
+            m_Grab = CrossPlatformInputManager.GetButtonDown("Fire1");
+        }
+        if (!m_Shoot)
+        {
+            m_Shoot = CrossPlatformInputManager.GetButtonDown("Fire2");
+        }*/
 
     }
 
 
     void ShootBall()
     {
-        if (Input.GetKeyUp(KeyCode.F))
+        if (Input.GetKeyUp(KeyCode.F) || CrossPlatformInputManager.GetButtonDown("Fire2"))
         {
             GrabBall.SetActive(false);
             /*Vector3 Distance = new Vector3(transform.position.x, transform.position.y + 0.8f,

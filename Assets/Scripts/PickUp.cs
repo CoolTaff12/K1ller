@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityStandardAssets.CrossPlatformInput;
 using System.Collections;
 
 public class PickUp : MonoBehaviour {
@@ -28,7 +29,8 @@ public class PickUp : MonoBehaviour {
 		if (Physics.SphereCast (transform.position, rayRadius,  transform.forward, out hit, rayDistance)) {
 			if(hit.collider.GetComponent<DodgeBallScript>() != null){
 				print ("Ball!");
-				if(Input.GetKeyDown(KeyCode.E)){
+				if(Input.GetKeyDown(KeyCode.E) || CrossPlatformInputManager.GetButtonDown("Fire1"))
+                {
 					crab.GrabBall.SetActive(true);
 					Destroy(hit.collider.gameObject);
 					crab.GotTheBall = true;
@@ -64,7 +66,7 @@ public class PickUp : MonoBehaviour {
 
     void InputtingKeys()
     {
-        if (Input.GetKey("c"))
+        if (Input.GetKey("c") || CrossPlatformInputManager.GetButton("Crouch"))
         { // press C to crouch
           //    vScale = 0.5f;
             ParentFPC.GetComponent<UnityStandardAssets.Characters.FirstPerson.FirstPersonController>().m_WalkSpeed = 3f;
