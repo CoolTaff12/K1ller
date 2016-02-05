@@ -32,7 +32,11 @@ public class PickUp : MonoBehaviour {
 				if(Input.GetKeyDown(KeyCode.E) || CrossPlatformInputManager.GetButtonDown("Fire1"))
                 {
 					crab.GrabBall.SetActive(true);
-					Destroy(hit.collider.gameObject);
+                    crab.GrabBall.GetComponent<Renderer>().material = hit.collider.gameObject.GetComponent<Renderer>().material;
+                    //Changes the balls material to the material the player caught.
+                 //   crab.GrabBall.renderer
+                    //crab.GrabBall.renderer.material.mainTexture = 
+                    Destroy(hit.collider.gameObject);
 					crab.GotTheBall = true;
 
 				}
@@ -66,7 +70,7 @@ public class PickUp : MonoBehaviour {
 
     void InputtingKeys()
     {
-        if (Input.GetKey("c") || CrossPlatformInputManager.GetButton("Crouch"))
+        if (CrossPlatformInputManager.GetButton("Crouch"))
         { // press C to crouch
           //    vScale = 0.5f;
             ParentFPC.GetComponent<UnityStandardAssets.Characters.FirstPerson.FirstPersonController>().m_WalkSpeed = 3f;

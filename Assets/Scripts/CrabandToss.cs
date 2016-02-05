@@ -68,7 +68,7 @@ public class CrabandToss : MonoBehaviour
 
     void ShootBall()
     {
-        if (Input.GetKeyUp(KeyCode.F) || CrossPlatformInputManager.GetButtonDown("Fire2"))
+        if (CrossPlatformInputManager.GetButtonDown("Fire2"))
         {
             GrabBall.SetActive(false);
             /*Vector3 Distance = new Vector3(transform.position.x, transform.position.y + 0.8f,
@@ -76,6 +76,7 @@ public class CrabandToss : MonoBehaviour
             Quaternion Direction = new Quaternion(transform.rotation.x, transform.rotation.y - 180f,
                                                                     transform.rotation.z);*/
             GameObject SpeedingBall = Instantiate(TossBall, Marker.transform.position, Marker.transform.rotation) as GameObject;
+            SpeedingBall.GetComponent<Renderer>().material = GrabBall.GetComponent<Renderer>().material;
             Rigidbody rb = SpeedingBall.GetComponent<Rigidbody>();
             rb.AddForce(head.transform.forward * speed);
          //   instantiatedBall.AddForce(instantiatedBall.transform.forward * speed);

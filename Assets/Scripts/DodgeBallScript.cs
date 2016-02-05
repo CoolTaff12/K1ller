@@ -3,13 +3,14 @@ using System.Collections;
 
 public class DodgeBallScript : MonoBehaviour
 {
-    public AudioClip[] audioClips;
+    public AudioClip[] audioClips = new AudioClip[1];
 	public PlayerTarget playerInfo;
 	public int thrownByTeam = 1;
 
     // Use this for initialization
-    void Start () {
-	
+    void Start ()
+    {
+        audioClips[0] = Resources.Load("Basketball-BallBounce") as AudioClip;
 	}
 	
 	// Update is called once per frame;

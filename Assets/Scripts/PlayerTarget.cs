@@ -4,6 +4,7 @@ using System.Collections;
 public class PlayerTarget : MonoBehaviour {
 	public int teamNumber;
 	public float health = 1f;
+    public int killed = 1;
 	public bool killable = true;
 	public Transform[] Bodyparts;
 
@@ -26,5 +27,12 @@ public class PlayerTarget : MonoBehaviour {
 			bpart.parent = null;
 			rb.isKinematic = false;  	
 		}
-	}
+        if(killed == 1)
+        {
+            Bodyparts[0].gameObject.AddComponent<AudioSource>();
+            Bodyparts[0].gameObject.AddComponent<DodgeBallScript>();
+            Bodyparts[0].gameObject.GetComponent<DodgeBallScript>().playerInfo = null;
+            killed = 0;
+        }
+    }
 }
