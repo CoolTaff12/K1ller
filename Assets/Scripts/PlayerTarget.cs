@@ -6,6 +6,7 @@ public class PlayerTarget : MonoBehaviour {
 	public float health = 1f;
     public int killed = 1;
 	public bool killable = true;
+	public bool dead = false;
 	public Transform[] Bodyparts;
 
 	// Use this for initialization
@@ -15,8 +16,9 @@ public class PlayerTarget : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (health <= 0) {
+		if (health <= 0 && !dead) {
 			RemoveChild ();
+			dead = true;
 		}
 	
 	}
