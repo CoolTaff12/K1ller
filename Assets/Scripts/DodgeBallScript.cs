@@ -6,11 +6,13 @@ public class DodgeBallScript : MonoBehaviour
     public AudioClip[] audioClips = new AudioClip[1];
 	public PlayerTarget playerInfo;
 	public int thrownByTeam = 1;
+    public GameObject Sparks;
 
     // Use this for initialization
     void Start ()
     {
         audioClips[0] = Resources.Load("Basketball-BallBounce") as AudioClip;
+        Sparks = Resources.Load("New Import/Particles/child prefabs/enmy Death") as GameObject;
 	}
 	
 	// Update is called once per frame;
@@ -35,10 +37,15 @@ public class DodgeBallScript : MonoBehaviour
 			}
 
         }
-		else if (col.gameObject.tag != "Player")
-		{
-			PlaySound(0);
-		}
+        if (col.gameObject.tag == "ForceField")
+        {
+           GameObject Sparked = (GameObject) Instantiate(Sparks, transform.position, Quaternion.identity);
+            Destroy(Sparked, 3f);
+        }
+        else if (col.gameObject.tag != "Player" || col.gameObject.tag != "ForceField")
+        {
+            PlaySound(0);
+        }
 
     }
 }
