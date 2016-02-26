@@ -11,8 +11,8 @@ public class DodgeBallScript : MonoBehaviour
     // Use this for initialization
     void Start ()
     {
-        audioClips[0] = Resources.Load("Basketball-BallBounce") as AudioClip;
-        Sparks = Resources.Load("New Import/Particles/child prefabs/enmy Death") as GameObject;
+        audioClips[0] = Resources.Load("Sound/Basketball-BallBounce") as AudioClip;
+        Sparks = Resources.Load("Particles/child prefabs/enmy Death") as GameObject;
 	}
 	
 	// Update is called once per frame;
