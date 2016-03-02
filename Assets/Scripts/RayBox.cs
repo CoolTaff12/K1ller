@@ -54,7 +54,7 @@ public class RayBox : MonoBehaviour
 		if (Physics.Raycast (transform.position, fwd, out hit) && hit.distance <= 1f) {
 			targetObject = hit.transform.gameObject;
 			targetHash = hit.transform.gameObject.GetHashCode ();
-			Debug.Log ("id: " + boxId + "\nHash " + targetHash);
+			//Debug.Log ("id: " + boxId + "\nHash " + targetHash);
 /*DEBUG*/		//Debug.Log("id: " + boxId + " - " + hit.transform.gameObject.name);
 		} else {
 			targetHash = 0;
