@@ -14,6 +14,7 @@ public class PlayerController : NetworkBehaviour
     private CharacterController CController;
     private Camera PlayersCamera;
     private Vector3 OriginalCameraPosition;
+    Rigidbody rigiB;
 
     public string axisX = "Horizontal";
     public string axisY = "Vertical";
@@ -26,6 +27,7 @@ public class PlayerController : NetworkBehaviour
     {
         GameObject PreviewCamera = GameObject.Find("Preview Camera");
         Destroy(PreviewCamera);
+        rigiB = gameObject.GetComponent<Rigidbody>();
         CController = GetComponent<CharacterController>();
         PlayersCamera = gameObject.GetComponentInChildren<Camera>();
         OriginalCameraPosition = PlayersCamera.transform.localPosition;
@@ -40,8 +42,8 @@ public class PlayerController : NetworkBehaviour
         if(isLocalPlayer)
         {
             GettingInput();
-            transform.position += Input.GetAxis(axisX) * Vector3.right * speed * Time.deltaTime;
-            transform.position += Input.GetAxis(axisY) * Vector3.forward * speed * Time.deltaTime;
+            rigiB.velocity = Input.GetAxis(axisX) * new Vector3(speed, rigiB.velocity.y, rigiB.velocity.z);
+            rigiB.velocity = Input.GetAxis(axisY) * new Vector3(rigiB.velocity.x, rigiB.velocity.y, speed);
             PreviouslyGrounded = CController.isGrounded;
         }
     }

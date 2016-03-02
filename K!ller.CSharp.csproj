@@ -52,6 +52,9 @@
     <Reference Include="UnityEngine">
       <HintPath>Library\UnityAssemblies\UnityEngine.dll</HintPath>
     </Reference>
+    <Reference Include="UnityEngine.Advertisements">
+      <HintPath>Library\UnityAssemblies\UnityEngine.Advertisements.dll</HintPath>
+    </Reference>
     <Reference Include="UnityEngine.UI">
       <HintPath>Library\UnityAssemblies\UnityEngine.UI.dll</HintPath>
     </Reference>
@@ -69,11 +72,15 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\MatchmakingManager.cs" />
+    <Compile Include="Assets\Scripts\BasicMovement.cs" />
     <Compile Include="Assets\Scripts\CrabandToss.cs" />
     <Compile Include="Assets\Scripts\DodgeBallScript.cs" />
+    <Compile Include="Assets\Scripts\Parkour.cs" />
     <Compile Include="Assets\Scripts\PickUp.cs" />
     <Compile Include="Assets\Scripts\PlayerController.cs" />
     <Compile Include="Assets\Scripts\PlayerTarget.cs" />
+    <Compile Include="Assets\Scripts\RayBox.cs" />
     <Compile Include="Assets\Scripts\TrampScript.cs" />
   </ItemGroup>
   <ItemGroup>
