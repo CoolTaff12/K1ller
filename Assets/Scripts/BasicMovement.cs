@@ -18,17 +18,39 @@ public class BasicMovement : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if (Input.GetKey (KeyCode.W)) {
-			rb.velocity = new Vector3 (rb.velocity.y, rb.velocity.y, speed);
+			rb.velocity = transform.forward * speed;
 		}
 		if (Input.GetKey (KeyCode.A)) {
-			rb.velocity = new Vector3 (speed, rb.velocity.y, rb.velocity.z);
+			var vl = transform.right;
+			vl.y = 0.0f;
+			vl.z = 0.0f;
+			vl.Normalize();
+			vl *= -Input.GetAxis("Horizontal") * speed;
+			vl.y = rb.velocity.y;
+			vl.z = rb.velocity.z;
+			rb.velocity = vl;
 		}
 		if (Input.GetKey (KeyCode.S)) {
-			rb.velocity = new Vector3 (rb.velocity.y, rb.velocity.y, -speed);
+			var vb = transform.forward;
+			vb.y = 0.0f;
+			vb.x = 0.0f;
+			vb.Normalize();
+			vb *= -Input.GetAxis("Vertical") * speed;
+			vb.y = rb.velocity.y;
+			vb.x = rb.velocity.x;
+			rb.velocity = vb;
 		}
 		if (Input.GetKey (KeyCode.D)) {
-			rb.velocity = new Vector3 (-speed, rb.velocity.y, rb.velocity.z);
+			var vr = transform.right;
+			vr.y = 0.0f;
+			vr.z = 0.0f;
+			vr.Normalize();
+			vr *= Input.GetAxis("Horizontal") * speed;
+			vr.y = rb.velocity.y;
+			vr.z = rb.velocity.z;
+			rb.velocity = vr;
 		}
+
 		if (Input.GetKey (KeyCode.LeftShift) && !Input.GetKey(KeyCode.S) && m_IsGrounded){
 			speed = 4;
 		}
