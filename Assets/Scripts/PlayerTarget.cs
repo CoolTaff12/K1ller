@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.Networking;
 
-public class PlayerTarget : MonoBehaviour {
+public class PlayerTarget : NetworkBehaviour {
 	public int teamNumber;
 	public float health = 1f;
     public int killed = 1;
@@ -19,8 +20,7 @@ public class PlayerTarget : MonoBehaviour {
 		if (health <= 0 && !dead) {
 			RemoveChild ();
 			dead = true;
-		}
-	
+		}	
 	}
 	public void RemoveChild(){
 		foreach (Transform bpart in Bodyparts){
