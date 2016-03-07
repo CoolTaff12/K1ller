@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Scenes/NetworkOptions.unity
+- path: Assets/Scenes/HermanTest.unity
   isLoaded: 1
   isActive: 1
