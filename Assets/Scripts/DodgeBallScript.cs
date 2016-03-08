@@ -1,23 +1,34 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.Networking;
 
-public class DodgeBallScript : MonoBehaviour
+public class DodgeBallScript : NetworkBehaviour
 {
     public AudioClip[] audioClips = new AudioClip[1];
 	public PlayerTarget playerInfo;
 	public int thrownByTeam = 1;
     public GameObject Sparks;
+    [SerializeField]
+    private Transform myTransform;
 
     // Use this for initialization
     void Start ()
     {
-        audioClips[0] = Resources.Load("Sound/Basketball-BallBounce") as AudioClip;
-        Sparks = Resources.Load("Particles/child prefabs/enmy Death") as GameObject;
+        if(isLocalPlayer)
+        {
+            audioClips[0] = Resources.Load("Sound/Basketball-BallBounce") as AudioClip;
+            Sparks = Resources.Load("Particles/child prefabs/enmy Death") as GameObject;
+        }
+        else
+        {
+            return;
+        }
 	}
 	
 	// Update is called once per frame;
-	void Update () {
-	
+	void Update ()
+    {
+	 
 	}
     //-----------------Play Audio------------------------
     //This will take the gameobjects AudioSource to switch the audioclips

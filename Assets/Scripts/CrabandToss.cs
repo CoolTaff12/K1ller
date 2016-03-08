@@ -77,6 +77,7 @@ public class CrabandToss : MonoBehaviour
                                                                     transform.rotation.z);*/
             GameObject SpeedingBall = Instantiate(TossBall, Marker.transform.position, Marker.transform.rotation) as GameObject;
             SpeedingBall.GetComponent<Renderer>().material = GrabBall.GetComponent<Renderer>().material;
+        //  SpeedingBall.GetComponent<Renderer>().material.SetTexture = 
             Rigidbody rb = SpeedingBall.GetComponent<Rigidbody>();
             rb.AddForce(head.transform.forward * speed);
          //   instantiatedBall.AddForce(instantiatedBall.transform.forward * speed);
