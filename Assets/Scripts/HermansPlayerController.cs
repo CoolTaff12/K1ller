@@ -15,7 +15,7 @@ public class HermansPlayerController : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        rig = GameObject.GetCompontent<Rigidbody>();
+        rig = gameObject.GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
@@ -26,7 +26,7 @@ public class HermansPlayerController : MonoBehaviour
 
         float rStickX = Input.GetAxis("X360_RStickX");
 
-        Vector3 movement = transform.transformDirection(new Vector3(hAxis, 0, vAxis) * speed * Time.deltaTime);
+        Vector3 movement = transform.TransformDirection(new Vector3(hAxis, 0, vAxis) * speed * Time.deltaTime);
 
         rig.MovePosition(transform.position + movement);
 
