@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Scenes/NetworkMenu.unity
+- path: Assets/Scenes/HermanGympasal.unity
   isLoaded: 1
   isActive: 1
