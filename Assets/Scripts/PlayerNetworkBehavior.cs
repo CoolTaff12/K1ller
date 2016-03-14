@@ -9,14 +9,16 @@ public class PlayerNetworkBehavior : NetworkBehaviour {
 	public PlayerTarget playerTarget;
 	// Use this for initialization
 	void Start () {
-		if (!isLocalPlayer) return;
+		if (isLocalPlayer) {
+			cat = gameObject.GetComponent<CrabandToss> ();
+			playerTarget = gameObject.GetComponent <PlayerTarget> ();
 
-		cat = gameObject.GetComponent<CrabandToss> ();
-		playerTarget = gameObject.GetComponent <PlayerTarget> ();
-
-		cam.enabled = true;
-		cat.enabled = true;
-		playerTarget.enabled = true;
+			cat.enabled = true;
+			playerTarget.enabled = true;
+		} else {
+			cam.enabled = false;
+			return;
+		}
 	}
 	
 	// Update is called once per frame

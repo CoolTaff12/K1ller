@@ -6,6 +6,7 @@ public class DodgeBallScript : NetworkBehaviour
 {
     public AudioClip[] audioClips = new AudioClip[1];
 	public PlayerTarget playerInfo;
+	[SyncVar]
 	public int thrownByTeam = 1;
     public GameObject Sparks;
     [SerializeField]

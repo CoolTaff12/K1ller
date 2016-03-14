@@ -1,8 +1,9 @@
 ﻿using UnityEngine;
 using UnityStandardAssets.CrossPlatformInput;
 using System.Collections;
+using UnityEngine.Networking;
 
-public class CrabandToss : MonoBehaviour
+public class CrabandToss : NetworkBehaviour
 {
     public int team;
     public GameObject GrabBall;
@@ -14,7 +15,7 @@ public class CrabandToss : MonoBehaviour
     public GameObject head;
 
     public GameObject Marker;
-    private GameObject Cam;
+	//    private GameObject Cam;
     Ray ray;
     Camera Aim;
     public AudioClip[] audioClips;
@@ -32,7 +33,7 @@ public class CrabandToss : MonoBehaviour
     void Start ()
     {
 //       Marker = GameObject.Find("Shoot it,");
-       Cam = GameObject.Find("FirstPersonCharacter");
+//       Cam = GameObject.Find("FirstPersonCharacter");
      //  Aim = Cam;
        GrabBall.SetActive(false);
         if(team == 1)
@@ -78,6 +79,7 @@ public class CrabandToss : MonoBehaviour
             GameObject SpeedingBall = Instantiate(TossBall, Marker.transform.position, Marker.transform.rotation) as GameObject;
             SpeedingBall.GetComponent<Renderer>().material = GrabBall.GetComponent<Renderer>().material;
         //  SpeedingBall.GetComponent<Renderer>().material.SetTexture = 
+			NetworkServer.Spawn(SpeedingBall);
             Rigidbody rb = SpeedingBall.GetComponent<Rigidbody>();
             rb.AddForce(head.transform.forward * speed);
          //   instantiatedBall.AddForce(instantiatedBall.transform.forward * speed);
