@@ -1,22 +1,36 @@
 ﻿using UnityEngine;
-using System.Collections;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 using UnityEngine.Networking;
 using UnityEngine.Networking.Match;
 using UnityEngine.Networking.Types;
-using UnityEngine.UI;
+using System.Collections;
+using System.Collections.Generic;
 
 public class MatchmakingManager : NetworkManager
 {
 
+    [SerializeField]
+    private List<MatchDesc> matchList = new List<MatchDesc>();
+    private bool matchCreated;
     private NetworkMatch networkMatch;
+    public GameObject[] PanelNr;
 
 	// Use this for initialization
-	void Start () {
-	
+	void Start ()
+    {
+        if(Application.loadedLevel == 0)
+        {
+            PanelNr = new GameObject[4];
+            PanelNr[0] = GameObject.Find("Panel");
+            PanelNr[1] = GameObject.Find("Map Panel");
+            PanelNr[1].SetActive(false);
+            PanelNr[0].SetActive(true);
+        }
 	}
-	
-	// Update is called once per frame
-	void Update ()
+
+    // Update is called once per frame
+    void Update ()
     {
 	    if(networkMatch == null)
         {
@@ -46,6 +60,30 @@ public class MatchmakingManager : NetworkManager
         NetworkManager.singleton.StartClient();
     }
 
+    public void SelectMap()
+    {
+        PanelNr[1].SetActive(true);
+        PanelNr[0].SetActive(false);
+    }
+
+    public void Gym()
+    {
+        onlineScene = "HermanGympasal";
+        StartupHost();
+    }
+
+    public void Arena()
+    {
+        onlineScene = "HermanArenaTest";
+        StartupHost();
+    }
+
+    public void Chinese()
+    {
+        onlineScene = "Chinese";
+        StartupHost();
+    }
+
     void SetIPAddress()
     {
         string ipAdress = GameObject.Find("InputFieldIPAddress").transform.FindChild("Text").GetComponent<Text>().text;
@@ -61,7 +99,7 @@ public class MatchmakingManager : NetworkManager
     {
         if(level == 0)
         {
-            //     SetUpMenuSceneButton();
+            SetUpMenuSceneButton();
             StartCoroutine(SetUpMenuSceneButton());
         }
         else
@@ -82,8 +120,8 @@ public class MatchmakingManager : NetworkManager
 
     void SetUpOtherMenuSceneButton()
     {
-        GameObject.Find("Disconect").GetComponent<Button>().onClick.RemoveAllListeners();
-        GameObject.Find("Disconect").GetComponent<Button>().onClick.AddListener(NetworkManager.singleton.StopHost);
+    /*  GameObject.Find("Disconect").GetComponent<Button>().onClick.RemoveAllListeners();
+        GameObject.Find("Disconect").GetComponent<Button>().onClick.AddListener(NetworkManager.singleton.StopHost);*/
     }
 
 }
