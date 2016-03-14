@@ -8,6 +8,7 @@ public class PickUp : NetworkBehaviour {
 	public float rayDistance;
 	public float rayRadius;
 	public GameObject ParentFPC;
+	public GameObject currentBall;
 	public CrabandToss crab;
     [SerializeField]
     private bool m_IsCrouching;
@@ -32,13 +33,13 @@ public class PickUp : NetworkBehaviour {
 				print ("Ball!");
 				if(Input.GetKeyDown(KeyCode.E) || CrossPlatformInputManager.GetButtonDown("Fire1"))
                 {
+					currentBall = hit.collider.gameObject;
 					crab.GrabBall.SetActive(true);
-                    crab.GrabBall.GetComponent<Renderer>().material = hit.collider.gameObject.GetComponent<Renderer>().material;
+					crab.GrabBall.GetComponent<Renderer>().material = currentBall.GetComponent<Renderer>().material;
                     //Changes the balls material to the material the player caught.
                  //   crab.GrabBall.renderer
                     //crab.GrabBall.renderer.material.mainTexture = 
-					NetworkServer.Destroy (hit.collider.gameObject);
-                    Destroy(hit.collider.gameObject);
+					CmdDestroyOnNetwork(currentBall);
 					crab.GotTheBall = true;
 
 				}
@@ -100,4 +101,8 @@ public class PickUp : NetworkBehaviour {
                 break;
         }
     }*/
+	[Command]
+	public void CmdDestroyOnNetwork(GameObject go){
+		NetworkServer.Destroy (go);
+	}
 }
