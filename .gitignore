@@ -20,7 +20,6 @@ ExportedObj/
 *.svd
 *.dll
 *.log
-*.info
 
 
 # Unity3D generated meta files
