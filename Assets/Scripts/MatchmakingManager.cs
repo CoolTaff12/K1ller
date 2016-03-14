@@ -48,13 +48,42 @@ public class MatchmakingManager : NetworkManager
 
     void SetIPAddress()
     {
-        string ipAdress = GameObject.Find("InputFieldIPAddress").transform.FindChild("Test").GetComponent<Text>().text;
+        string ipAdress = GameObject.Find("InputFieldIPAddress").transform.FindChild("Text").GetComponent<Text>().text;
         NetworkManager.singleton.networkAddress = ipAdress;
     }
 
     void SetPort()
     {
         NetworkManager.singleton.networkPort = 7777;
+    }
+
+    void OnLevelWasLoaded(int level)
+    {
+        if(level == 0)
+        {
+            //     SetUpMenuSceneButton();
+            StartCoroutine(SetUpMenuSceneButton());
+        }
+        else
+        {
+            SetUpOtherMenuSceneButton();
+        }
+    }
+
+    IEnumerator SetUpMenuSceneButton()
+    {
+        yield return new WaitForSeconds(0.3f);
+        GameObject.Find("Host Match").GetComponent<Button>().onClick.RemoveAllListeners();
+        GameObject.Find("Host Match").GetComponent<Button>().onClick.AddListener(StartupHost);
+
+        GameObject.Find("Find Match").GetComponent<Button>().onClick.RemoveAllListeners();
+        GameObject.Find("Find Match").GetComponent<Button>().onClick.AddListener(JoinGameNow);
+    }
+
+    void SetUpOtherMenuSceneButton()
+    {
+        GameObject.Find("Disconect").GetComponent<Button>().onClick.RemoveAllListeners();
+        GameObject.Find("Disconect").GetComponent<Button>().onClick.AddListener(NetworkManager.singleton.StopHost);
     }
 
 }
