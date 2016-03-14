@@ -1,8 +1,9 @@
 ﻿using UnityEngine;
 using UnityStandardAssets.CrossPlatformInput;
 using System.Collections;
+using UnityEngine.Networking;
 
-public class PickUp : MonoBehaviour {
+public class PickUp : NetworkBehaviour {
 	RaycastHit hit;
 	public float rayDistance;
 	public float rayRadius;
@@ -36,6 +37,7 @@ public class PickUp : MonoBehaviour {
                     //Changes the balls material to the material the player caught.
                  //   crab.GrabBall.renderer
                     //crab.GrabBall.renderer.material.mainTexture = 
+					NetworkServer.Destroy (hit.collider.gameObject);
                     Destroy(hit.collider.gameObject);
 					crab.GotTheBall = true;
 
