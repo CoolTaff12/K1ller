@@ -6,7 +6,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{84419AC8-F740-FF07-8117-9774EF3D3A9E}</ProjectGuid>
+    <ProjectGuid>{135C9710-62F8-4E7A-7975-ACD814F84965}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Assembly-CSharp</AssemblyName>
@@ -45,11 +45,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\MatchmakingManager.cs" />
      <Compile Include="Assets\Scripts\BasicMovement.cs" />
      <Compile Include="Assets\Scripts\CrabandToss.cs" />
      <Compile Include="Assets\Scripts\DodgeBallScript.cs" />
      <Compile Include="Assets\Scripts\HermansPlayerController.cs" />
+     <Compile Include="Assets\Scripts\MatchmakingManager.cs" />
      <Compile Include="Assets\Scripts\Parkour.cs" />
      <Compile Include="Assets\Scripts\PickUp.cs" />
      <Compile Include="Assets\Scripts\PlayerController.cs" />
@@ -57,6 +57,7 @@
      <Compile Include="Assets\Scripts\PlayerTarget.cs" />
      <Compile Include="Assets\Scripts\Player_ID.cs" />
      <Compile Include="Assets\Scripts\RayBox.cs" />
+     <Compile Include="Assets\Scripts\SpriteAnimation.cs" />
      <Compile Include="Assets\Scripts\TrampScript.cs" />
      <None Include="Assets\Standard Assets\Environment\Water\Water4\Shaders\FXWater4Simple.shader" />
      <None Include="Assets\Standard Assets\Environment\Water (Basic)\Shaders\FXWaterBasic.shader" />
@@ -76,7 +77,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="Assembly-CSharp-firstpass.csproj">
-      <Project>{41AFDDE2-A6AE-A41B-A0D4-5132811B8454}</Project>      <Name>Assembly-CSharp-firstpass</Name>    </ProjectReference>
+      <Project>{649ECBA7-9524-5C41-DDAD-497F102C36CD}</Project>      <Name>Assembly-CSharp-firstpass</Name>    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
