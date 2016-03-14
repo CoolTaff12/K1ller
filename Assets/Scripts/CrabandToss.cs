@@ -31,7 +31,7 @@ public class CrabandToss : MonoBehaviour
     // Use this for initialization
     void Start ()
     {
-       Marker = GameObject.Find("Shoot it,");
+//       Marker = GameObject.Find("Shoot it,");
        Cam = GameObject.Find("FirstPersonCharacter");
      //  Aim = Cam;
        GrabBall.SetActive(false);
