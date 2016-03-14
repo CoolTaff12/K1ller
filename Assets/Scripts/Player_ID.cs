@@ -12,8 +12,6 @@ public class Player_ID : NetworkBehaviour
     public override void OnStartLocalPlayer()
     {
         GetNetIdenity();
-        SetIdenity();
-        base.OnStartLocalPlayer();
     }
 
     // Use this for initialization
@@ -25,9 +23,12 @@ public class Player_ID : NetworkBehaviour
 	// Update is called once per frame
 	void Update ()
     {
-	   if(myTransform.name == "" || myTransform.name == "Warrior(Clone)")
+        if(myTransform !=null)
         {
-            SetIdenity();
+            if (myTransform.name == "Warrior(Clone)" || myTransform.name == "Warrior")
+            {
+                SetIdenity();
+            }
         }
 	}
 
