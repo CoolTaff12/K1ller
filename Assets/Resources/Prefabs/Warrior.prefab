@@ -47,6 +47,7 @@ GameObject:
   - 20: {fileID: 2028372}
   - 81: {fileID: 8144386}
   - 114: {fileID: 11434398}
+  - 114: {fileID: 11446698}
   m_Layer: 0
   m_Name: FirstPersonCharacter
   m_TagString: MainCamera
@@ -559,7 +560,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 156958}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.68135965, y: 2.85, z: -1.9255219}
+  m_LocalPosition: {x: -0.7682284, y: 0.6160587, z: -8.209921}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 462108}
@@ -1279,6 +1280,38 @@ MonoBehaviour:
   RunningSpeed: 0
   tr: {fileID: 0}
   OnAndOff: 0
+--- !u!114 &11446698
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 124938}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 372142912, guid: 870353891bb340e2b2a9c8707e7419ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SceneId:
+    m_Value: 0
+  m_AssetId:
+    i0: 127
+    i1: 229
+    i2: 8
+    i3: 79
+    i4: 119
+    i5: 18
+    i6: 249
+    i7: 148
+    i8: 123
+    i9: 20
+    i10: 173
+    i11: 155
+    i12: 191
+    i13: 224
+    i14: 47
+    i15: 75
+  m_ServerOnly: 0
+  m_LocalPlayerAuthority: 0
 --- !u!114 &11459296
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1726,6 +1759,10 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_TransformSyncMode
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_ServerOnly
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

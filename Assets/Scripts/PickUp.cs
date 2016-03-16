@@ -33,14 +33,21 @@ public class PickUp : NetworkBehaviour {
 				print ("Ball!");
 				if(Input.GetKeyDown(KeyCode.E) || CrossPlatformInputManager.GetButtonDown("Fire1"))
                 {
-					currentBall = hit.collider.gameObject;
-					crab.GrabBall.SetActive(true);
-					crab.GrabBall.GetComponent<Renderer>().material = currentBall.GetComponent<Renderer>().material;
-                    //Changes the balls material to the material the player caught.
-                 //   crab.GrabBall.renderer
-                    //crab.GrabBall.renderer.material.mainTexture = 
-					CmdDestroyOnNetwork(currentBall);
-					crab.GotTheBall = true;
+					if (!crab.GotTheBall) {
+						
+						currentBall = hit.collider.gameObject;
+						DodgeBallScript dBall = currentBall.GetComponent<DodgeBallScript> ();
+						crab.GrabBall.SetActive (true);
+						crab.GrabBall.GetComponent<Renderer> ().material = currentBall.GetComponent<Renderer> ().material;
+						//Changes the balls material to the material the player caught.
+						//   crab.GrabBall.renderer
+						//crab.GrabBall.renderer.material.mainTexture = 
+						crab.GotTheBall = true;
+						dBall.pickedUp = true;
+					} else {
+						Debug.Log ("Already carrying a ball");
+					}
+
 
 				}
 			}
@@ -101,8 +108,5 @@ public class PickUp : NetworkBehaviour {
                 break;
         }
     }*/
-	[Command]
-	public void CmdDestroyOnNetwork(GameObject go){
-		NetworkServer.Destroy (go);
-	}
+
 }
