@@ -4,6 +4,7 @@ using UnityEngine.Networking;
 
 public class DodgeBallScript : NetworkBehaviour
 {
+	public bool pickedUp = false;
     public AudioClip[] audioClips = new AudioClip[1];
 	public PlayerTarget playerInfo;
 	[SyncVar]
@@ -29,7 +30,10 @@ public class DodgeBallScript : NetworkBehaviour
 	// Update is called once per frame;
 	void Update ()
     {
-	 
+		if (pickedUp) {
+			CmdDestroyOnNetwork(gameObject);
+		}
+
 	}
     //-----------------Play Audio------------------------
     //This will take the gameobjects AudioSource to switch the audioclips
@@ -60,4 +64,9 @@ public class DodgeBallScript : NetworkBehaviour
         }
 
     }
+	[Command]
+	public void CmdDestroyOnNetwork(GameObject go){
+		NetworkServer.UnSpawn (go);
+		NetworkServer.Destroy (go);
+	}
 }
