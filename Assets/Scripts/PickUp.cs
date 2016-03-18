@@ -37,10 +37,11 @@ public class PickUp : NetworkBehaviour {
 					crab.GrabBall.SetActive(true);
 					crab.GrabBall.GetComponent<Renderer>().material = currentBall.GetComponent<Renderer>().material;
                     //Changes the balls material to the material the player caught.
-                 //   crab.GrabBall.renderer
+                    //crab.GrabBall.renderer
                     //crab.GrabBall.renderer.material.mainTexture = 
-					CmdDestroyOnNetwork(currentBall);
+
 					crab.GotTheBall = true;
+                    CmdDestroyOnNetwork(currentBall);
 
 				}
 			}
@@ -73,7 +74,7 @@ public class PickUp : NetworkBehaviour {
 
     void InputtingKeys()
     {
-        if (CrossPlatformInputManager.GetButton("Crouch"))
+        if (CrossPlatformInputManager.GetButton("Crouch") && isLocalPlayer)
         { // press C to crouch
           //    vScale = 0.5f;
             ParentFPC.GetComponent<UnityStandardAssets.Characters.FirstPerson.FirstPersonController>().m_WalkSpeed = 3f;
@@ -89,18 +90,6 @@ public class PickUp : NetworkBehaviour {
         }
     }
 
-  /*  void DuckLerp()
-    {
-        switch (OnAndOff)
-        {
-            case 0:
-                text.text = "Add Ships";
-                break;
-            case 1:
-                text.text = "Player Selecting";
-                break;
-        }
-    }*/
 	[Command]
 	public void CmdDestroyOnNetwork(GameObject go){
 		NetworkServer.Destroy (go);
