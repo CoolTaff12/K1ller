@@ -1,8 +1,4 @@
 sceneSetups:
-<<<<<<< HEAD
-- path: Assets/Scenes/Chinese.unity
-=======
-- path: Assets/Scenes/HermanGympasal.unity
->>>>>>> 4947eca4ebb5ce5d73c621353d5ff4786ccd4393
+- path: Assets/Scenes/NetworkMenu.unity
   isLoaded: 1
   isActive: 1
