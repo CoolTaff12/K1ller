@@ -101,11 +101,10 @@ public class PickUp : NetworkBehaviour {
                 break;
         }
     }*/
-<<<<<<< HEAD
+
 	[Command]
 	public void CmdDestroyOnNetwork(GameObject go){
 		NetworkServer.Destroy (go);
 	}
-=======
->>>>>>> ead7ed7dfaee27ca2ae82af60845bdb64a3aeb7e
+
 }
