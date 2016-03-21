@@ -15,17 +15,22 @@ public class MatchmakingManager : NetworkManager
     private bool matchCreated;
     private NetworkMatch networkMatch;
     public GameObject[] PanelNr;
+    GameObject JoinMatchButton;
 
 	// Use this for initialization
 	void Awake ()
     {
-        if(Application.loadedLevel == 0)
+        networkMatch = gameObject.AddComponent<NetworkMatch>();
+        if (Application.loadedLevel == 0)
         {
-            PanelNr = new GameObject[4];
+            PanelNr = new GameObject[5];
             PanelNr[0] = GameObject.Find("Panel");
             PanelNr[1] = GameObject.Find("Map Panel");
             PanelNr[2] = GameObject.Find("Create Room");
             PanelNr[3] = GameObject.Find("Loading");
+            PanelNr[4] = GameObject.Find("List of Matches");
+            JoinMatchButton = Resources.Load("Prefabs/Menu/Join Match Button") as GameObject;
+            PanelNr[4].SetActive(false);
             PanelNr[3].SetActive(false);
             PanelNr[2].SetActive(false);
             PanelNr[1].SetActive(false);
@@ -49,7 +54,7 @@ public class MatchmakingManager : NetworkManager
         }
 	}
 
-    //- NetworkManager_Custome
+    //------------------------------------- NetworkManager_Custome
 
     public void StartupHost()
     {
@@ -64,88 +69,6 @@ public class MatchmakingManager : NetworkManager
         NetworkManager.singleton.StartClient();
     }
 
-    public void FindMatch()
-    {
-        CreatingRoom();
-        hjsgadjasd
-        matchMaker.ListMatches(0, 20, "", OnMatchList);
-    }
-
-    public void SelectMatch()
-    {
-     /*   foreach (var match in matches)
-        {
-            Instantiate(
-            if (GUI.Button(new Rect(xpos, ypos, 200, 20), "Join Match:" + match.name))
-            {
-                matchName = match.name;
-                matchSize = (uint)match.currentSize;
-                matchMaker.JoinMatch(match.networkId, "", manager.OnMatchJoined);
-            }
-            ypos += spacing;
-        }*/
-    }
-
-    public void SelectMap()
-    {
-        PanelNr[3].SetActive(false);
-        PanelNr[2].SetActive(false);
-        PanelNr[1].SetActive(true);
-        PanelNr[0].SetActive(false);
-        StartMatchMaker();
-    }
-
-    public void CreatingRoom()
-    {
-        StartMatchMaker();
-    }
-
-    public void CreateInternetMatch()
-    {
-       SetRoomName();
-       PanelNr[3].SetActive(true);
-        StartCoroutine("LoadingARoom", 5.0f);
-    }
-
-    void LoadingARoom()
-    {
-        matchMaker.CreateMatch(matchName, matchSize, true, "", OnMatchCreate);
-    }
-
-    void SetRoomName()
-    {
-        string RoomName = GameObject.Find("InputFieldRoomName").transform.FindChild("Text").GetComponent<Text>().text;
-        matchName = RoomName;
-        Debug.Log("The amount of matchName is " + matchName);
-        Debug.Log("The amount of matchSize is " + matchSize);
-    }
-
-    void ChangeToCreate()
-    {
-        PanelNr[3].SetActive(false);
-        PanelNr[2].SetActive(true);
-        PanelNr[1].SetActive(false);
-        PanelNr[0].SetActive(false);
-    }
-
-    public void Gym()
-    {
-        onlineScene = "HermanGympasal";
-        ChangeToCreate();
-    }
-
-    public void Arena()
-    {
-        onlineScene = "HermanArenaTest";
-        ChangeToCreate();
-    }
-
-    public void Chinese()
-    {
-        onlineScene = "Chinese";
-        ChangeToCreate();
-        // StartupHost();
-    }
 
     void SetIPAddress()
     {
@@ -160,7 +83,7 @@ public class MatchmakingManager : NetworkManager
 
     void OnLevelWasLoaded(int level)
     {
-        if(level == 0)
+        if (level == 0)
         {
             SetUpMenuSceneButton();
             StartCoroutine(SetUpMenuSceneButton());
@@ -183,8 +106,139 @@ public class MatchmakingManager : NetworkManager
 
     void SetUpOtherMenuSceneButton()
     {
-    /*  GameObject.Find("Disconect").GetComponent<Button>().onClick.RemoveAllListeners();
-        GameObject.Find("Disconect").GetComponent<Button>().onClick.AddListener(NetworkManager.singleton.StopHost);*/
+        /*  GameObject.Find("Disconect").GetComponent<Button>().onClick.RemoveAllListeners();
+            GameObject.Find("Disconect").GetComponent<Button>().onClick.AddListener(NetworkManager.singleton.StopHost);*/
+    }
+
+    //----------------------------Hosting Matches
+
+    public void SelectMap()
+    {
+        PanelNr[4].SetActive(false);
+        PanelNr[3].SetActive(false);
+        PanelNr[2].SetActive(false);
+        PanelNr[1].SetActive(true);
+        PanelNr[0].SetActive(false);
+        StartMatchMaker();
+    }
+
+    public void CreatingRoom()
+    {
+        StartMatchMaker();
+    }
+
+    public void CreateInternetMatch()
+    {
+       SetRoomName();
+       PanelNr[3].SetActive(true);
+        StartCoroutine("LoadingARoom", 5.0f);
+    }
+
+    void LoadingARoom()
+    {
+        CreateMatchRequest create = new CreateMatchRequest();
+        create.name = matchName;
+        create.size = matchSize;
+        create.advertise = true;
+        create.password = "";
+        networkMatch.CreateMatch(create, OnMatchCreate);
+    }
+
+    void SetRoomName()
+    {
+        string RoomName = GameObject.Find("InputFieldRoomName").transform.FindChild("Text").GetComponent<Text>().text;
+        matchName = RoomName;
+    }
+
+    void ChangeToCreate()
+    {
+        PanelNr[4].SetActive(false);
+        PanelNr[3].SetActive(false);
+        PanelNr[2].SetActive(true);
+        PanelNr[1].SetActive(false);
+        PanelNr[0].SetActive(false);
+    }
+
+    //------------------------------------- Finding matches on matchlist
+
+    public void FindMatch()
+    {
+        CreatingRoom();
+        PanelNr[4].SetActive(true);
+        PanelNr[0].SetActive(false);
+        networkMatch.ListMatches(0, 20, "", OnMatchList);
+    }
+
+    //--------------Copy and Paste
+
+    public void OnMatchList(ListMatchResponse matchListResponse)
+    {
+        if (matchListResponse.success && matchListResponse.matches != null)
+        {
+            foreach (var match in matchListResponse.matches)
+            {
+                GameObject MatchChooiceNr = (GameObject)Instantiate(JoinMatchButton, Vector3.zero,
+                Quaternion.identity);
+                MatchChooiceNr.transform.localScale = new Vector3(0.3f, 0.3f, 0.3f);
+                MatchChooiceNr.transform.parent = PanelNr[4].transform;
+                MatchChooiceNr.name = "Join Match: " + match.name;
+                MatchChooiceNr.transform.FindChild("Text").GetComponent<Text>().text = "Join Match: " + "\n" + match.name + "\n";
+                MatchChooiceNr.GetComponent<Button>().onClick.AddListener(() => GameObject.Find("NetworkManager").GetComponent<MatchmakingManager>());
+            }
+         //   networkMatch.JoinMatch(matchListResponse.matches[0].networkId, "", OnMatchJoined);
+        }
+    }
+
+    public void MatchName()
+    {
+        /*networkMatch.JoinMatch(match.networkId, "", OnMatchJoined);*/
+    }
+
+    public void OnMatchJoined(JoinMatchResponse matchJoin)
+    {
+        if (matchJoin.success)
+        {
+            Debug.Log("Join match succeeded");
+            if (matchCreated)
+            {
+                Debug.LogWarning("Match already set up, aborting...");
+                return;
+            }
+            Utility.SetAccessTokenForNetwork(matchJoin.networkId, new NetworkAccessToken(matchJoin.accessTokenString));
+            NetworkClient myClient = new NetworkClient();
+            myClient.RegisterHandler(MsgType.Connect, OnConnected);
+            myClient.Connect(new MatchInfo(matchJoin));
+        }
+        else
+        {
+            Debug.LogError("Join match failed");
+        }
+    }
+
+    public void OnConnected(NetworkMessage msg)
+    {
+        Debug.Log("Connected!");
+    }
+
+    //------------------------ Map selection
+
+    public void Gym()
+    {
+        onlineScene = "HermanGympasal";
+        ChangeToCreate();
+    }
+
+    public void Arena()
+    {
+        onlineScene = "HermanArenaTest";
+        ChangeToCreate();
+    }
+
+    public void Chinese()
+    {
+        onlineScene = "Chinese";
+        ChangeToCreate();
+        // StartupHost();
     }
 
 }

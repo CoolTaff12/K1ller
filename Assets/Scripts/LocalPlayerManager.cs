@@ -9,7 +9,8 @@ public class LocalPlayerManager : GameManager
     // Use this for initialization
     void Start ()
     {
-        if (NetworkM = GameObject.Find("NetworkManager"))
+        Players = GameObject.FindGameObjectsWithTag("Player");
+       /* if (NetworkM = GameObject.Find("NetworkManager"))
         {
             if (!GameManager.IsUsingNework)
             {
@@ -17,7 +18,7 @@ public class LocalPlayerManager : GameManager
             }
             else
                 Destroy(gameObject);
-        }
+        }*/
     }
 	
 	// Update is called once per frame
