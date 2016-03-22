@@ -15,7 +15,7 @@ public class GrabAndToss : MonoBehaviour
 	public GameObject head;
 	public GameObject currentBall;
 	public GameObject holdPos;
-	public DodgeBallScript ballScript;
+	public DodgeBallBehaviour ballScript;
 
 	// Use this for initialization
 	void Start ()
@@ -27,13 +27,13 @@ public class GrabAndToss : MonoBehaviour
 	{
 		Debug.DrawRay (head.transform.position, head.transform.forward, Color.green, rayDistance);
 		if (Physics.SphereCast (head.transform.position, rayRadius, head.transform.forward, out hit, rayDistance)) {
-			if (hit.collider.GetComponent<DodgeBallScript> () != null) {
+			if (hit.collider.GetComponent<DodgeBallBehaviour> () != null) {
 				print ("Ball!");
 				if (Input.GetKeyDown (KeyCode.E) || CrossPlatformInputManager.GetButtonDown ("Fire1")) {
-					if (!hit.collider.GetComponent<DodgeBallScript> ().pickedUp) {
+					if (!hit.collider.GetComponent<DodgeBallBehaviour> ().pickedUp) {
 					currentBall = hit.collider.gameObject;
 					currentBall.transform.SetParent (gameObject.transform);
-					ballScript = hit.collider.gameObject.GetComponent<DodgeBallScript> ();
+					ballScript = hit.collider.gameObject.GetComponent<DodgeBallBehaviour> ();
 					ballScript.GetPickedUp ();
 					//ballScript.holdingPos = holdPos;
 //					ballScript.pickedUp = true;
