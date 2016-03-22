@@ -76,10 +76,10 @@ public class CrabandToss : NetworkBehaviour
                                                                  transform.position.z + 1.4f);
             Quaternion Direction = new Quaternion(transform.rotation.x, transform.rotation.y - 180f,
                                                                     transform.rotation.z);*/
-            GameObject SpeedingBall = Instantiate(TossBall, Marker.transform.position, Marker.transform.rotation) as GameObject;
+			GameObject SpeedingBall = Instantiate(TossBall, Marker.transform.position, Quaternion.identity) as GameObject;
+			CmdSpawnOnServer(SpeedingBall);
             SpeedingBall.GetComponent<Renderer>().material = GrabBall.GetComponent<Renderer>().material;
         //  SpeedingBall.GetComponent<Renderer>().material.SetTexture = 
-			CmdSpawnOnServer(SpeedingBall);
             Rigidbody rb = SpeedingBall.GetComponent<Rigidbody>();
             rb.AddForce(head.transform.forward * speed);
          //   instantiatedBall.AddForce(instantiatedBall.transform.forward * speed);

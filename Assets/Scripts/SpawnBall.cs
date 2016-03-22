@@ -16,7 +16,11 @@ public class SpawnBall : NetworkBehaviour {
 	void OnTriggerEnter(Collider col){
 		if (col.tag == "Player"){
 			GameObject SpeedingBall = Instantiate(ballPrefab, transform.position, Quaternion.identity) as GameObject;
-			NetworkServer.Spawn(SpeedingBall);	
+			CmdSpawnOnServer(SpeedingBall);	
 		}
+	}
+	[Command]
+	public void CmdSpawnOnServer(GameObject go){
+		NetworkServer.Spawn(go);
 	}
 }
