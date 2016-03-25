@@ -19,16 +19,16 @@ public class MatchmakingManager : NetworkManager
     GameObject JoinMatchButton;
 
 	// Use this for initialization
-	void Awake ()
+	void Start ()
     {
         networkMatch = gameObject.AddComponent<NetworkMatch>();
-        if (Application.loadedLevel == 0)
+        if (Application.loadedLevelName == "NetworkMenu")
         {
             PanelNr = new GameObject[5];
             PanelNr[0] = GameObject.Find("Panel");
             PanelNr[1] = GameObject.Find("Map Panel");
             PanelNr[2] = GameObject.Find("Create Room");
-            PanelNr[3] = GameObject.Find("Loading");
+            PanelNr[3] = GameObject.Find("Loading Canvas");
             PanelNr[4] = GameObject.Find("List of Matches");
             JoinMatchButton = Resources.Load("Prefabs/Menu/Join Match Button") as GameObject;
             PanelNr[4].SetActive(false);
@@ -113,7 +113,7 @@ public class MatchmakingManager : NetworkManager
 
     //----------------------------Hosting Matches
 
-    public void SelectMap()
+    public void SelectMap() //--Function that attached to Host Match
     {
         PanelNr[4].SetActive(false);
         PanelNr[3].SetActive(false);
@@ -162,7 +162,7 @@ public class MatchmakingManager : NetworkManager
 
     //------------------------------------- Finding matches on matchlist
 
-    public void FindMatch()
+    public void FindMatch() //--Function that is attached to the FInd Match Button
     {
         CreatingRoom();
         PanelNr[4].SetActive(true);
@@ -210,7 +210,7 @@ public class MatchmakingManager : NetworkManager
             }
             Utility.SetAccessTokenForNetwork(matchJoin.networkId, new NetworkAccessToken(matchJoin.accessTokenString));
             NetworkClient myClient = new NetworkClient();
-            myClient.RegisterHandler(MsgType.Connect, OnConnected);
+            myClient.RegisterHandler(MsgType.Connect, OnClientConnected);
             myClient.Connect(new MatchInfo(matchJoin));
         }
         else
@@ -219,7 +219,7 @@ public class MatchmakingManager : NetworkManager
         }
     }
 
-    public void OnConnected(NetworkMessage msg)
+    public void OnClientConnected(NetworkMessage msg)
     {
         Debug.Log("Connected!");
     }
