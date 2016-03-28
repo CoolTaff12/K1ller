@@ -3,17 +3,21 @@ using System.Collections;
 using UnityStandardAssets.CrossPlatformInput;
 using UnityEngine.Networking;
 
-public class GrabAndToss : MonoBehaviour
+public class GrabAndToss : NetworkBehaviour
 {
 
 	RaycastHit hit;
 	public float rayDistance;
 	public float rayRadius;
+	[SyncVar]
 	public float tossForce;
+	[SyncVar]
 	public bool holdingBall;
 	public GameObject fpc;
 	public GameObject head;
+	[SyncVar]
 	public GameObject currentBall;
+	[SyncVar]
 	public GameObject holdPos;
 	public DodgeBallBehaviour ballScript;
 
@@ -45,10 +49,10 @@ public class GrabAndToss : MonoBehaviour
 		}
 		if (CrossPlatformInputManager.GetButtonDown ("Fire2") && holdingBall) {
 			holdingBall = false;
-			Rigidbody brb = currentBall.GetComponent<Rigidbody> ();
+//			Rigidbody brb = currentBall.GetComponent<Rigidbody> ();
 			currentBall.transform.parent = null;
 			ballScript.Shoot ();
-			brb.AddForce(head.transform.forward * tossForce);
+//			brb.AddForce(head.transform.forward * tossForce);
 			ballScript = null;
 
 		}

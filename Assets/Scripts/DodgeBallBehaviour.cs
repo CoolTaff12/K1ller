@@ -84,6 +84,7 @@ public class DodgeBallBehaviour : NetworkBehaviour {
 		rb.angularVelocity = Vector3.zero;
 		coll.enabled = true;
 		rb.detectCollisions = true;
+		rb.AddForce(gat.head.transform.forward * gat.tossForce);
 		gat = null;
 		pickedUp = false;
 	}
