@@ -9,15 +9,11 @@ public class GrabAndToss : NetworkBehaviour
 	RaycastHit hit;
 	public float rayDistance;
 	public float rayRadius;
-	[SyncVar]
 	public float tossForce;
-	[SyncVar]
 	public bool holdingBall;
 	public GameObject fpc;
 	public GameObject head;
-	[SyncVar]
 	public GameObject currentBall;
-	[SyncVar]
 	public GameObject holdPos;
 	public DodgeBallBehaviour ballScript;
 
@@ -36,7 +32,6 @@ public class GrabAndToss : NetworkBehaviour
 				if (Input.GetKeyDown (KeyCode.E) || CrossPlatformInputManager.GetButtonDown ("Fire1")) {
 					if (!hit.collider.GetComponent<DodgeBallBehaviour> ().pickedUp) {
 					currentBall = hit.collider.gameObject;
-					currentBall.transform.SetParent (gameObject.transform);
 					ballScript = hit.collider.gameObject.GetComponent<DodgeBallBehaviour> ();
 					ballScript.GetPickedUp ();
 					//ballScript.holdingPos = holdPos;

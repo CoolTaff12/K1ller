@@ -8,12 +8,10 @@ public class DodgeBallBehaviour : NetworkBehaviour {
 	public GrabAndToss gat;
 	public Rigidbody rb;
 	public Collider coll;
-	[SyncVar]
 	public int thrownByTeam = 1;
 	public GameObject Sparks;
 	[SerializeField]
 	private Transform myTransform;
-	[SyncVar]
 	public bool pickedUp;
 
 	// Use this for initialization
@@ -21,16 +19,12 @@ public class DodgeBallBehaviour : NetworkBehaviour {
 	{
 		rb = gameObject.GetComponent<Rigidbody> ();
 		coll = gameObject.GetComponent<SphereCollider> ();
-		if(isLocalPlayer)
-		{
+		if (!isLocalPlayer) {
+			return;
+		}
 			audioClips[0] = Resources.Load("Sound/Basketball-BallBounce") as AudioClip;
 			Sparks = Resources.Load("Particles/child prefabs/enmy Death") as GameObject;
 		}
-		else
-		{
-			return;
-		}
-	}
 
 	// Update is called once per frame;
 	void Update ()
