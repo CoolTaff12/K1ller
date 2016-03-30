@@ -29,7 +29,7 @@ public class GrabAndToss : NetworkBehaviour
 		if (Physics.SphereCast (head.transform.position, rayRadius, head.transform.forward, out hit, rayDistance)) {
 			if (hit.collider.GetComponent<DodgeBallBehaviour> () != null) {
 				print ("Ball!");
-				if (Input.GetKeyDown (KeyCode.E) || CrossPlatformInputManager.GetButtonDown ("Fire1")) {
+				if (Input.GetKeyDown (KeyCode.E) || CrossPlatformInputManager.GetButtonDown ("Fire1") && !holdingBall) {
 					if (!hit.collider.GetComponent<DodgeBallBehaviour> ().pickedUp) {
 					currentBall = hit.collider.gameObject;
 					ballScript = hit.collider.gameObject.GetComponent<DodgeBallBehaviour> ();
@@ -45,7 +45,7 @@ public class GrabAndToss : NetworkBehaviour
 		if (CrossPlatformInputManager.GetButtonDown ("Fire2") && holdingBall) {
 			holdingBall = false;
 //			Rigidbody brb = currentBall.GetComponent<Rigidbody> ();
-			currentBall.transform.parent = null;
+//			currentBall.transform.parent = null;
 			ballScript.Shoot ();
 //			brb.AddForce(head.transform.forward * tossForce);
 			ballScript = null;

@@ -67,11 +67,11 @@ public class DodgeBallBehaviour : NetworkBehaviour {
 	public void GetPickedUp(){
 		coll.enabled = false;
 		rb.detectCollisions = false;
+		gat = gameObject.GetComponentInParent<GrabAndToss> ();
 		pickedUp = true;
 		rb.velocity = Vector3.zero;
 		rb.angularVelocity = Vector3.zero;
 		Debug.Log ("hej");
-		gat = gameObject.GetComponentInParent<GrabAndToss> ();
 	}
 	public void Shoot(){
 		rb.velocity = Vector3.zero;
