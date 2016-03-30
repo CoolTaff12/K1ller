@@ -25,7 +25,6 @@ public class testThrowBall : MonoBehaviour
 
 	public void ThrowBall()
 	{
-//		Instantiate (ballPrefab, spawnPoint.transform.position, Quaternion.identity);
 		GameObject ballClone = Instantiate(ballPrefab, spawnPoint.transform.position, Quaternion.identity) as GameObject;
 
 		rb = ballClone.GetComponent<Rigidbody>();

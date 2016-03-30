@@ -24,7 +24,7 @@ public class hermControls : NetworkBehaviour
 	{
 		anim = GetComponent<Animator>();
 		testTB = GetComponent<testThrowBall>();
-//		anim.SetBool("isIdle", true);
+
 
 	}
 
@@ -88,7 +88,8 @@ public class hermControls : NetworkBehaviour
 		if (Input.GetKeyDown(KeyCode.Mouse0))
 		{
 			anim.SetTrigger("isThrowing");
-			testTB.ThrowBall();
+			print("Starting At: " + Time.time);
+			StartCoroutine(WaitForAnimation(0.3F));
 		}
 
 	}
@@ -98,4 +99,16 @@ public class hermControls : NetworkBehaviour
 	{
 		isOnground = Physics.OverlapSphere(groundCheck.position, groundSphere, whatIsTheGround).Length > 0;
 	}
+
+
+	IEnumerator WaitForAnimation(float waitTime) 
+	{
+		yield return new WaitForSeconds(waitTime);
+		print("Throwing at: " + Time.time);
+		testTB.ThrowBall();
+	}
+
+
+
+
 }
