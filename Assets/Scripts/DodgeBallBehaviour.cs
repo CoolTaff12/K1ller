@@ -91,6 +91,7 @@ public class DodgeBallBehaviour : NetworkBehaviour {
 	public void GetPickedUp(GameObject go){
 		Debug.Log ("hej");
 		if (!isServer) {
+			Cmd_GetPickedUp (go);
 			return;}
 		Rpc_GetPickedUp (go);
 		Debug.Log ("hej!");
@@ -98,8 +99,17 @@ public class DodgeBallBehaviour : NetworkBehaviour {
 	public void Shoot(){
 		Debug.Log ("hejdå");
 		if (!isServer) {
+			Cmd_Shoot ();
 			return;}
 	Rpc_Shoot();
 		Debug.Log ("hejdå!");
 }
+	[Command]
+	void Cmd_Shoot(){
+		Rpc_Shoot ();
+	}
+	[Command]
+	void Cmd_GetPickedUp(GameObject go){
+		Rpc_GetPickedUp (go);
+	}
 }
