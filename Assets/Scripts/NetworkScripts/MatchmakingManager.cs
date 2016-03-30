@@ -4,14 +4,13 @@ using UnityEngine.SceneManagement;
 using UnityEngine.Networking;
 using UnityEngine.Networking.Match;
 using UnityEngine.Networking.Types;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 
 public class MatchmakingManager : NetworkManager
 {
 
-    [SerializeField]
-    private List<MatchDesc> matchList = new List<MatchDesc>();
     private MatchDesc currentMatch;
     private bool matchCreated;
     private NetworkMatch networkMatch;
@@ -21,7 +20,11 @@ public class MatchmakingManager : NetworkManager
 	// Use this for initialization
 	void Start ()
     {
+        Debug.Log("Start of start");
         networkMatch = gameObject.AddComponent<NetworkMatch>();
+        //  AppID appid;
+        //appid = 837002;
+        networkMatch.SetProgramAppID((AppID)837002);
         if (Application.loadedLevelName == "NetworkMenu")
         {
             PanelNr = new GameObject[5];
@@ -37,22 +40,13 @@ public class MatchmakingManager : NetworkManager
             PanelNr[1].SetActive(false);
             PanelNr[0].SetActive(true);
         }
-	}
+        Debug.Log("End of start");
+    }
 
     // Update is called once per frame
     void Update ()
     {
-	    if(networkMatch == null)
-        {
-            NetworkMatch nm = GetComponent<NetworkMatch>();   
-            if( nm != null)
-            {
-                networkMatch = nm;
-                //  AppID appid;
-                //appid = 837002;
-                networkMatch.SetProgramAppID((AppID) 837002);
-            }
-        }
+        Debug.Log("U");
 	}
 
     //------------------------------------- NetworkManager_Custome
@@ -132,6 +126,10 @@ public class MatchmakingManager : NetworkManager
     {
        SetRoomName();
        PanelNr[3].SetActive(true);
+        PanelNr[0] = null;
+        PanelNr[1] = null;
+        PanelNr[2] = null;
+        PanelNr[4] = null;
         StartCoroutine("LoadingARoom", 5.0f);
     }
 
@@ -198,24 +196,45 @@ public class MatchmakingManager : NetworkManager
         networkMatch.JoinMatch(currentMatch.networkId, "", OnMatchJoined);
     }
 
-    public void OnMatchJoined(JoinMatchResponse matchJoin)
+    public virtual void OnMatchJoined(JoinMatchResponse matchJoin)
     {
+        PanelNr[3].SetActive(true);
+        PanelNr[0] = null;
+        PanelNr[1] = null;
+        PanelNr[2] = null;
+        PanelNr[4] = null;
+        if (LogFilter.logDebug)
+        {
+            Debug.Log("NetworkManager OnMatchJoined ");
+        }
         if (matchJoin.success)
         {
-            Debug.Log("Join match succeeded");
-            if (matchCreated)
+            try
             {
-                Debug.LogWarning("Match already set up, aborting...");
-                return;
+                Utility.SetAccessTokenForNetwork(matchJoin.networkId, new NetworkAccessToken(matchJoin.accessTokenString));
             }
-            Utility.SetAccessTokenForNetwork(matchJoin.networkId, new NetworkAccessToken(matchJoin.accessTokenString));
-            NetworkClient myClient = new NetworkClient();
-            myClient.RegisterHandler(MsgType.Connect, OnClientConnected);
-            myClient.Connect(new MatchInfo(matchJoin));
+            catch (Exception ex)
+            {
+                if (LogFilter.logError)
+                {
+                    Debug.LogError(ex);
+                }
+            }
+            this.StartClient(new MatchInfo(matchJoin));
         }
-        else
+        else if (LogFilter.logError)
         {
-            Debug.LogError("Join match failed");
+            Debug.LogError(string.Concat("Join Failed:", matchJoin));
+        }
+        if (NetworkClient.active && !ClientScene.ready)
+        {
+            ClientScene.Ready(client.connection);
+
+            if (ClientScene.localPlayers.Count == 0)
+            {
+                ClientScene.AddPlayer(0);
+                Debug.Log("Sucess");
+            }
         }
     }
 
