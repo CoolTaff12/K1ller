@@ -27,13 +27,16 @@ public class GrabAndToss : NetworkBehaviour
 	{
 		Debug.DrawRay (head.transform.position, head.transform.forward, Color.green, rayDistance);
 		if (Physics.SphereCast (head.transform.position, rayRadius, head.transform.forward, out hit, rayDistance)) {
+			if (!isLocalPlayer) {
+				return;
+			}
 			if (hit.collider.GetComponent<DodgeBallBehaviour> () != null) {
 				print ("Ball!");
 				if (Input.GetKeyDown (KeyCode.E) || CrossPlatformInputManager.GetButtonDown ("Fire1") && !holdingBall) {
 					if (!hit.collider.GetComponent<DodgeBallBehaviour> ().pickedUp) {
 					currentBall = hit.collider.gameObject;
 					ballScript = hit.collider.gameObject.GetComponent<DodgeBallBehaviour> ();
-					ballScript.GetPickedUp ();
+					ballScript.GetPickedUp (gameObject);
 					//ballScript.holdingPos = holdPos;
 //					ballScript.pickedUp = true;
 					holdingBall = true;
@@ -43,11 +46,15 @@ public class GrabAndToss : NetworkBehaviour
 			}
 		}
 		if (CrossPlatformInputManager.GetButtonDown ("Fire2") && holdingBall) {
+			if (!isLocalPlayer) {
+				return;
+			}
 			holdingBall = false;
 //			Rigidbody brb = currentBall.GetComponent<Rigidbody> ();
 //			currentBall.transform.parent = null;
 			ballScript.Shoot ();
 //			brb.AddForce(head.transform.forward * tossForce);
+			currentBall = null;
 			ballScript = null;
 
 		}

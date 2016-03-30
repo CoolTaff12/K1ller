@@ -13,6 +13,7 @@ public class DodgeBallBehaviour : NetworkBehaviour {
 	[SerializeField]
 	private Transform myTransform;
 	public bool pickedUp;
+	public GameObject currentPlayer;
 
 	// Use this for initialization
 	void Start ()
@@ -64,22 +65,41 @@ public class DodgeBallBehaviour : NetworkBehaviour {
 		}
 
 	}
-	public void GetPickedUp(){
+	[ClientRpc]
+	void Rpc_GetPickedUp (GameObject go){
 		coll.enabled = false;
 		rb.detectCollisions = false;
-		gat = gameObject.GetComponentInParent<GrabAndToss> ();
+		rb.isKinematic = true;
+		currentPlayer = go;
+		gat = currentPlayer.GetComponent<GrabAndToss> ();
 		pickedUp = true;
 		rb.velocity = Vector3.zero;
 		rb.angularVelocity = Vector3.zero;
-		Debug.Log ("hej");
+	
 	}
-	public void Shoot(){
+	[ClientRpc]
+	void Rpc_Shoot (){
 		rb.velocity = Vector3.zero;
 		rb.angularVelocity = Vector3.zero;
+		rb.isKinematic = false;
 		coll.enabled = true;
 		rb.detectCollisions = true;
 		rb.AddForce(gat.head.transform.forward * gat.tossForce);
 		gat = null;
 		pickedUp = false;
 	}
+	public void GetPickedUp(GameObject go){
+		Debug.Log ("hej");
+		if (!isServer) {
+			return;}
+		Rpc_GetPickedUp (go);
+		Debug.Log ("hej!");
+	}
+	public void Shoot(){
+		Debug.Log ("hejdå");
+		if (!isServer) {
+			return;}
+	Rpc_Shoot();
+		Debug.Log ("hejdå!");
+}
 }
