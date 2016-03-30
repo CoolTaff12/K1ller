@@ -10,6 +10,7 @@ public class GrabAndToss : NetworkBehaviour
 	public float rayDistance;
 	public float rayRadius;
 	public float tossForce;
+	public int teamNumber;
 	public bool holdingBall;
 	public GameObject fpc;
 	public GameObject head;
@@ -20,6 +21,7 @@ public class GrabAndToss : NetworkBehaviour
 	// Use this for initialization
 	void Start ()
 	{
+		teamNumber = gameObject.GetComponent<PlayerTarget> ().teamNumber;
 	}
 
 	// Update is called once per frame

@@ -46,14 +46,6 @@ public class DodgeBallBehaviour : NetworkBehaviour {
 
 	void OnCollisionEnter(Collision col)
 	{
-		if (col.gameObject.tag == "Player")
-		{
-			playerInfo = col.gameObject.GetComponent<PlayerTarget>();
-			if (playerInfo.teamNumber != thrownByTeam) {
-				playerInfo.health -= 1;
-			}
-
-		}
 		if (col.gameObject.tag == "ForceField")
 		{
 			GameObject Sparked = (GameObject) Instantiate(Sparks, transform.position, Quaternion.identity);
@@ -82,6 +74,7 @@ public class DodgeBallBehaviour : NetworkBehaviour {
 		rb.velocity = Vector3.zero;
 		rb.angularVelocity = Vector3.zero;
 		rb.isKinematic = false;
+		thrownByTeam = gat.teamNumber;
 		coll.enabled = true;
 		rb.detectCollisions = true;
 		rb.AddForce(gat.head.transform.forward * gat.tossForce);
