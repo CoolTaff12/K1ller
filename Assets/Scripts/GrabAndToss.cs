@@ -35,8 +35,7 @@ public class GrabAndToss : NetworkBehaviour
 				if (Input.GetKeyDown (KeyCode.E) || CrossPlatformInputManager.GetButtonDown ("Fire1") && !holdingBall) {
 					if (!hit.collider.GetComponent<DodgeBallBehaviour> ().pickedUp) {
 					currentBall = hit.collider.gameObject;
-					ballScript = hit.collider.gameObject.GetComponent<DodgeBallBehaviour> ();
-					ballScript.GetPickedUp (gameObject);
+						Cmd_GetPickedUp (currentBall , gameObject);
 					//ballScript.holdingPos = holdPos;
 //					ballScript.pickedUp = true;
 					holdingBall = true;
@@ -52,12 +51,22 @@ public class GrabAndToss : NetworkBehaviour
 			holdingBall = false;
 //			Rigidbody brb = currentBall.GetComponent<Rigidbody> ();
 //			currentBall.transform.parent = null;
-			ballScript.Shoot ();
+			Cmd_Shoot (currentBall);
 //			brb.AddForce(head.transform.forward * tossForce);
 			currentBall = null;
 			ballScript = null;
 
 		}
 
+	}
+	[Command]
+	void Cmd_Shoot(GameObject bs){
+		ballScript = bs.GetComponent<DodgeBallBehaviour> ();
+		ballScript.Rpc_Shoot ();
+	}
+	[Command]
+	void Cmd_GetPickedUp(GameObject bs, GameObject go){
+		ballScript = bs.GetComponent<DodgeBallBehaviour> ();
+		ballScript.Rpc_GetPickedUp (go);
 	}
 }

@@ -66,7 +66,7 @@ public class DodgeBallBehaviour : NetworkBehaviour {
 
 	}
 	[ClientRpc]
-	void Rpc_GetPickedUp (GameObject go){
+	public void Rpc_GetPickedUp (GameObject go){
 		coll.enabled = false;
 		rb.detectCollisions = false;
 		rb.isKinematic = true;
@@ -78,7 +78,7 @@ public class DodgeBallBehaviour : NetworkBehaviour {
 	
 	}
 	[ClientRpc]
-	void Rpc_Shoot (){
+	public void Rpc_Shoot (){
 		rb.velocity = Vector3.zero;
 		rb.angularVelocity = Vector3.zero;
 		rb.isKinematic = false;
@@ -90,26 +90,17 @@ public class DodgeBallBehaviour : NetworkBehaviour {
 	}
 	public void GetPickedUp(GameObject go){
 		Debug.Log ("hej");
-		if (!isServer) {
-			Cmd_GetPickedUp (go);
-			return;}
+//		if (!isServer) {
+//			return;}
 		Rpc_GetPickedUp (go);
 		Debug.Log ("hej!");
 	}
 	public void Shoot(){
 		Debug.Log ("hejdå");
-		if (!isServer) {
-			Cmd_Shoot ();
-			return;}
+//		if (!isServer) {
+//			return;}
 	Rpc_Shoot();
 		Debug.Log ("hejdå!");
 }
-	[Command]
-	void Cmd_Shoot(){
-		Rpc_Shoot ();
-	}
-	[Command]
-	void Cmd_GetPickedUp(GameObject go){
-		Rpc_GetPickedUp (go);
-	}
+
 }
