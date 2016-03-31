@@ -17,10 +17,12 @@ public class GrabAndToss : NetworkBehaviour
 	public GameObject holdPos;
 	public DodgeBallBehaviour ballScript;
 
-	// Use this for initialization
-	void Start ()
+
+    // Use this for initialization
+    void Start ()
 	{
-	}
+      
+    }
 
 	// Update is called once per frame
 	void Update ()
@@ -57,9 +59,9 @@ public class GrabAndToss : NetworkBehaviour
 			ballScript = null;
 
 		}
-
 	}
-	[Command]
+
+    [Command]
 	void Cmd_Shoot(GameObject bs){
 		ballScript = bs.GetComponent<DodgeBallBehaviour> ();
 		ballScript.Rpc_Shoot ();
