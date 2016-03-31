@@ -3,7 +3,7 @@ using System.Collections;
 using UnityStandardAssets.CrossPlatformInput;
 using UnityEngine.Networking;
 
-public class GrabAndToss : MonoBehaviour
+public class GrabAndToss : NetworkBehaviour
 {
 
 	RaycastHit hit;
@@ -27,14 +27,15 @@ public class GrabAndToss : MonoBehaviour
 	{
 		Debug.DrawRay (head.transform.position, head.transform.forward, Color.green, rayDistance);
 		if (Physics.SphereCast (head.transform.position, rayRadius, head.transform.forward, out hit, rayDistance)) {
+			if (!isLocalPlayer) {
+				return;
+			}
 			if (hit.collider.GetComponent<DodgeBallBehaviour> () != null) {
 				print ("Ball!");
-				if (Input.GetKeyDown (KeyCode.E) || CrossPlatformInputManager.GetButtonDown ("Fire1")) {
+				if (Input.GetKeyDown (KeyCode.E) || CrossPlatformInputManager.GetButtonDown ("Fire1") && !holdingBall) {
 					if (!hit.collider.GetComponent<DodgeBallBehaviour> ().pickedUp) {
 					currentBall = hit.collider.gameObject;
-					currentBall.transform.SetParent (gameObject.transform);
-					ballScript = hit.collider.gameObject.GetComponent<DodgeBallBehaviour> ();
-					ballScript.GetPickedUp ();
+						Cmd_GetPickedUp (currentBall , gameObject);
 					//ballScript.holdingPos = holdPos;
 //					ballScript.pickedUp = true;
 					holdingBall = true;
@@ -44,14 +45,28 @@ public class GrabAndToss : MonoBehaviour
 			}
 		}
 		if (CrossPlatformInputManager.GetButtonDown ("Fire2") && holdingBall) {
+			if (!isLocalPlayer) {
+				return;
+			}
 			holdingBall = false;
-			Rigidbody brb = currentBall.GetComponent<Rigidbody> ();
-			currentBall.transform.parent = null;
-			ballScript.Shoot ();
-			brb.AddForce(head.transform.forward * tossForce);
+//			Rigidbody brb = currentBall.GetComponent<Rigidbody> ();
+//			currentBall.transform.parent = null;
+			Cmd_Shoot (currentBall);
+//			brb.AddForce(head.transform.forward * tossForce);
+			currentBall = null;
 			ballScript = null;
 
 		}
 
+	}
+	[Command]
+	void Cmd_Shoot(GameObject bs){
+		ballScript = bs.GetComponent<DodgeBallBehaviour> ();
+		ballScript.Rpc_Shoot ();
+	}
+	[Command]
+	void Cmd_GetPickedUp(GameObject bs, GameObject go){
+		ballScript = bs.GetComponent<DodgeBallBehaviour> ();
+		ballScript.Rpc_GetPickedUp (go);
 	}
 }

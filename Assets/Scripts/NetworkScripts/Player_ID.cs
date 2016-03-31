@@ -25,7 +25,8 @@ public class Player_ID : NetworkBehaviour
     {
         if(myTransform !=null)
         {
-            if (myTransform.name == "Warrior(Clone)" || myTransform.name == "Warrior")
+			if (myTransform.name == "Warrior(Clone)" || myTransform.name == "Warrior" 
+				|| myTransform.name == "Warrior2(Clone)" || myTransform.name == "Warrior2")
             {
                 SetIdenity();
             }
