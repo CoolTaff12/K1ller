@@ -10,23 +10,39 @@ public class GrabAndToss : NetworkBehaviour
 	public float rayDistance;
 	public float rayRadius;
 	public float tossForce;
+	[SyncVar]
 	public int teamNumber;
+	public int killed = 1;
+	[SyncVar]
+	public float health = 1f;
+	public bool killable = true;
+	public bool dead = false;
 	public bool holdingBall;
+	public Transform[] Bodyparts;
+	public DodgeBallBehaviour ballInfo;
+	public AssignPlayerInfo assignInfo;
+	public DodgeBallBehaviour ballScript;
 	public GameObject fpc;
 	public GameObject head;
 	public GameObject currentBall;
 	public GameObject holdPos;
-	public DodgeBallBehaviour ballScript;
+	public GameObject networkMgr;
 
 	// Use this for initialization
 	void Start ()
 	{
-		teamNumber = gameObject.GetComponent<PlayerTarget> ().teamNumber;
+		Cmd_SetTeamNumber (gameObject);
+
 	}
 
 	// Update is called once per frame
 	void Update ()
 	{
+		if (health <= 0 && !dead) {
+			//			RemoveChild ();
+			dead = true;
+			teamNumber = 0;
+		}
 		Debug.DrawRay (head.transform.position, head.transform.forward, Color.green, rayDistance);
 		if (Physics.SphereCast (head.transform.position, rayRadius, head.transform.forward, out hit, rayDistance)) {
 			if (!isLocalPlayer) {
@@ -61,6 +77,21 @@ public class GrabAndToss : NetworkBehaviour
 		}
 
 	}
+	void OnCollisionEnter(Collision col)
+	{
+		if (col.gameObject.tag == "Ball")
+		{
+			ballInfo = col.gameObject.GetComponent<DodgeBallBehaviour>();
+			if (teamNumber != ballInfo.thrownByTeam) {
+				Cmd_TakeDamage ();
+			}
+		}
+	}
+	[Command]
+	public void Cmd_TakeDamage() {
+		health -= 1;
+
+	}
 	[Command]
 	void Cmd_Shoot(GameObject bs){
 		ballScript = bs.GetComponent<DodgeBallBehaviour> ();
@@ -70,5 +101,15 @@ public class GrabAndToss : NetworkBehaviour
 	void Cmd_GetPickedUp(GameObject bs, GameObject go){
 		ballScript = bs.GetComponent<DodgeBallBehaviour> ();
 		ballScript.Rpc_GetPickedUp (go);
+	}
+	[Command]
+	public void Cmd_SetTeamNumber(GameObject go){
+		networkMgr = GameObject.Find ("PlayerInfoHandler");
+		Debug.Log ("PlayerSPawnHejHej");
+		assignInfo = networkMgr.GetComponent<AssignPlayerInfo> ();
+		Debug.Log (go + " = GameObject We Are Looking For");
+		assignInfo.Rpc_SetTeamNumber (go);
+
+
 	}
 }

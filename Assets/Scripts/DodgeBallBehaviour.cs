@@ -8,6 +8,7 @@ public class DodgeBallBehaviour : NetworkBehaviour {
 	public GrabAndToss gat;
 	public Rigidbody rb;
 	public Collider coll;
+	[SyncVar]
 	public int thrownByTeam = 1;
 	public GameObject Sparks;
 	[SerializeField]
@@ -81,19 +82,11 @@ public class DodgeBallBehaviour : NetworkBehaviour {
 		gat = null;
 		pickedUp = false;
 	}
-	public void GetPickedUp(GameObject go){
-		Debug.Log ("hej");
-//		if (!isServer) {
-//			return;}
-		Rpc_GetPickedUp (go);
-		Debug.Log ("hej!");
-	}
-	public void Shoot(){
-		Debug.Log ("hejdå");
-//		if (!isServer) {
-//			return;}
-	Rpc_Shoot();
-		Debug.Log ("hejdå!");
-}
+//	public void GetPickedUp(GameObject go){
+//		Rpc_GetPickedUp (go);
+//	}
+//	public void Shoot(){
+//	Rpc_Shoot();
+//}
 
 }

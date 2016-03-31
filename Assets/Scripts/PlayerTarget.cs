@@ -4,6 +4,7 @@ using UnityEngine.Networking;
 
 public class PlayerTarget : NetworkBehaviour {
 	public int teamNumber;
+	[SyncVar]
 	public float health = 1f;
     public int killed = 1;
 	public bool killable = true;
@@ -44,7 +45,14 @@ public class PlayerTarget : NetworkBehaviour {
 		if (col.gameObject.tag == "Ball")
 		{
 			ballInfo = col.gameObject.GetComponent<DodgeBallBehaviour>();
-			if (teamNumber != thrownByTeam) {
-				playerInfo.health -= 1;
+			if (teamNumber != ballInfo.thrownByTeam) {
+				Cmd_TakeDamage ();
 			}
+}
+	}
+	[Command]
+	public void Cmd_TakeDamage() {
+		health -= 1;
+		
+	}
 }
