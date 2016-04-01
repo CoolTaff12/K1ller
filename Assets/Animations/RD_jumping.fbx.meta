@@ -1,0 +1,153 @@
+fileFormatVersion: 2
+guid: 68e98f7aa1bbe2e43963374cf7ee9624
+timeCreated: 1459505593
+licenseType: Free
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: breast_j
+    100002: chin_j
+    100004: head_tip_J
+    100006: l_thumb_base
+    100008: left_ankle_j
+    100010: left_ball_j
+    100012: left_clavical_j
+    100014: left_elbow_j
+    100016: left_hand_j
+    100018: left_hip_j
+    100020: left_knee_J
+    100022: left_mitten1_j
+    100024: left_mitten2_j
+    100026: left_mitten3_j
+    100028: left_shoulder_J
+    100030: left_thumb1_j
+    100032: left_thumb2_j
+    100034: left_thumb3_j
+    100036: left_toe_j
+    100038: neck_j
+    100040: r_thumb_base
+    100042: //RootNode
+    100044: right_ankle_j
+    100046: right_ball_j
+    100048: right_clavical_j
+    100050: right_elbow_j
+    100052: right_hand_j
+    100054: right_hip_j
+    100056: right_knee_J
+    100058: right_mitten1_j
+    100060: right_mitten2_j
+    100062: right_mitten3_j
+    100064: right_shoulder_j
+    100066: right_thumb1_J
+    100068: right_thumb2_j
+    100070: right_thumb3_j
+    100072: right_toe_j
+    100074: root_j
+    100076: spine1_j
+    100078: spine2_j
+    400000: breast_j
+    400002: chin_j
+    400004: head_tip_J
+    400006: l_thumb_base
+    400008: left_ankle_j
+    400010: left_ball_j
+    400012: left_clavical_j
+    400014: left_elbow_j
+    400016: left_hand_j
+    400018: left_hip_j
+    400020: left_knee_J
+    400022: left_mitten1_j
+    400024: left_mitten2_j
+    400026: left_mitten3_j
+    400028: left_shoulder_J
+    400030: left_thumb1_j
+    400032: left_thumb2_j
+    400034: left_thumb3_j
+    400036: left_toe_j
+    400038: neck_j
+    400040: r_thumb_base
+    400042: //RootNode
+    400044: right_ankle_j
+    400046: right_ball_j
+    400048: right_clavical_j
+    400050: right_elbow_j
+    400052: right_hand_j
+    400054: right_hip_j
+    400056: right_knee_J
+    400058: right_mitten1_j
+    400060: right_mitten2_j
+    400062: right_mitten3_j
+    400064: right_shoulder_j
+    400066: right_thumb1_J
+    400068: right_thumb2_j
+    400070: right_thumb3_j
+    400072: right_toe_j
+    400074: root_j
+    400076: spine1_j
+    400078: spine2_j
+    7400000: Take 001
+    9500000: //RootNode
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleRotations: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
