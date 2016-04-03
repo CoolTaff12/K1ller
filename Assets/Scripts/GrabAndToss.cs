@@ -7,31 +7,35 @@ public class GrabAndToss : NetworkBehaviour
 {
 
 	RaycastHit hit;
-	public float rayDistance;
-	public float rayRadius;
-	public float tossForce;
+	public float rayDistance = 5f; //Length of Ray. Default set to 5.
+	public float rayRadius = 0.75f; //Radius of Ray. Default set to 0.75
+	public float tossForce = 20f; //Force added to ball when tossed. Default set to 20;
 	[SyncVar]
-	public int teamNumber;
-	public int killed = 1;
+	public int teamNumber; //Number of the team this character is on. Is set by AssignPlayerInfo Script.
+	public int killed = 1; //Is this character killed? 1 for true, 0 for false;
 	[SyncVar]
-	public float health = 1f;
-	public bool killable = true;
-	public bool dead = false;
-	public bool holdingBall;
-	public Transform[] Bodyparts;
-	public DodgeBallBehaviour ballInfo;
-	public AssignPlayerInfo assignInfo;
-	public DodgeBallBehaviour ballScript;
-	public GameObject fpc;
-	public GameObject head;
-	public GameObject currentBall;
-	public GameObject holdPos;
-	public GameObject networkMgr;
+	public float health = 1f; //Amount of hits the character can take before dying.
+	[SyncVar]
+	public bool killable = true; //Can this character be killed?
+	[SyncVar]
+	public bool dead = false; //Is this character dead?
+	[SyncVar]
+	public bool holdingBall; //Is this character holding a ball?
+	public Transform[] Bodyparts; //List of bodypart segments.
+	public DodgeBallBehaviour ballInfo; //Script on the ball colliding with the player;
+	public DodgeBallBehaviour ballScript; //Script on the ball hit by the players' raycast.
+	public AssignPlayerInfo assignInfo; //Script to set initial info such as teamNumber.
+	public GameObject fpc; //FirstPersonController connected to the player;
+	public GameObject head; //Head of the player;
+	public GameObject currentBall; //Ball that is currently being held.
+	public GameObject holdPos; //Position of the held ball.
+	public GameObject networkMgr; //NetworkManager found in scene.
 
 	// Use this for initialization
 	void Start ()
 	{
-		Cmd_SetTeamNumber (gameObject);
+		Cmd_SetName (gameObject);
+		Cmd_SetTeamNumber (gameObject); //Command sent to assign a team number to this player.
 
 	}
 
@@ -40,10 +44,12 @@ public class GrabAndToss : NetworkBehaviour
 	{
 		if (health <= 0 && !dead) {
 			//			RemoveChild ();
+			Cmd_KillYourself(gameObject);
 			dead = true;
 			teamNumber = 0;
 		}
-		Debug.DrawRay (head.transform.position, head.transform.forward, Color.green, rayDistance);
+//DEBUG//
+//Debug.DrawRay (head.transform.position, head.transform.forward, Color.green, rayDistance);
 		if (Physics.SphereCast (head.transform.position, rayRadius, head.transform.forward, out hit, rayDistance)) {
 			if (!isLocalPlayer) {
 				return;
@@ -53,7 +59,7 @@ public class GrabAndToss : NetworkBehaviour
 				if (Input.GetKeyDown (KeyCode.E) || CrossPlatformInputManager.GetButtonDown ("Fire1") && !holdingBall) {
 					if (!hit.collider.GetComponent<DodgeBallBehaviour> ().pickedUp) {
 					currentBall = hit.collider.gameObject;
-						Cmd_GetPickedUp (currentBall , gameObject);
+					Cmd_GetPickedUp (currentBall , gameObject);
 					//ballScript.holdingPos = holdPos;
 //					ballScript.pickedUp = true;
 					holdingBall = true;
@@ -62,6 +68,7 @@ public class GrabAndToss : NetworkBehaviour
 				}
 			}
 		}
+//--THROW BALL--//
 		if (CrossPlatformInputManager.GetButtonDown ("Fire2") && holdingBall) {
 			if (!isLocalPlayer) {
 				return;
@@ -109,7 +116,17 @@ public class GrabAndToss : NetworkBehaviour
 		assignInfo = networkMgr.GetComponent<AssignPlayerInfo> ();
 		Debug.Log (go + " = GameObject We Are Looking For");
 		assignInfo.Rpc_SetTeamNumber (go);
-
-
+	}
+	[Command]
+	public void Cmd_SetName(GameObject go){
+		networkMgr = GameObject.Find ("PlayerInfoHandler");
+		assignInfo = networkMgr.GetComponent<AssignPlayerInfo> ();
+		assignInfo.Rpc_SetName (go);
+	}
+	[Command]
+	public void Cmd_KillYourself(GameObject go){
+		networkMgr = GameObject.Find ("PlayerInfoHandler");
+		assignInfo = networkMgr.GetComponent<AssignPlayerInfo> ();
+		assignInfo.Rpc_KillAPlayer(go);
 	}
 }
