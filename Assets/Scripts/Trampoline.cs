@@ -11,7 +11,6 @@
 using UnityEngine;
 using System.Collections;
 
-[AddComponentMenu("Bun Bun Studios/Physics/Trampoline")]
 public class Trampoline : MonoBehaviour
 {
 	public Vector3 force = new Vector3(0, 10, 0);
