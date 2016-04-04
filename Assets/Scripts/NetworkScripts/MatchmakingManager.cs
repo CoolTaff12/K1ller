@@ -14,6 +14,7 @@ public class MatchmakingManager : NetworkManager
     private MatchDesc currentMatch;
     private bool matchCreated;
     private NetworkMatch networkMatch;
+
     public GameObject[] PanelNr;
     GameObject JoinMatchButton;
 
@@ -80,8 +81,8 @@ public class MatchmakingManager : NetworkManager
     {
         if (level == 0)
         {
-            SetUpMenuSceneButton();
-            StartCoroutine(SetUpMenuSceneButton());
+           
+           // StartCoroutine(SetUpMenuSceneButton());
         }
         else
         {
@@ -226,7 +227,8 @@ public class MatchmakingManager : NetworkManager
         {
             Debug.LogError(string.Concat("Join Failed:", matchJoin));
         }
-        StartCoroutine(Connecting(2.0F));
+     //   StartCoroutine(Connecting(2.0F));
+        GameObject ClientIsReady = (GameObject)Instantiate(JoinMatchButton, Vector3.zero, Quaternion.identity);
     }
 
     IEnumerator Connecting(float waitTime)
