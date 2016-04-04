@@ -15,7 +15,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
         public float m_WalkSpeed;
         public float m_RunSpeed;
         [SerializeField] [Range(0f, 1f)] private float m_RunstepLenghten;
-        [SerializeField] private float m_JumpSpeed;
+        public float m_JumpSpeed;
         [SerializeField] private float m_StickToGroundForce;
         [SerializeField] private float m_GravityMultiplier;
         [SerializeField] private MouseLook m_MouseLook;
@@ -31,7 +31,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
 
 
         private Camera m_Camera;
-        private bool m_Jump;
+        public bool m_Jump;
         private float m_YRotation;
         private Vector2 m_Input;
         private Vector3 m_MoveDir = Vector3.zero;
@@ -218,11 +218,13 @@ namespace UnityStandardAssets.Characters.FirstPerson
                                           (speed * (m_IsWalking ? 1f : m_RunstepLenghten)));
                     newCameraPosition = m_Camera.transform.localPosition;
                     newCameraPosition.y = m_Camera.transform.localPosition.y - m_JumpBob.Offset();
+                    m_JumpSpeed = 10f;
                 }
                 else
                 {
                     newCameraPosition = m_Camera.transform.localPosition;
                     newCameraPosition.y = m_OriginalCameraPosition.y - m_JumpBob.Offset();
+                    m_JumpSpeed = 10f;
                 }
                 m_Camera.transform.localPosition = newCameraPosition;
             }

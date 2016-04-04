@@ -226,15 +226,17 @@ public class MatchmakingManager : NetworkManager
         {
             Debug.LogError(string.Concat("Join Failed:", matchJoin));
         }
-        if (NetworkClient.active && !ClientScene.ready)
-        {
-            ClientScene.Ready(client.connection);
+        StartCoroutine(Connecting(2.0F));
+    }
 
-            if (ClientScene.localPlayers.Count == 0)
-            {
-                ClientScene.AddPlayer(0);
-                Debug.Log("Sucess");
-            }
+    IEnumerator Connecting(float waitTime)
+    {
+        yield return new WaitForSeconds(waitTime);
+        ClientScene.Ready(client.connection);
+        if (ClientScene.localPlayers.Count == 0)
+        {
+            ClientScene.AddPlayer(0);
+            Debug.Log("Sucess");
         }
     }
 

@@ -4,6 +4,7 @@ using UnityEngine.Networking;
 
 public class DodgeBallBehaviour : NetworkBehaviour {
 	public AudioClip[] audioClips = new AudioClip[1];
+    public AudioClip[] HitAudioClips = new AudioClip[4];
 	public PlayerTarget playerInfo;
 	public GrabAndToss gat;
 	public Rigidbody rb;
