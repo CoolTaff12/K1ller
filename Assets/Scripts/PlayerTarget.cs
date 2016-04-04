@@ -4,11 +4,13 @@ using UnityEngine.Networking;
 
 public class PlayerTarget : NetworkBehaviour {
 	public int teamNumber;
+	[SyncVar]
 	public float health = 1f;
     public int killed = 1;
 	public bool killable = true;
 	public bool dead = false;
 	public Transform[] Bodyparts;
+	public DodgeBallBehaviour ballInfo;
 
 	// Use this for initialization
 	void Start () {
@@ -18,23 +20,39 @@ public class PlayerTarget : NetworkBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if (health <= 0 && !dead) {
-			RemoveChild ();
+//			RemoveChild ();
 			dead = true;
-		}	
-	}
-	public void RemoveChild(){
-		foreach (Transform bpart in Bodyparts){
-//			Destroy (bpart.gameObject);
-			Rigidbody rb = bpart.GetComponent<Rigidbody> ();
-			bpart.parent = null;
-			rb.isKinematic = false;  	
+			teamNumber = 0;
+			gameObject.GetComponent<GrabAndToss>().teamNumber = teamNumber;
 		}
-        if(killed == 1)
-        {
-            Bodyparts[0].gameObject.AddComponent<AudioSource>();
-            Bodyparts[0].gameObject.AddComponent<DodgeBallScript>();
-            Bodyparts[0].gameObject.GetComponent<DodgeBallScript>().playerInfo = null;
-            killed = 0;
-        }
-    }
+	}
+//	public void RemoveChild(){
+//		foreach (Transform bpart in Bodyparts){
+//			Rigidbody rb = bpart.GetComponent<Rigidbody> ();
+//			bpart.parent = null;
+//			rb.isKinematic = false;  	
+//		}
+//        if(killed == 1)
+//        {
+//            Bodyparts[0].gameObject.AddComponent<AudioSource>();
+//            Bodyparts[0].gameObject.AddComponent<DodgeBallBehaviour>();
+//            Bodyparts[0].gameObject.GetComponent<DodgeBallBehaviour>().playerInfo = null;
+//            killed = 0;
+//        }
+//    }
+	void OnCollisionEnter(Collision col)
+	{
+		if (col.gameObject.tag == "Ball")
+		{
+			ballInfo = col.gameObject.GetComponent<DodgeBallBehaviour>();
+			if (teamNumber != ballInfo.thrownByTeam) {
+				Cmd_TakeDamage ();
+			}
+}
+	}
+	[Command]
+	public void Cmd_TakeDamage() {
+		health -= 1;
+		
+	}
 }
