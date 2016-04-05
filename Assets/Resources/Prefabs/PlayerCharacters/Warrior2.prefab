@@ -44,6 +44,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 458604}
   - 20: {fileID: 2095932}
+  - 81: {fileID: 8130440}
   - 114: {fileID: 11498746}
   m_Layer: 0
   m_Name: FirstPersonCharacter
@@ -201,13 +202,11 @@ GameObject:
   - 114: {fileID: 11488190}
   - 54: {fileID: 5405396}
   - 82: {fileID: 8218632}
-  - 114: {fileID: 11497406}
   - 114: {fileID: 11477102}
   - 114: {fileID: 11494482}
   - 114: {fileID: 11435048}
+  - 114: {fileID: 11461072}
   - 114: {fileID: 11494486}
-  - 65: {fileID: 6570410}
-  - 114: {fileID: 11415058}
   m_Layer: 0
   m_Name: Warrior2
   m_TagString: Player
@@ -285,7 +284,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 175410}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.347, y: -0.332, z: 1.045}
+  m_LocalPosition: {x: 0.347, y: -0.332, z: 1.409}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 458604}
@@ -341,7 +340,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 175808}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -26.785555, y: 1.47, z: -3.3863358}
+  m_LocalPosition: {x: 3.6021552, y: 0.67, z: -9.16335}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 458604}
@@ -430,7 +429,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 170682}
   m_LocalRotation: {x: -0.7071067, y: 1.4210855e-14, z: 1.4210855e-14, w: 0.7071068}
-  m_LocalPosition: {x: 0.07, y: 1.95, z: -0.12}
+  m_LocalPosition: {x: 0.07, y: 2.24, z: -0.12}
   m_LocalScale: {x: 1.6666666, y: 1.666667, z: 1.666667}
   m_Children: []
   m_Father: {fileID: 422640}
@@ -746,18 +745,13 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!65 &6570410
-BoxCollider:
+--- !u!81 &8130440
+AudioListener:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 175808}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_GameObject: {fileID: 108286}
   m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.5, y: 0.5, z: 0.5}
-  m_Center: {x: 0, y: -0.7, z: 0}
 --- !u!82 &8218632
 AudioSource:
   m_ObjectHideFlags: 1
@@ -832,18 +826,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
---- !u!114 &11415058
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 175808}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 50ca92a59c7eed148a57bc8220285409, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerUniqueIdenity: 
 --- !u!114 &11435048
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -857,7 +839,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cam: {fileID: 2095932}
   gat: {fileID: 0}
-  playerTarget: {fileID: 0}
 --- !u!114 &11440306
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -885,6 +866,18 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &11461072
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 175808}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50ca92a59c7eed148a57bc8220285409, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerUniqueIdenity: 
 --- !u!114 &11477102
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1084,36 +1077,36 @@ MonoBehaviour:
   rayDistance: 5
   rayRadius: 0.75
   tossForce: 20
+  teamNumber: 0
+  killed: 1
+  health: 1
+  killable: 1
+  dead: 0
   holdingBall: 0
+  Bodyparts:
+  - {fileID: 451664}
+  - {fileID: 437004}
+  - {fileID: 479310}
+  - {fileID: 422640}
+  - {fileID: 400114}
+  - {fileID: 432960}
+  - {fileID: 439206}
+  - {fileID: 494324}
+  ballInfo: {fileID: 0}
+  ballScript: {fileID: 0}
+  assignInfo: {fileID: 0}
   fpc: {fileID: 108286}
   head: {fileID: 167468}
   currentBall: {fileID: 0}
   holdPos: {fileID: 170682}
-  ballScript: {fileID: 0}
---- !u!114 &11497406
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 175808}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 22aa92ffc7c130547a7d45f59a9d8139, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  teamNumber: 1
-  health: 1
-  killed: 1
-  killable: 0
-  dead: 0
-  Bodyparts: []
+  networkMgr: {fileID: 0}
 --- !u!114 &11498746
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 108286}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a9e73c5ac7e90e049b3c2d5a69ffd502, type: 3}
   m_Name: 
@@ -1308,15 +1301,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 0}
-      propertyPath: m_JumpBob.BobDuration
-      value: 0.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 0}
-      propertyPath: m_JumpBob.BobAmount
-      value: 0.1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
