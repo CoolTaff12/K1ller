@@ -15,7 +15,6 @@ GameObject:
   - 82: {fileID: 8247170}
   - 114: {fileID: 11494516}
   - 114: {fileID: 11460258}
-  - 114: {fileID: 11479258}
   - 114: {fileID: 11489760}
   m_Layer: 0
   m_Name: DodgeBall
@@ -178,23 +177,6 @@ MonoBehaviour:
   m_SnapThreshold: 5
   m_InterpolateRotation: 1
   m_InterpolateMovement: 1
---- !u!114 &11479258
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 163478}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 98c6b1dfaf2a2de448ddafb56807f97f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  audioClips:
-  - {fileID: 8300000, guid: cc73d319ab158d64ba87527eb1d15d3b, type: 3}
-  playerInfo: {fileID: 0}
-  thrownByTeam: 1
-  Sparks: {fileID: 100000, guid: d05d496cb4f43c14e80630addd23652e, type: 3}
-  myTransform: {fileID: 0}
 --- !u!114 &11489760
 MonoBehaviour:
   m_ObjectHideFlags: 1

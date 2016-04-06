@@ -19,9 +19,17 @@ public class AssignPlayerInfo : NetworkBehaviour {
 //	{
 //		Rpc_SetTeamNumber(go);
 //	}
+
+	public void KillAPlayer(GameObject go){
+		Rpc_KillAPlayer (go);
+	}
+
 	[ClientRpc]
-	public void Rpc_SetTeamNumber(GameObject go){
-		go.GetComponent<GrabAndToss> ().teamNumber = teamNumber;
-		teamNumber++;
+	public void Rpc_KillAPlayer(GameObject go){
+		Animator anim = go.GetComponent<Animator> ();
+		anim.enabled = false;
+		foreach (Transform tr in go.GetComponent<GrabAndToss>().bodyparts) {
+			tr.SetParent(null);
+		}
 	}
 }
