@@ -20,16 +20,25 @@ public class AssignPlayerInfo : NetworkBehaviour {
 //		Rpc_SetTeamNumber(go);
 //	}
 
-	public void KillAPlayer(GameObject go){
-		Rpc_KillAPlayer (go);
-	}
-
+//	[ClientRpc]
+//	public void Rpc_SetTeamNumber(GameObject go)
+//	{
+//		go.GetComponent<GrabAndToss>().teamNumber = teamNumber;
+//		teamNumber++;
+//	}
+//	[ClientRpc]
+//	public void Rpc_SetName(GameObject go)
+//	{
+//		go.transform.name = "Player" + teamNumber;
+//	}
 	[ClientRpc]
-	public void Rpc_KillAPlayer(GameObject go){
-		Animator anim = go.GetComponent<Animator> ();
-		anim.enabled = false;
-		foreach (Transform tr in go.GetComponent<GrabAndToss>().bodyparts) {
-			tr.SetParent(null);
-		}
+	public void Rpc_KillAPlayer(GameObject go)
+	{
+		go.GetComponent<GrabAndToss>().dead = true;
+		go.GetComponent<GrabAndToss>().teamNumber = 0;
+		go.transform.localScale = new Vector3(0.2f, 0.2f, 0.2f);
+		Rigidbody rb = go.GetComponent<Rigidbody>();
+		rb.detectCollisions = false;
+		rb.useGravity = false;
 	}
 }

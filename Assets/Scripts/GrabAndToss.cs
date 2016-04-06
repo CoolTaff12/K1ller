@@ -21,10 +21,11 @@ public class GrabAndToss : NetworkBehaviour
 	public bool dead = false; //Is this character dead?
 	[SyncVar]
 	public bool holdingBall; //Is this character holding a ball?
+	public bool throwing = false;
 	public Transform[] bodyparts; //List of bodypart segments.
 	public DodgeBallBehaviour ballInfo; //Script on the ball colliding with the player;
 	public DodgeBallBehaviour ballScript; //Script on the ball hit by the players' raycast.
-	public NetworkCharacterInfo assignInfo; //Script to set initial info such as teamNumber.
+	public AssignPlayerInfo assignInfo; //Script to set initial info such as teamNumber.
 	public Animator anim;
 	public GameObject fpc; //FirstPersonController connected to the player;
 	public GameObject head; //Head of the player;
@@ -72,23 +73,31 @@ Debug.DrawRay (head.transform.position, head.transform.forward, Color.green, ray
 			}
 		}
 //--THROW BALL--//
-		if (CrossPlatformInputManager.GetButtonDown ("Fire2") && holdingBall) {
+		if (CrossPlatformInputManager.GetButton ("Fire2")) {
 			if (!isLocalPlayer) {
 				return;
 			}
-			holdingBall = false;
+			if (!holdingBall) {
+				anim.SetBool ("isThrowing", false);
+				return;
+			}
 //			Rigidbody brb = currentBall.GetComponent<Rigidbody> ();
 //			currentBall.transform.parent = null;
-			anim.SetBool("isThrowing", true);
-			if (anim.GetNextAnimatorStateInfo (0).IsName ("isThrowing")) {
-				anim.SetBool ("isThrowing", false);
-			}
+			if (!throwing && holdingBall) {
+				throwing = true;
+				anim.SetBool ("isThrowing", true);
+			} 
+			holdingBall = false;
 			StartCoroutine(StartThrow(0.4F));
 			Cmd_Shoot (currentBall);
 //			brb.AddForce(head.transform.forward * tossForce);
 			currentBall = null;
 			ballScript = null;
 
+		}
+		if (Input.GetButtonUp ("Fire2") && throwing) {
+			throwing = false;
+			anim.SetBool ("isThrowing", false);
 		}
 
 	}
@@ -134,7 +143,7 @@ Debug.DrawRay (head.transform.position, head.transform.forward, Color.green, ray
 	[Command]
 	public void Cmd_KillYourself(GameObject go){
 		networkMgr = GameObject.Find ("PlayerInfoHandler");
-		assignInfo = GetComponent<NetworkCharacterInfo> ();
+		assignInfo = GetComponent<AssignPlayerInfo> ();
 		assignInfo.Rpc_KillAPlayer(go);
 	}
 	IEnumerator StartThrow(float waitTime) 

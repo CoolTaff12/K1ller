@@ -217,6 +217,7 @@ GameObject:
   - 114: {fileID: 11482484}
   - 114: {fileID: 11442072}
   - 114: {fileID: 11426014}
+  - 114: {fileID: 11431808}
   m_Layer: 0
   m_Name: Main Character
   m_TagString: Player
@@ -1204,7 +1205,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 135626}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.221, z: 0}
+  m_LocalPosition: {x: 0, y: 0.221, z: -0.1}
   m_LocalScale: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
@@ -1439,7 +1440,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 123130}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 13.934284, y: 1.47, z: -15.540728}
+  m_LocalPosition: {x: 11.494787, y: 2.27, z: -14.376784}
   m_LocalScale: {x: 3, y: 3, z: 3}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
@@ -1854,6 +1855,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   anim: {fileID: 9552176}
+  gat: {fileID: 11442072}
+--- !u!114 &11431808
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 123130}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db6dff81994e101498d73cee61e9e4f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  score: 0
+  color: {r: 0, g: 0, b: 0, a: 0}
+  playerName: 
+  lifeCount: 0
+  teamNumber: 1
 --- !u!114 &11432088
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1911,6 +1929,7 @@ MonoBehaviour:
   killable: 1
   dead: 0
   holdingBall: 0
+  throwing: 0
   bodyparts:
   - {fileID: 427994}
   - {fileID: 461550}

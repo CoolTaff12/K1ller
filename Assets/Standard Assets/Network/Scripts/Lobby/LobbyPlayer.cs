@@ -17,6 +17,7 @@ namespace UnityStandardAssets.Network
 
         public Button colorButton;
         public InputField nameInput;
+        public InputField teamNumber;
         public Button readyButton;
         public Button waitingPlayerButton;
         public Button removePlayerButton;
@@ -236,6 +237,7 @@ namespace UnityStandardAssets.Network
         {
             LobbyManager.s_Singleton.countdownPanel.UIText.text = "Match Starting in " + countdown;
             LobbyManager.s_Singleton.countdownPanel.gameObject.SetActive(countdown != 0);
+            this.gameObject.name = playerName;
         }
 
         [ClientRpc]
