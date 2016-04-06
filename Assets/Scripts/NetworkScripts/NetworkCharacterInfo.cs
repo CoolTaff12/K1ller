@@ -15,13 +15,13 @@ public class NetworkCharacterInfo : NetworkBehaviour
     public int score;
     [SyncVar]
     public Color color;
-    [SyncVar]
-    public string playerName;
+    public string playerName = "";
     [SyncVar(hook = "OnLifeChanged")]
     public int lifeCount;
     [SyncVar]
     public int teamNumber = 1;
 
+    [SerializeField]
     protected Text ScoreText;
     //hard to control WHEN Init is called (networking make order between object spawning non deterministic)
     //so we call init from multiple location (depending on what between spaceship & manager is created first).
@@ -32,6 +32,7 @@ public class NetworkCharacterInfo : NetworkBehaviour
     {
         //register the spaceship in the gamemanager, that will allow to loop on it.
         NetworkGameManager.sCHaracter.Add(this);
+        this.gameObject.name = playerName;
     }
 
     // Use this for initialization
@@ -39,6 +40,7 @@ public class NetworkCharacterInfo : NetworkBehaviour
     {
 
         Renderer[] CRends = GetComponentsInChildren<Renderer>();
+        // Renderer TshirtRends = GameObject.Find(this.gameObject + "/body/gular_dude_bodydy").GetComponent<Renderer>();
         foreach (Renderer r in CRends)
         {
             r.material.color = color;
