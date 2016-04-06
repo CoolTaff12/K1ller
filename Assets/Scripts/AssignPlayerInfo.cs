@@ -19,9 +19,4 @@ public class AssignPlayerInfo : NetworkBehaviour {
 //	{
 //		Rpc_SetTeamNumber(go);
 //	}
-	[ClientRpc]
-	public void Rpc_SetTeamNumber(GameObject go){
-		go.GetComponent<GrabAndToss> ().teamNumber = teamNumber;
-		teamNumber++;
-	}
 }

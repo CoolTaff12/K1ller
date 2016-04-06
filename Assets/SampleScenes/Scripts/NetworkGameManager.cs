@@ -7,6 +7,7 @@ using System.Collections.Generic;
 public class NetworkGameManager : NetworkBehaviour
 {
     static public List<NetworkSpaceship> sShips = new List<NetworkSpaceship>();
+    static public List<NetworkCharacterInfo> sCHaracter = new List<NetworkCharacterInfo>();
     static public NetworkGameManager sInstance = null;
 
     public GameObject uiScoreZone;
@@ -37,12 +38,18 @@ public class NetworkGameManager : NetworkBehaviour
         {
             sShips[i].Init();
         }
+        for (int i = 0; i < sCHaracter.Count; ++i)
+        {
+            sCHaracter[i].Init();
+        }
     }
 
     [ServerCallback]
     void Update()
     {
         if (!_running || sShips.Count == 0)
+            return;
+        if (!_running || sCHaracter.Count == 0)
             return;
 
         bool allDestroyed = true;
