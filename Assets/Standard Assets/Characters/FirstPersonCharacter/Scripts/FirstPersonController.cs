@@ -75,8 +75,6 @@ namespace UnityStandardAssets.Characters.FirstPerson
                     m_Jump = CrossPlatformInputManager.GetButtonDown("Jump");
                 }
 
-
-
                 if (!m_PreviouslyGrounded && m_CharacterController.isGrounded)
                 {
                     StartCoroutine(m_JumpBob.DoBobCycle());
@@ -88,6 +86,9 @@ namespace UnityStandardAssets.Characters.FirstPerson
                 {
                     m_MoveDir.y = 0f;
                 }
+
+                if(m_Jump == false)
+                    m_JumpSpeed = 10f;
 
                 m_PreviouslyGrounded = m_CharacterController.isGrounded;
             }
@@ -218,13 +219,11 @@ namespace UnityStandardAssets.Characters.FirstPerson
                                           (speed * (m_IsWalking ? 1f : m_RunstepLenghten)));
                     newCameraPosition = m_Camera.transform.localPosition;
                     newCameraPosition.y = m_Camera.transform.localPosition.y - m_JumpBob.Offset();
-                    m_JumpSpeed = 10f;
                 }
                 else
                 {
                     newCameraPosition = m_Camera.transform.localPosition;
                     newCameraPosition.y = m_OriginalCameraPosition.y - m_JumpBob.Offset();
-                    m_JumpSpeed = 10f;
                 }
                 m_Camera.transform.localPosition = newCameraPosition;
             }
