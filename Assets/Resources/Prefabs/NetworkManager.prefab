@@ -26,6 +26,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -10.15, y: 3.17, z: -7.81}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -52,7 +53,7 @@ MonoBehaviour:
   m_PlayerPrefab: {fileID: 156958, guid: 7fe5084f7712f9947b14ad9bbfe02f4b, type: 2}
   m_AutoCreatePlayer: 1
   m_PlayerSpawnMethod: 0
-  m_OfflineScene: OfflineScene
+  m_OfflineScene: 
   m_OnlineScene: Chinese
   m_SpawnPrefabs:
   - {fileID: 163478, guid: 16a89774751f1f740a89d9192e74dc7b, type: 2}
