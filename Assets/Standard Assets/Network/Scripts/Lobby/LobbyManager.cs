@@ -46,6 +46,9 @@ namespace UnityStandardAssets.Network
         [HideInInspector]
         public bool _isMatchmaking = false;
 
+        //used to show which map was selected
+        public string matchMap;
+
         protected bool _disconnectServer = false;
         
         protected ulong _currentMatchID;

@@ -11,11 +11,14 @@ namespace UnityStandardAssets.Network
     {
         public Text serverInfoText;
         public Text slotInfo;
+        public Text mapInfo;
         public Button joinButton;
 
         public void Populate(MatchDesc match, LobbyManager lobbyManager, Color c)
         {
             serverInfoText.text = match.name;
+
+            mapInfo.text = lobbyManager.matchMap;
 
             slotInfo.text = match.currentSize.ToString() + "/" + match.maxSize.ToString(); ;
 

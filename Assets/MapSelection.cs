@@ -23,22 +23,26 @@ public class MapSelection : MonoBehaviour
 	    if(OptionSelected.text == "GYM_1")
         {
             GameObject.Find("LobbyManager").GetComponent<UnityStandardAssets.Network.LobbyManager>().playScene = "HermanGympasal";
+            GameObject.Find("LobbyManager").GetComponent<UnityStandardAssets.Network.LobbyManager>().matchMap = "GYM_1";
             MapFolder.sprite = MapImages[0];
         }
         if (OptionSelected.text == "GYM_2")
         {
             GameObject.Find("LobbyManager").GetComponent<UnityStandardAssets.Network.LobbyManager>().playScene = "SergejTestGym";
+            GameObject.Find("LobbyManager").GetComponent<UnityStandardAssets.Network.LobbyManager>().matchMap = "GYM_2";
             MapFolder.sprite = MapImages[1];
         }
         if (OptionSelected.text == "Chin_1")
         {
             GameObject.Find("LobbyManager").GetComponent<UnityStandardAssets.Network.LobbyManager>().playScene = "Chinese";
+            GameObject.Find("LobbyManager").GetComponent<UnityStandardAssets.Network.LobbyManager>().matchMap = "Chin_1";
             MapFolder.sprite = MapImages[2];
         }
 
         if (OptionSelected.text == "Char_1")
         {
             GameObject.Find("LobbyManager").GetComponent<UnityStandardAssets.Network.LobbyManager>().playScene = "Character";
+            GameObject.Find("LobbyManager").GetComponent<UnityStandardAssets.Network.LobbyManager>().matchMap = "Char_1";
             MapFolder.sprite = MapImages[3];
         }
     }
