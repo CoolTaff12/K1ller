@@ -25,7 +25,7 @@ public class GrabAndToss : NetworkBehaviour
 	public Transform[] bodyparts; //List of bodypart segments.
 	public DodgeBallBehaviour ballInfo; //Script on the ball colliding with the player;
 	public DodgeBallBehaviour ballScript; //Script on the ball hit by the players' raycast.
-	public NetworkCharacterInfo assignInfo; //Script to set initial info such as teamNumber.
+	public AssignPlayerInfo assignInfo; //Script to set initial info such as teamNumber.
 	public Animator anim;
 	public GameObject fpc; //FirstPersonController connected to the player;
 	public GameObject head; //Head of the player;
@@ -143,7 +143,7 @@ Debug.DrawRay (head.transform.position, head.transform.forward, Color.green, ray
 	[Command]
 	public void Cmd_KillYourself(GameObject go){
 		networkMgr = GameObject.Find ("PlayerInfoHandler");
-		assignInfo = GetComponent<NetworkCharacterInfo> ();
+		assignInfo = GetComponent<AssignPlayerInfo> ();
 		assignInfo.Rpc_KillAPlayer(go);
 	}
 	IEnumerator StartThrow(float waitTime) 
