@@ -17,7 +17,7 @@ public class NetworkLobbyHook : LobbyHook
             spaceship.score = 0;
             spaceship.lifeCount = 3;
         }
-        else if(gamePlayer.GetComponent<NetworkCharacterInfo>())
+        else if (gamePlayer.GetComponent<NetworkCharacterInfo>())
         {
             NetworkCharacterInfo characterInfo = gamePlayer.GetComponent<NetworkCharacterInfo>();
 

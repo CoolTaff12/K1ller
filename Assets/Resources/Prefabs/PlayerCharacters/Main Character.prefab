@@ -217,6 +217,7 @@ GameObject:
   - 114: {fileID: 11482484}
   - 114: {fileID: 11442072}
   - 114: {fileID: 11426014}
+  - 114: {fileID: 11431808}
   m_Layer: 0
   m_Name: Main Character
   m_TagString: Player
@@ -1855,6 +1856,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   anim: {fileID: 9552176}
   gat: {fileID: 11442072}
+--- !u!114 &11431808
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 123130}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db6dff81994e101498d73cee61e9e4f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  score: 0
+  color: {r: 0, g: 0, b: 0, a: 0}
+  playerName: 
+  lifeCount: 0
+  teamNumber: 1
 --- !u!114 &11432088
 MonoBehaviour:
   m_ObjectHideFlags: 1
