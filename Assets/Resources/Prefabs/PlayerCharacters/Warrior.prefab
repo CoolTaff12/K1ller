@@ -174,7 +174,6 @@ GameObject:
   - 114: {fileID: 11415172}
   - 114: {fileID: 11411844}
   - 114: {fileID: 11475074}
-  - 114: {fileID: 11406110}
   m_Layer: 0
   m_Name: Warrior
   m_TagString: Player
@@ -1184,18 +1183,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
---- !u!114 &11406110
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 156958}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 50ca92a59c7eed148a57bc8220285409, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerUniqueIdenity: 
 --- !u!114 &11411844
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1383,6 +1370,7 @@ MonoBehaviour:
   m_JumpSound: {fileID: 8300000, guid: 5897aeed9b676024fbb8c694b421a861, type: 3}
   m_LandSound: {fileID: 8300000, guid: 3b09d59f4499d45428baa7a21e954296, type: 3}
   m_Jump: 0
+  m_Jumping: 0
 --- !u!114 &11471582
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1423,6 +1411,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cam: {fileID: 2028372}
   gat: {fileID: 0}
+  audioLis: {fileID: 0}
+  bodyParts: []
 --- !u!114 &11485038
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1459,10 +1449,12 @@ MonoBehaviour:
   killable: 1
   dead: 0
   holdingBall: 0
-  Bodyparts: []
+  throwing: 0
+  bodyparts: []
   ballInfo: {fileID: 0}
   ballScript: {fileID: 0}
   assignInfo: {fileID: 0}
+  anim: {fileID: 0}
   fpc: {fileID: 0}
   head: {fileID: 124938}
   currentBall: {fileID: 0}

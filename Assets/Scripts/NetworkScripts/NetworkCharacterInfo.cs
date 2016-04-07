@@ -37,6 +37,7 @@ public class NetworkCharacterInfo : NetworkBehaviour
     // Use this for initialization
     void Start ()
     {
+        name = playerName;
         Renderer[] CRends = GetComponentsInChildren<Renderer>();
         Renderer TshirtRends = GameObject.Find(this.gameObject.name + "/Body/regular_dude_body").GetComponent<Renderer>();
         TshirtRends.material.color = color;
