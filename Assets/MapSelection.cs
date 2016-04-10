@@ -45,5 +45,12 @@ public class MapSelection : MonoBehaviour
             GameObject.Find("LobbyManager").GetComponent<UnityStandardAssets.Network.LobbyManager>().matchMap = "Char_1";
             MapFolder.sprite = MapImages[3];
         }
+
+        if (OptionSelected.text == "Rot_1")
+        {
+            GameObject.Find("LobbyManager").GetComponent<UnityStandardAssets.Network.LobbyManager>().playScene = "RotateAcrossTheSky";
+            GameObject.Find("LobbyManager").GetComponent<UnityStandardAssets.Network.LobbyManager>().matchMap = "Rot_1";
+            MapFolder.sprite = MapImages[4];
+        }
     }
 }

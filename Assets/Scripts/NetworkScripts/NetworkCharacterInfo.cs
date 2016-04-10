@@ -49,8 +49,8 @@ public class NetworkCharacterInfo : NetworkBehaviour
 	
 	// Update is called once per frame
 	void Update () {
-	
-	}
+        UnityEngine.Cursor.visible = true;
+    }
 
     [ClientRpc]
     public void Rpc_SetTeamNumber(GameObject go)

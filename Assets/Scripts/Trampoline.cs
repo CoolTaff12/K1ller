@@ -15,9 +15,13 @@ public class Trampoline : MonoBehaviour
 {
 	public Vector3 force = new Vector3(0, 10, 0);
 	public bool relative = false;
-    public float TrampolineForce;
-	
-	Vector3 _overwrite = Vector3.zero;
+    [SerializeField]
+    private float TrampolineForce;
+    public int AppliedForce;
+    public int NormalForce;
+    public int StrongForce;
+
+    Vector3 _overwrite = Vector3.zero;
 	
 	void OnTriggerEnter(Collider other)
 	{
@@ -39,6 +43,15 @@ public class Trampoline : MonoBehaviour
 			other.GetComponent<Rigidbody>().AddForce(force-other.GetComponent<Rigidbody>().velocity, ForceMode.VelocityChange);
         if (other.gameObject.GetComponent<UnityStandardAssets.Characters.FirstPerson.FirstPersonController>())
         {
+            AppliedForce = Random.Range(1, 3);
+            if(AppliedForce == 2)
+            {
+                TrampolineForce = StrongForce;
+            }
+            else
+            {
+                TrampolineForce = NormalForce;
+            }
             other.gameObject.GetComponent<UnityStandardAssets.Characters.FirstPerson.FirstPersonController>().m_JumpSpeed = TrampolineForce;
             other.gameObject.GetComponent<UnityStandardAssets.Characters.FirstPerson.FirstPersonController>().m_Jump = true;
             Debug.Log("Gottcha!");
