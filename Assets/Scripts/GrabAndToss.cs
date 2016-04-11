@@ -34,6 +34,7 @@ public class GrabAndToss : NetworkBehaviour
 	public GameObject networkMgr; //NetworkManager found in scene.
 	public GameObject ballPrefab;
 	public GameObject deathMessage;
+    public NetworkLobbyHook NLH;
 	[SyncVar]
 	public GameObject body;
 
@@ -46,10 +47,8 @@ public class GrabAndToss : NetworkBehaviour
 //			go.GetComponent<Rigidbody> ().useGravity = false;
 //		}
 		anim = GetComponent<Animator>();
-		teamNumber = GetComponent<NetworkCharacterInfo> ().teamNumber;
-
-
-	}
+        NLH = GameObject.Find("LobbyManager").GetComponent<NetworkLobbyHook>();
+    }
 
 	// Update is called once per frame
 	void Update ()
@@ -134,7 +133,42 @@ Debug.DrawRay (head.transform.position, head.transform.forward, Color.green, ray
 
 	void KillYourSelf(){
 		dead = true;
-		teamNumber = 0;
+        switch (teamNumber)
+        {
+            case 10:
+                print("Why hello there good sir! Let me teach you about Trigonometry!");
+                break;
+            case 9:
+                print("Hello and good day!");
+                break;
+            case 8:
+                print("Whadya want?");
+                break;
+            case 7:
+                print("Grog SMASH!");
+                break;
+            case 6:
+                NLH.CheackingList1(this.gameObject);
+                break;
+            case 5:
+                print("Why hello there good sir! Let me teach you about Trigonometry!");
+                break;
+            case 4:
+                print("Hello and good day!");
+                break;
+            case 3:
+                print("Whadya want?");
+                break;
+            case 2:
+                print("Grog SMASH!");
+                break;
+            case 1:
+                NLH.CheackingList1(this.gameObject);
+                break;
+            default:
+                break;
+        }
+        teamNumber = 0;
 		GetComponent<BoxCollider> ().enabled = false;
 		bodyparts[8].layer = 9;
 		bodyparts [9].layer = 9;
@@ -160,7 +194,9 @@ Debug.DrawRay (head.transform.position, head.transform.forward, Color.green, ray
 			tossForce = 1f;
 			Cmd_Shoot (currentBall);
 		}
+        
 	}
+
 	[Command]
 	public void Cmd_TakeDamage(GameObject go) {
 		networkMgr = GameObject.Find ("PlayerInfoHandler");

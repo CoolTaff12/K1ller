@@ -20,7 +20,7 @@ public class NetworkLobbyHook : LobbyHook
     public override void OnLobbyServerSceneLoadedForPlayer(NetworkManager manager, GameObject lobbyPlayer, GameObject gamePlayer)
     {
         LobbyPlayer lobby = lobbyPlayer.GetComponent<LobbyPlayer>();
-        if(gamePlayer.GetComponent<NetworkSpaceship>())
+        if (gamePlayer.GetComponent<NetworkSpaceship>())
         {
             NetworkSpaceship spaceship = gamePlayer.GetComponent<NetworkSpaceship>();
 
@@ -49,7 +49,7 @@ public class NetworkLobbyHook : LobbyHook
         GameObject[] TeamPlayers = GameObject.FindGameObjectsWithTag("Player");
         foreach (GameObject GnT in TeamPlayers)
         {
-            if(GnT.GetComponent<GrabAndToss>().teamNumber == 1)
+            if (GnT.GetComponent<GrabAndToss>().teamNumber == 1)
             {
                 Team1.Add(GnT);
             }
@@ -90,5 +90,27 @@ public class NetworkLobbyHook : LobbyHook
                 Team10.Add(GnT);
             }
         }
+        return;
+    }
+
+    void Update()
+    {
+
+    }
+
+    public void CheackingList1(GameObject isDead)
+    {
+        Team1.Remove(isDead);
+        /* foreach(GameObject deadPlayer in Team1)
+         {
+             if(deadPlayer.GetComponent<GrabAndToss>().dead == true)
+             {
+                 Team1.Remove(deadPlayer);
+             }
+         }*/
+    }
+    public void CheackingList2(GameObject isDead)
+    {
+        Team2.Remove(isDead);
     }
 }
