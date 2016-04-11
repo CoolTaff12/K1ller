@@ -309,7 +309,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071067}
   m_LocalPosition: {x: -3, y: 0.98, z: 29.4}
   m_LocalScale: {x: 1, y: 46.661568, z: 74.953896}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 3
@@ -563,7 +563,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 497878, guid: 2b9fa37ac0f417041ba6f6b207c59ea5, type: 2}
       propertyPath: m_RootOrder
-      value: 11
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 11455392, guid: 2b9fa37ac0f417041ba6f6b207c59ea5, type: 2}
       propertyPath: m_OnlineScene
@@ -580,6 +580,10 @@ Prefab:
     - target: {fileID: 11455392, guid: 2b9fa37ac0f417041ba6f6b207c59ea5, type: 2}
       propertyPath: m_OfflineScene
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 11455392, guid: 2b9fa37ac0f417041ba6f6b207c59ea5, type: 2}
+      propertyPath: m_PlayerSpawnMethod
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 2b9fa37ac0f417041ba6f6b207c59ea5, type: 2}
@@ -661,7 +665,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 487108, guid: 059e3f0f3acf24e438fd22fe66c4ce12, type: 2}
       propertyPath: m_RootOrder
-      value: 9
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 11460370, guid: 059e3f0f3acf24e438fd22fe66c4ce12, type: 2}
       propertyPath: m_AssetId.i0
@@ -726,6 +730,10 @@ Prefab:
     - target: {fileID: 11460370, guid: 059e3f0f3acf24e438fd22fe66c4ce12, type: 2}
       propertyPath: m_AssetId.i15
       value: 18
+      objectReference: {fileID: 0}
+    - target: {fileID: 173430, guid: 059e3f0f3acf24e438fd22fe66c4ce12, type: 2}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 059e3f0f3acf24e438fd22fe66c4ce12, type: 2}
@@ -875,9 +883,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23d2c7364b07ef84fb57063f83e8f91e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefabToSpawn: {fileID: 142076, guid: 0b7c7e54cbe17bf48a563efc87bece91, type: 2}
-  objectName: BallSpawner
-  onlyOne: 1
+  prefabToSpawn: {fileID: 163478, guid: 16a89774751f1f740a89d9192e74dc7b, type: 2}
+  objectName: Ball
+  onlyOne: 0
 --- !u!114 &1280469655
 MonoBehaviour:
   m_ObjectHideFlags: 0

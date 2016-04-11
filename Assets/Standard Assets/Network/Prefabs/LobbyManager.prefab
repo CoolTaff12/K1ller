@@ -4099,7 +4099,8 @@ MonoBehaviour:
   m_PlayerSpawnMethod: 0
   m_OfflineScene: NetworkLobby
   m_OnlineScene: 
-  m_SpawnPrefabs: []
+  m_SpawnPrefabs:
+  - {fileID: 163478, guid: 16a89774751f1f740a89d9192e74dc7b, type: 2}
   m_CustomConfig: 0
   m_MaxConnections: 4
   m_ConnectionConfig:
@@ -4142,14 +4143,14 @@ MonoBehaviour:
   m_ShowLobbyGUI: 0
   m_MaxPlayers: 10
   m_MaxPlayersPerConnection: 1
-  m_MinPlayers: 2
+  m_MinPlayers: 1
   m_LobbyPlayerPrefab: {fileID: 11487034, guid: ad727d7e1462ecc4f83c898ecc501997,
     type: 2}
   m_GamePlayerPrefab: {fileID: 123130, guid: 8da62885f0bb2c6438f3be2716a446c4, type: 2}
   m_LobbyScene: NetworkLobby
   m_PlayScene: NetworkSpaceship
   lobbySlots: []
-  prematchCountdown: 3
+  prematchCountdown: 5
   topPanel: {fileID: 11424994}
   mainMenuPanel: {fileID: 22442386}
   lobbyPanel: {fileID: 22443498}
