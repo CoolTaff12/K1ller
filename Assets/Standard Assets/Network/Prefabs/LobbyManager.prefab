@@ -2763,6 +2763,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a5d15f2051d09644ebccdef0f54b7bbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Team1: []
+  Team2: []
+  Team3: []
+  Team4: []
+  Team5: []
+  Team6: []
+  Team7: []
+  Team8: []
+  Team9: []
+  Team10: []
 --- !u!114 &11439030
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2840,15 +2850,15 @@ MonoBehaviour:
   m_Value: 0
   m_Options:
     m_Options:
-    - m_Text: GYM_1
+    - m_Text: GYM_FORT
       m_Image: {fileID: 0}
     - m_Text: GYM_2
       m_Image: {fileID: 0}
-    - m_Text: Chin_1
+    - m_Text: GYM_BridgeTwon
       m_Image: {fileID: 0}
     - m_Text: Char_1
       m_Image: {fileID: 0}
-    - m_Text: Rot_1
+    - m_Text: Bonus_AcrossTheSky
       m_Image: {fileID: 0}
   m_OnValueChanged:
     m_PersistentCalls:
@@ -2952,7 +2962,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: GYM_1
+  m_Text: GYM_FORT
 --- !u!114 &11443636
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4146,7 +4156,7 @@ MonoBehaviour:
   m_ShowLobbyGUI: 0
   m_MaxPlayers: 10
   m_MaxPlayersPerConnection: 1
-  m_MinPlayers: 1
+  m_MinPlayers: 2
   m_LobbyPlayerPrefab: {fileID: 11487034, guid: ad727d7e1462ecc4f83c898ecc501997,
     type: 2}
   m_GamePlayerPrefab: {fileID: 123130, guid: 8da62885f0bb2c6438f3be2716a446c4, type: 2}
