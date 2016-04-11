@@ -20,12 +20,40 @@ public class AssignPlayerInfo : NetworkBehaviour {
 	{
 		go.GetComponent<GrabAndToss>().dead = true;
 		go.GetComponent<GrabAndToss>().teamNumber = 0;
-//		go.GetComponent<FirstPersonController> ().m_RunSpeed = 0;
-//		go.GetComponent<FirstPersonController> ().m_WalkSpeed = 0;
+		go.GetComponent<BoxCollider> ().enabled = false;
+		go.GetComponent<GrabAndToss>().bodyparts[8].layer = 9;
+		go.GetComponent<GrabAndToss>().bodyparts [9].layer = 9;
+		//		foreach(GameObject go in bodyparts){
+		//			go.transform.SetParent (null);
+		//			go.GetComponent<Rigidbody> ().isKinematic = false;
+		//			go.GetComponent<Rigidbody> ().detectCollisions = true;
+		//			go.GetComponent<Rigidbody> ().useGravity = true;
+		//		}
+		go.layer = 10;
+
+		go.GetComponent<FirstPersonController> ().m_RunSpeed = 30;
+		go.GetComponent<FirstPersonController> ().m_WalkSpeed = 15;
 		go.GetComponent<FirstPersonController> ().m_JumpSpeed = 0;
+		go.GetComponent<FirstPersonController> ().m_GravityMultiplier = 0;
 		go.transform.localScale = new Vector3(0.2f, 0.2f, 0.2f);
 		Rigidbody rb = go.GetComponent<Rigidbody>();
 		rb.detectCollisions = false;
 		rb.useGravity = false;
+		rb.Sleep ();
+		go.GetComponent<GrabAndToss>().deathMessage.SetActive (true);
+
 	}
+	[ClientRpc]
+	public void Rpc_SpawnHead(GameObject go)
+	{
+		GameObject HeadBall = Instantiate(go.GetComponent<GrabAndToss>().ballPrefab, go.GetComponent<GrabAndToss>().head.transform.position, Quaternion.identity) as GameObject;
+		HeadBall.GetComponent<Renderer> ().material.mainTexture = go.GetComponent<GrabAndToss>().bodyparts [0].GetComponent<Renderer> ().material.mainTexture;
+		NetworkServer.Spawn(go.GetComponent<GrabAndToss>().ballPrefab);
+	}
+	[ClientRpc]
+	public void Rpc_DealDamage(GameObject go)
+	{
+		go.GetComponent<GrabAndToss> ().health -= 1;
+	}
+
 }

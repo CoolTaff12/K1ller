@@ -8,6 +8,8 @@ TagManager:
   - Ball
   - ForceField
   - Spawn
+  - Trampoline
+  - DeadPlayer
   layers:
   - Default
   - TransparentFX
@@ -19,7 +21,7 @@ TagManager:
   - 
   - PlayerLayer
   - Self
-  - 
+  - DeadPlayer
   - 
   - 
   - 
