@@ -37,18 +37,20 @@ public class NetworkCharacterInfo : NetworkBehaviour
     // Use this for initialization
     void Start ()
     {
-
+        name = playerName;
         Renderer[] CRends = GetComponentsInChildren<Renderer>();
-        foreach (Renderer r in CRends)
+        Renderer TshirtRends = GameObject.Find(this.gameObject.name + "/Body/regular_dude_body").GetComponent<Renderer>();
+        TshirtRends.material.color = color;
+      /*  foreach (Renderer r in CRends)
         {
             r.material.color = color;
-        }
+        }*/
     }
 	
 	// Update is called once per frame
 	void Update () {
-	
-	}
+        UnityEngine.Cursor.visible = true;
+    }
 
     [ClientRpc]
     public void Rpc_SetTeamNumber(GameObject go)

@@ -46,6 +46,9 @@ namespace UnityStandardAssets.Network
         [HideInInspector]
         public bool _isMatchmaking = false;
 
+        //used to show which map was selected
+        public string matchMap;
+
         protected bool _disconnectServer = false;
         
         protected ulong _currentMatchID;
@@ -54,6 +57,7 @@ namespace UnityStandardAssets.Network
 
         void Start()
         {
+            UnityEngine.Cursor.visible = true;
             s_Singleton = this;
             _lobbyHooks = GetComponent<UnityStandardAssets.Network.LobbyHook>();
             currentPanel = mainMenuPanel;

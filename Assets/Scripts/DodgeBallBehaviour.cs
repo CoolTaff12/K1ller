@@ -16,12 +16,15 @@ public class DodgeBallBehaviour : NetworkBehaviour {
 	private Transform myTransform;
 	public bool pickedUp;
 	public GameObject currentPlayer;
+	[SyncVar]
+	public int bounces = 10;
 
 	// Use this for initialization
 	void Start ()
 	{
 		rb = gameObject.GetComponent<Rigidbody> ();
 		coll = gameObject.GetComponent<SphereCollider> ();
+		Physics.IgnoreLayerCollision (0, 10);
 		if (!isLocalPlayer) {
 			return;
 		}
@@ -36,6 +39,9 @@ public class DodgeBallBehaviour : NetworkBehaviour {
 			gameObject.transform.position = gat.holdPos.transform.position;
 			gameObject.transform.rotation = gat.fpc.transform.rotation;
 		}
+		if (bounces <= 0) {
+			thrownByTeam = 0;
+		}
 
 	}
 	//-----------------Play Audio------------------------
@@ -48,6 +54,8 @@ public class DodgeBallBehaviour : NetworkBehaviour {
 
 	void OnCollisionEnter(Collision col)
 	{
+		bounces--;
+
 		if (col.gameObject.tag == "ForceField")
 		{
 			GameObject Sparked = (GameObject) Instantiate(Sparks, transform.position, Quaternion.identity);
@@ -73,6 +81,7 @@ public class DodgeBallBehaviour : NetworkBehaviour {
 	}
 	[ClientRpc]
 	public void Rpc_Shoot (){
+		bounces = 10;
 		rb.velocity = Vector3.zero;
 		rb.angularVelocity = Vector3.zero;
 		rb.isKinematic = false;
@@ -83,11 +92,5 @@ public class DodgeBallBehaviour : NetworkBehaviour {
 		gat = null;
 		pickedUp = false;
 	}
-//	public void GetPickedUp(GameObject go){
-//		Rpc_GetPickedUp (go);
-//	}
-//	public void Shoot(){
-//	Rpc_Shoot();
-//}
 
 }

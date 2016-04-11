@@ -17,6 +17,7 @@ namespace UnityStandardAssets.Network
 
         public Button colorButton;
         public InputField nameInput;
+        public Dropdown teamNumber;
         public Button readyButton;
         public Button waitingPlayerButton;
         public Button removePlayerButton;
@@ -29,6 +30,8 @@ namespace UnityStandardAssets.Network
         public string playerName = "";
         [SyncVar(hook = "OnMyColor")]
         public Color playerColor = Color.white;
+        [SyncVar(hook = "OnMyTeam")]
+        public int setTeamNumber = 1;
 
         public Color OddRowColor = new Color(250.0f / 255.0f, 250.0f / 255.0f, 250.0f / 255.0f, 1.0f);
         public Color EvenRowColor = new Color(180.0f / 255.0f, 180.0f / 255.0f, 180.0f / 255.0f, 1.0f);
@@ -63,6 +66,7 @@ namespace UnityStandardAssets.Network
             //setup the player data on UI. The value are SyncVar so the player
             //will be created with the right value currently on server
             OnMyName(playerName);
+            OnMyTeam(setTeamNumber);
             OnMyColor(playerColor);
         }
 
@@ -89,6 +93,7 @@ namespace UnityStandardAssets.Network
         void SetupOtherPlayer()
         {
             nameInput.interactable = false;
+            teamNumber.interactable = false;
             removePlayerButton.interactable = NetworkServer.active;
 
             ChangeReadyButtonColor(NotReadyColor);
@@ -102,6 +107,7 @@ namespace UnityStandardAssets.Network
         void SetupLocalPlayer()
         {
             nameInput.interactable = true;
+            teamNumber.interactable = true;
             remoteIcone.gameObject.SetActive(false);
             localIcone.gameObject.SetActive(true);
 
@@ -122,9 +128,13 @@ namespace UnityStandardAssets.Network
             //we switch from simple name display to name input
             colorButton.interactable = true;
             nameInput.interactable = true;
+            teamNumber.interactable = true;
 
             nameInput.onEndEdit.RemoveAllListeners();
             nameInput.onEndEdit.AddListener(OnNameChanged);
+
+            teamNumber.onValueChanged.RemoveAllListeners();
+            teamNumber.onValueChanged.AddListener(OnTeamSet);
 
             colorButton.onClick.RemoveAllListeners();
             colorButton.onClick.AddListener(OnColorClicked);
@@ -189,6 +199,13 @@ namespace UnityStandardAssets.Network
             nameInput.text = playerName;
         }
 
+        public void OnMyTeam(int newTeam)
+        {
+            setTeamNumber = newTeam;
+            teamNumber.value = setTeamNumber;
+        }
+
+
         public void OnMyColor(Color newColor)
         {
             playerColor = newColor;
@@ -214,6 +231,11 @@ namespace UnityStandardAssets.Network
             CmdNameChanged(str);
         }
 
+        public void OnTeamSet(int nr)
+        {
+            CmdTeamSet(nr);
+        }
+
         public void OnRemovePlayerClick()
         {
             if (isLocalPlayer)
@@ -236,6 +258,7 @@ namespace UnityStandardAssets.Network
         {
             LobbyManager.s_Singleton.countdownPanel.UIText.text = "Match Starting in " + countdown;
             LobbyManager.s_Singleton.countdownPanel.gameObject.SetActive(countdown != 0);
+            this.gameObject.name = playerName;
         }
 
         [ClientRpc]
@@ -289,6 +312,12 @@ namespace UnityStandardAssets.Network
         public void CmdNameChanged(string name)
         {
             playerName = name;
+        }
+
+        [Command]
+        public void CmdTeamSet(int teamNr)
+        {
+            setTeamNumber = teamNr;
         }
 
         //Cleanup thing when get destroy (which happen when client kick or disconnect)

@@ -20,26 +20,37 @@ public class MapSelection : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
     {
-	    if(OptionSelected.text == "GYM_1")
+	    if(OptionSelected.text == "GYM_FORT")
         {
             GameObject.Find("LobbyManager").GetComponent<UnityStandardAssets.Network.LobbyManager>().playScene = "HermanGympasal";
+            GameObject.Find("LobbyManager").GetComponent<UnityStandardAssets.Network.LobbyManager>().matchMap = "GYM_FORT";
             MapFolder.sprite = MapImages[0];
         }
         if (OptionSelected.text == "GYM_2")
         {
             GameObject.Find("LobbyManager").GetComponent<UnityStandardAssets.Network.LobbyManager>().playScene = "SergejTestGym";
+            GameObject.Find("LobbyManager").GetComponent<UnityStandardAssets.Network.LobbyManager>().matchMap = "GYM_2";
             MapFolder.sprite = MapImages[1];
         }
-        if (OptionSelected.text == "Chin_1")
+        if (OptionSelected.text == "GYM_BridgeTwon")
         {
-            GameObject.Find("LobbyManager").GetComponent<UnityStandardAssets.Network.LobbyManager>().playScene = "Chinese";
+            GameObject.Find("LobbyManager").GetComponent<UnityStandardAssets.Network.LobbyManager>().playScene = "BridgeTown";
+            GameObject.Find("LobbyManager").GetComponent<UnityStandardAssets.Network.LobbyManager>().matchMap = "GYM_BridgeTwon";
             MapFolder.sprite = MapImages[2];
         }
 
         if (OptionSelected.text == "Char_1")
         {
             GameObject.Find("LobbyManager").GetComponent<UnityStandardAssets.Network.LobbyManager>().playScene = "Character";
+            GameObject.Find("LobbyManager").GetComponent<UnityStandardAssets.Network.LobbyManager>().matchMap = "Char_1";
             MapFolder.sprite = MapImages[3];
+        }
+
+        if (OptionSelected.text == "Bonus_AcrossTheSky")
+        {
+            GameObject.Find("LobbyManager").GetComponent<UnityStandardAssets.Network.LobbyManager>().playScene = "RotateAcrossTheSky";
+            GameObject.Find("LobbyManager").GetComponent<UnityStandardAssets.Network.LobbyManager>().matchMap = "Bonus_AcrossTheSky";
+            MapFolder.sprite = MapImages[4];
         }
     }
 }

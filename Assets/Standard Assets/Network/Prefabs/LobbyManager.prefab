@@ -590,6 +590,23 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &143136
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 224: {fileID: 22440496}
+  - 222: {fileID: 22279520}
+  - 114: {fileID: 11452960}
+  m_Layer: 5
+  m_Name: ServerName
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &144076
 GameObject:
   m_ObjectHideFlags: 1
@@ -980,7 +997,7 @@ GameObject:
   - 222: {fileID: 22203328}
   - 114: {fileID: 11404728}
   m_Layer: 5
-  m_Name: ServerName
+  m_Name: MapName
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1618,9 +1635,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 0
-  m_Text: 'SERVER NAME
-
-'
+  m_Text: MAP NAME
 --- !u!114 &11405198
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2748,6 +2763,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a5d15f2051d09644ebccdef0f54b7bbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Team1: []
+  Team2: []
+  Team3: []
+  Team4: []
+  Team5: []
+  Team6: []
+  Team7: []
+  Team8: []
+  Team9: []
+  Team10: []
 --- !u!114 &11439030
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2825,13 +2850,15 @@ MonoBehaviour:
   m_Value: 0
   m_Options:
     m_Options:
-    - m_Text: GYM_1
+    - m_Text: GYM_FORT
       m_Image: {fileID: 0}
     - m_Text: GYM_2
       m_Image: {fileID: 0}
-    - m_Text: Chin_1
+    - m_Text: GYM_BridgeTwon
       m_Image: {fileID: 0}
     - m_Text: Char_1
+      m_Image: {fileID: 0}
+    - m_Text: Bonus_AcrossTheSky
       m_Image: {fileID: 0}
   m_OnValueChanged:
     m_PersistentCalls:
@@ -2935,7 +2962,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: GYM_1
+  m_Text: GYM_FORT
 --- !u!114 &11443636
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3250,6 +3277,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 8a6e0d6e57d0ec149b13e1e4b005dcbe, type: 3}
   - {fileID: 21300000, guid: eeb45a45bd9a2414b8f1538d12918047, type: 3}
   - {fileID: 21300000, guid: 77255067e8fcab84497224aa00653e4b, type: 3}
+  - {fileID: 21300000, guid: e20db298203cf6340a3b6d6ffe7deef1, type: 3}
 --- !u!114 &11451604
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3337,6 +3365,41 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: PREVIOUS
+--- !u!114 &11452960
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 143136}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 708705254, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.13333334, g: 0.17254902, b: 0.21568629, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_FontData:
+    m_Font: {fileID: 12800000, guid: 87c316b602156405d92e616621658222, type: 3}
+    m_FontSize: 36
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 10
+    m_MaxSize: 36
+    m_Alignment: 6
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 1
+    m_VerticalOverflow: 1
+    m_LineSpacing: 0
+  m_Text: 'SERVER NAME
+
+'
 --- !u!114 &11453250
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4049,7 +4112,8 @@ MonoBehaviour:
   m_PlayerSpawnMethod: 0
   m_OfflineScene: NetworkLobby
   m_OnlineScene: 
-  m_SpawnPrefabs: []
+  m_SpawnPrefabs:
+  - {fileID: 163478, guid: 16a89774751f1f740a89d9192e74dc7b, type: 2}
   m_CustomConfig: 0
   m_MaxConnections: 4
   m_ConnectionConfig:
@@ -4090,16 +4154,16 @@ MonoBehaviour:
   matchName: default
   matchSize: 4
   m_ShowLobbyGUI: 0
-  m_MaxPlayers: 4
+  m_MaxPlayers: 10
   m_MaxPlayersPerConnection: 1
-  m_MinPlayers: 1
+  m_MinPlayers: 2
   m_LobbyPlayerPrefab: {fileID: 11487034, guid: ad727d7e1462ecc4f83c898ecc501997,
     type: 2}
-  m_GamePlayerPrefab: {fileID: 175808, guid: 839621b68dcf44647aa1e2072f33bd25, type: 2}
+  m_GamePlayerPrefab: {fileID: 123130, guid: 8da62885f0bb2c6438f3be2716a446c4, type: 2}
   m_LobbyScene: NetworkLobby
   m_PlayScene: NetworkSpaceship
   lobbySlots: []
-  prematchCountdown: 3
+  prematchCountdown: 5
   topPanel: {fileID: 11424994}
   mainMenuPanel: {fileID: 22442386}
   lobbyPanel: {fileID: 22443498}
@@ -4111,6 +4175,7 @@ MonoBehaviour:
   hostInfo: {fileID: 11415712}
   _playerNumber: 0
   _isMatchmaking: 0
+  matchMap: 
 --- !u!114 &11475302
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5255,6 +5320,12 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 181620}
+--- !u!222 &22279520
+CanvasRenderer:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 143136}
 --- !u!222 &22282080
 CanvasRenderer:
   m_ObjectHideFlags: 1
@@ -5628,10 +5699,10 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 22491510}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 116, y: -36}
+  m_AnchoredPosition: {x: 1200, y: -36}
   m_SizeDelta: {x: 260, y: 27}
   m_Pivot: {x: 0, y: 1}
 --- !u!224 &22415988
@@ -5929,8 +6000,8 @@ RectTransform:
   m_RootOrder: 0
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 1039.3477, y: -50}
-  m_SizeDelta: {x: 2078.6953, y: 100}
+  m_AnchoredPosition: {x: 821.8229, y: -50}
+  m_SizeDelta: {x: 1643.6458, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &22433364
 RectTransform:
@@ -6027,6 +6098,24 @@ RectTransform:
   m_AnchoredPosition: {x: 115.5, y: -44}
   m_SizeDelta: {x: 105, y: 24}
   m_Pivot: {x: 0, y: 0.5}
+--- !u!224 &22440496
+RectTransform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 143136}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_Children: []
+  m_Father: {fileID: 22491510}
+  m_RootOrder: 0
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 116, y: -36}
+  m_SizeDelta: {x: 260, y: 27}
+  m_Pivot: {x: 0, y: 1}
 --- !u!224 &22442232
 RectTransform:
   m_ObjectHideFlags: 1
@@ -6173,7 +6262,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 22491510}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 1272, y: -36}
@@ -6399,7 +6488,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 22491510}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 960, y: -36}
@@ -6610,7 +6699,7 @@ RectTransform:
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: -1004, y: -140.5}
-  m_SizeDelta: {x: 138, y: 94}
+  m_SizeDelta: {x: 117, y: 94}
   m_Pivot: {x: 0, y: 1}
 --- !u!224 &22478074
 RectTransform:
@@ -6774,6 +6863,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
+  - {fileID: 22440496}
   - {fileID: 22413772}
   - {fileID: 22465950}
   - {fileID: 22452078}

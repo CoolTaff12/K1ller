@@ -32,6 +32,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -3.071097, y: 3.14, z: -8.21192}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -199,7 +200,7 @@ MonoBehaviour:
   gat: {fileID: 0}
   rb: {fileID: 0}
   coll: {fileID: 0}
-  thrownByTeam: 1
+  thrownByTeam: 0
   Sparks: {fileID: 100000, guid: d05d496cb4f43c14e80630addd23652e, type: 3}
   myTransform: {fileID: 0}
   pickedUp: 0
