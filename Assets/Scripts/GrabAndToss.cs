@@ -11,7 +11,6 @@ public class GrabAndToss : NetworkBehaviour
 	public float rayDistance = 4f; //Length of Ray. Default set to 5.
 	public float rayRadius = 0.75f; //Radius of Ray. Default set to 0.75
 	public float tossForce = 20f; //Force added to ball when tossed. Default set to 20;
-	[SyncVar]
 	public int teamNumber = 0; //Number of the team this character is on. Is set by AssignPlayerInfo Script.
 //	public int killed = 1; //Is this character killed? 1 for true, 0 for false;
 	[SyncVar]
@@ -35,6 +34,8 @@ public class GrabAndToss : NetworkBehaviour
 	public GameObject networkMgr; //NetworkManager found in scene.
 	public GameObject ballPrefab;
 	public GameObject deathMessage;
+	[SyncVar]
+	public GameObject body;
 
 	// Use this for initialization
 	void Start ()
@@ -131,35 +132,35 @@ Debug.DrawRay (head.transform.position, head.transform.forward, Color.green, ray
 		}
 	}
 
-//	void KillYourSelf(){
-//		GetComponent<GrabAndToss>().dead = true;
-//		GetComponent<GrabAndToss>().teamNumber = 0;
-//		GetComponent<BoxCollider> ().enabled = false;
-//		bodyparts[8].layer = 9;
-//		bodyparts [9].layer = 9;
-////		foreach(GameObject go in bodyparts){
-////			go.transform.SetParent (null);
-////			go.GetComponent<Rigidbody> ().isKinematic = false;
-////			go.GetComponent<Rigidbody> ().detectCollisions = true;
-////			go.GetComponent<Rigidbody> ().useGravity = true;
-////		}
-//		gameObject.layer = 10;
-//
-//		GetComponent<FirstPersonController> ().m_RunSpeed = 30;
-//		GetComponent<FirstPersonController> ().m_WalkSpeed = 15;
-//		GetComponent<FirstPersonController> ().m_JumpSpeed = 0;
-//		GetComponent<FirstPersonController> ().m_GravityMultiplier = 0;
-//		transform.localScale = new Vector3(0.2f, 0.2f, 0.2f);
-//		Rigidbody rb = GetComponent<Rigidbody>();
-//		rb.detectCollisions = false;
-//		rb.useGravity = false;
-//		rb.Sleep ();
-//		deathMessage.SetActive (true);
-//		if (holdingBall) {
-//			tossForce = 1f;
-//			Cmd_Shoot (currentBall);
+	void KillYourSelf(){
+		dead = true;
+		teamNumber = 0;
+		GetComponent<BoxCollider> ().enabled = false;
+		bodyparts[8].layer = 9;
+		bodyparts [9].layer = 9;
+//		foreach(GameObject go in bodyparts){
+//			go.transform.SetParent (null);
+//			go.GetComponent<Rigidbody> ().isKinematic = false;
+//			go.GetComponent<Rigidbody> ().detectCollisions = true;
+//			go.GetComponent<Rigidbody> ().useGravity = true;
 //		}
-//	}
+		gameObject.layer = 10;
+
+		GetComponent<FirstPersonController> ().m_RunSpeed = 30;
+		GetComponent<FirstPersonController> ().m_WalkSpeed = 15;
+		GetComponent<FirstPersonController> ().m_JumpSpeed = 0;
+		GetComponent<FirstPersonController> ().m_GravityMultiplier = 0;
+		Rigidbody rb = GetComponent<Rigidbody>();
+		rb.detectCollisions = false;
+		rb.useGravity = false;
+		rb.Sleep ();
+		deathMessage.SetActive (true);
+		body.SetActive (false);
+		if (holdingBall) {
+			tossForce = 1f;
+			Cmd_Shoot (currentBall);
+		}
+	}
 	[Command]
 	public void Cmd_TakeDamage(GameObject go) {
 		networkMgr = GameObject.Find ("PlayerInfoHandler");
