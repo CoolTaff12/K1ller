@@ -26,8 +26,8 @@ public class GrabAndToss : NetworkBehaviour
 	public DodgeBallBehaviour ballInfo; //Script on the ball colliding with the player;
 	public DodgeBallBehaviour ballScript; //Script on the ball hit by the players' raycast.
 	public AssignPlayerInfo assignInfo; //Script to set initial info such as teamNumber.
-	public Animator anim;
-	public GameObject fpc; //FirstPersonController connected to the player;
+	public Animator anim;//Animator attached to the player.
+	public GameObject fpc; //FirstPersonController connected to the player.
 	public GameObject head; //Head of the player;
 	public GameObject currentBall; //Ball that is currently being held.
 	public GameObject holdPos; //Position of the held ball.
@@ -36,9 +36,8 @@ public class GrabAndToss : NetworkBehaviour
 	// Use this for initialization
 	void Start ()
 	{
-//		Cmd_SetName (gameObject);
-//		Cmd_SetTeamNumber (gameObject); //Command sent to assign a team number to this player.
 		anim = GetComponent<Animator>();
+		teamNumber = GetComponent<NetworkCharacterInfo> ().teamNumber;
 
 
 	}
@@ -52,6 +51,15 @@ public class GrabAndToss : NetworkBehaviour
 			dead = true;
 			teamNumber = 0;
 		}
+		if (dead) {
+			if (Input.GetKey (KeyCode.Space)) {
+				gameObject.transform.position = new Vector3 (transform.position.x, transform.position.y + 1f, transform.position.z);
+			}
+			if (Input.GetKey (KeyCode.LeftControl)) {
+				gameObject.transform.position = new Vector3 (transform.position.x, transform.position.y - 1f, transform.position.z);
+			}
+		}
+
 //DEBUG//
 Debug.DrawRay (head.transform.position, head.transform.forward, Color.green, rayDistance);
 		if (Physics.SphereCast (head.transform.position, rayRadius, head.transform.forward, out hit, rayDistance)) {
@@ -60,12 +68,10 @@ Debug.DrawRay (head.transform.position, head.transform.forward, Color.green, ray
 			}
 			if (hit.collider.GetComponent<DodgeBallBehaviour> () != null) {
 				print ("Ball!");
-				if (Input.GetKeyDown (KeyCode.E) || CrossPlatformInputManager.GetButtonDown ("Fire1") && !holdingBall) {
+				if (Input.GetKey (KeyCode.E) || CrossPlatformInputManager.GetButton ("Fire1") && !holdingBall) {
 					if (!hit.collider.GetComponent<DodgeBallBehaviour> ().pickedUp) {
 					currentBall = hit.collider.gameObject;
 					Cmd_GetPickedUp (currentBall , gameObject);
-					//ballScript.holdingPos = holdPos;
-//					ballScript.pickedUp = true;
 					holdingBall = true;
 					}
 
@@ -106,7 +112,7 @@ Debug.DrawRay (head.transform.position, head.transform.forward, Color.green, ray
 		if (col.gameObject.tag == "Ball")
 		{
 			ballInfo = col.gameObject.GetComponent<DodgeBallBehaviour>();
-			if (teamNumber != ballInfo.thrownByTeam) {
+			if (teamNumber != ballInfo.thrownByTeam && ballInfo.thrownByTeam != 0) {
 				Cmd_TakeDamage ();
 			}
 		}
@@ -126,25 +132,12 @@ Debug.DrawRay (head.transform.position, head.transform.forward, Color.green, ray
 		ballScript = bs.GetComponent<DodgeBallBehaviour> ();
 		ballScript.Rpc_GetPickedUp (go);
 	}
-//	[Command]
-//	public void Cmd_SetTeamNumber(GameObject go){
-//		networkMgr = GameObject.Find ("PlayerInfoHandler");
-//		Debug.Log ("PlayerSPawnHejHej");
-//		assignInfo = GetComponent<NetworkCharacterInfo> ();
-//		Debug.Log (go + " = GameObject We Are Looking For");
-//		assignInfo.Rpc_SetTeamNumber (go);
-//	}
-//	[Command]
-//	public void Cmd_SetName(GameObject go){
-//		networkMgr = GameObject.Find ("PlayerInfoHandler");
-//		assignInfo = GetComponent<NetworkCharacterInfo> ();
-//		assignInfo.Rpc_SetName (go);
-//	}
 	[Command]
 	public void Cmd_KillYourself(GameObject go){
 		networkMgr = GameObject.Find ("PlayerInfoHandler");
 		assignInfo = GetComponent<AssignPlayerInfo> ();
-		assignInfo.Rpc_KillAPlayer(go);
+		GameObject player = go;
+		assignInfo.Rpc_KillAPlayer(player);
 	}
 	IEnumerator StartThrow(float waitTime) 
 	{
