@@ -2848,6 +2848,8 @@ MonoBehaviour:
       m_Image: {fileID: 0}
     - m_Text: Char_1
       m_Image: {fileID: 0}
+    - m_Text: Rot_1
+      m_Image: {fileID: 0}
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -3265,6 +3267,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 8a6e0d6e57d0ec149b13e1e4b005dcbe, type: 3}
   - {fileID: 21300000, guid: eeb45a45bd9a2414b8f1538d12918047, type: 3}
   - {fileID: 21300000, guid: 77255067e8fcab84497224aa00653e4b, type: 3}
+  - {fileID: 21300000, guid: e20db298203cf6340a3b6d6ffe7deef1, type: 3}
 --- !u!114 &11451604
 MonoBehaviour:
   m_ObjectHideFlags: 1
