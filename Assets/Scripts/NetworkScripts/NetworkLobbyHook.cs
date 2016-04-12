@@ -41,7 +41,7 @@ public class NetworkLobbyHook : LobbyHook
             characterInfo.playertexture = lobby.playersTexture;
             characterInfo.color = lobby.playerColor;
             characterInfo.teamNumber = (lobby.setTeamNumber + 1);
-            characterInfo.gameObject.GetComponent<GrabAndToss>().teamNumber = (lobby.setTeamNumber + 1);
+			characterInfo.gameObject.GetComponent<NetworkCharacterInfo>().teamNumber = (lobby.setTeamNumber + 1);
             characterInfo.score = 0;
             characterInfo.lifeCount = 3;
             CheckAvailablePlayers();
@@ -54,43 +54,43 @@ public class NetworkLobbyHook : LobbyHook
         GameObject[] TeamPlayers = GameObject.FindGameObjectsWithTag("Player");
         foreach (GameObject GnT in TeamPlayers)
         {
-            if (GnT.GetComponent<GrabAndToss>().teamNumber == 1)
+			if (GnT.GetComponent<NetworkCharacterInfo>().teamNumber == 1)
             {
                 Team1.Add(GnT);
             }
-            if (GnT.GetComponent<GrabAndToss>().teamNumber == 2)
+			if (GnT.GetComponent<NetworkCharacterInfo>().teamNumber == 2)
             {
                 Team2.Add(GnT);
             }
-            if (GnT.GetComponent<GrabAndToss>().teamNumber == 3)
+			if (GnT.GetComponent<NetworkCharacterInfo>().teamNumber == 3)
             {
                 Team3.Add(GnT);
             }
-            if (GnT.GetComponent<GrabAndToss>().teamNumber == 4)
+			if (GnT.GetComponent<NetworkCharacterInfo>().teamNumber == 4)
             {
                 Team4.Add(GnT);
             }
-            if (GnT.GetComponent<GrabAndToss>().teamNumber == 5)
+			if (GnT.GetComponent<NetworkCharacterInfo>().teamNumber == 5)
             {
                 Team5.Add(GnT);
             }
-            if (GnT.GetComponent<GrabAndToss>().teamNumber == 6)
+			if (GnT.GetComponent<NetworkCharacterInfo>().teamNumber == 6)
             {
                 Team6.Add(GnT);
             }
-            if (GnT.GetComponent<GrabAndToss>().teamNumber == 7)
+			if (GnT.GetComponent<NetworkCharacterInfo>().teamNumber == 7)
             {
                 Team7.Add(GnT);
             }
-            if (GnT.GetComponent<GrabAndToss>().teamNumber == 8)
+			if (GnT.GetComponent<NetworkCharacterInfo>().teamNumber == 8)
             {
                 Team8.Add(GnT);
             }
-            if (GnT.GetComponent<GrabAndToss>().teamNumber == 9)
+			if (GnT.GetComponent<NetworkCharacterInfo>().teamNumber == 9)
             {
                 Team9.Add(GnT);
             }
-            if (GnT.GetComponent<GrabAndToss>().teamNumber == 10)
+			if (GnT.GetComponent<NetworkCharacterInfo>().teamNumber == 10)
             {
                 Team10.Add(GnT);
             }
@@ -125,101 +125,101 @@ public class NetworkLobbyHook : LobbyHook
 
     public void CheackingList(GameObject isdead)
     {
-        if (isdead.GetComponent<GrabAndToss>().teamNumber == 1)
+		if (isdead.GetComponent<NetworkCharacterInfo>().teamNumber == 1)
         {
             foreach (GameObject deadPlayer in Team1)
             {
-                if (deadPlayer.GetComponent<GrabAndToss>().dead == true)
+				if (deadPlayer.GetComponent<PlayerInfo>().dead == true)
                 {
                     Team1.Remove(deadPlayer);
                 }
             }
         }
-        if (isdead.GetComponent<GrabAndToss>().teamNumber == 2)
+		if (isdead.GetComponent<NetworkCharacterInfo>().teamNumber == 2)
         {
             foreach (GameObject deadPlayer in Team2)
             {
-                if (deadPlayer.GetComponent<GrabAndToss>().dead == true)
+				if (deadPlayer.GetComponent<PlayerInfo>().dead == true)
                 {
                     Team2.Remove(deadPlayer);
                 }
             }
         }
-        if (isdead.GetComponent<GrabAndToss>().teamNumber == 3)
+		if (isdead.GetComponent<NetworkCharacterInfo>().teamNumber == 3)
         {
             foreach (GameObject deadPlayer in Team3)
             {
-                if (deadPlayer.GetComponent<GrabAndToss>().dead == true)
+				if (deadPlayer.GetComponent<PlayerInfo>().dead == true)
                 {
                     Team3.Remove(deadPlayer);
                 }
             }
         }
-        if (isdead.GetComponent<GrabAndToss>().teamNumber == 4)
+		if (isdead.GetComponent<NetworkCharacterInfo>().teamNumber == 4)
         {
             foreach (GameObject deadPlayer in Team4)
             {
-                if (deadPlayer.GetComponent<GrabAndToss>().dead == true)
+				if (deadPlayer.GetComponent<PlayerInfo>().dead == true)
                 {
                     Team4.Remove(deadPlayer);
                 }
             }
         }
-        if (isdead.GetComponent<GrabAndToss>().teamNumber == 5)
+		if (isdead.GetComponent<NetworkCharacterInfo>().teamNumber == 5)
         {
             foreach (GameObject deadPlayer in Team5)
             {
-                if (deadPlayer.GetComponent<GrabAndToss>().dead == true)
+				if (deadPlayer.GetComponent<PlayerInfo>().dead == true)
                 {
                     Team5.Remove(deadPlayer);
                 }
             }
         }
-        if (isdead.GetComponent<GrabAndToss>().teamNumber == 6)
+		if (isdead.GetComponent<NetworkCharacterInfo>().teamNumber == 6)
         {
             foreach (GameObject deadPlayer in Team6)
             {
-                if (deadPlayer.GetComponent<GrabAndToss>().dead == true)
+				if (deadPlayer.GetComponent<PlayerInfo>().dead == true)
                 {
                     Team6.Remove(deadPlayer);
                 }
             }
         }
-        if (isdead.GetComponent<GrabAndToss>().teamNumber == 7)
+		if (isdead.GetComponent<NetworkCharacterInfo>().teamNumber == 7)
         {
             foreach (GameObject deadPlayer in Team7)
             {
-                if (deadPlayer.GetComponent<GrabAndToss>().dead == true)
+				if (deadPlayer.GetComponent<PlayerInfo>().dead == true)
                 {
                     Team7.Remove(deadPlayer);
                 }
             }
         }
-        if (isdead.GetComponent<GrabAndToss>().teamNumber == 8)
+		if (isdead.GetComponent<NetworkCharacterInfo>().teamNumber == 8)
         {
             foreach (GameObject deadPlayer in Team8)
             {
-                if (deadPlayer.GetComponent<GrabAndToss>().dead == true)
+				if (deadPlayer.GetComponent<PlayerInfo>().dead == true)
                 {
                     Team8.Remove(deadPlayer);
                 }
             }
         }
-        if (isdead.GetComponent<GrabAndToss>().teamNumber == 9)
+		if (isdead.GetComponent<NetworkCharacterInfo>().teamNumber == 9)
         {
             foreach (GameObject deadPlayer in Team9)
             {
-                if (deadPlayer.GetComponent<GrabAndToss>().dead == true)
+				if (deadPlayer.GetComponent<PlayerInfo>().dead == true)
                 {
                     Team9.Remove(deadPlayer);
                 }
             }
         }
-        if (isdead.GetComponent<GrabAndToss>().teamNumber == 10)
+		if (isdead.GetComponent<NetworkCharacterInfo>().teamNumber == 10)
         {
             foreach (GameObject deadPlayer in Team10)
             {
-                if (deadPlayer.GetComponent<GrabAndToss>().dead == true)
+				if (deadPlayer.GetComponent<PlayerInfo>().dead == true)
                 {
                     Team10.Remove(deadPlayer);
                 }

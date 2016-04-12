@@ -217,6 +217,7 @@ GameObject:
   - 114: {fileID: 11482484}
   - 114: {fileID: 11442072}
   - 114: {fileID: 11426014}
+  - 114: {fileID: 11453716}
   - 114: {fileID: 11431808}
   - 65: {fileID: 6596036}
   m_Layer: 0
@@ -1458,7 +1459,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 123130}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -387.69208, y: 385.30054, z: -357.5731}
+  m_LocalPosition: {x: -6.109621, y: -1.25, z: -0.86527014}
   m_LocalScale: {x: 3, y: 3, z: 3}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
@@ -1902,6 +1903,7 @@ MonoBehaviour:
   playerName: 
   lifeCount: 0
   teamNumber: 1
+  playertexture: {fileID: 0}
 --- !u!114 &11432088
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1953,24 +1955,8 @@ MonoBehaviour:
   rayDistance: 5
   rayRadius: 0.75
   tossForce: 20
-  teamNumber: 0
-  health: 1
-  killable: 1
-  dead: 0
   holdingBall: 0
   throwing: 0
-  bodyparts:
-  - {fileID: 179032}
-  - {fileID: 157318}
-  - {fileID: 100432}
-  - {fileID: 149572}
-  - {fileID: 197514}
-  - {fileID: 183442}
-  - {fileID: 123036}
-  - {fileID: 184988}
-  - {fileID: 127490}
-  - {fileID: 116436}
-  ballInfo: {fileID: 0}
   ballScript: {fileID: 0}
   assignInfo: {fileID: 0}
   anim: {fileID: 0}
@@ -1978,14 +1964,9 @@ MonoBehaviour:
   head: {fileID: 123280}
   currentBall: {fileID: 0}
   holdPos: {fileID: 106302}
-  networkMgr: {fileID: 0}
-  ballPrefab: {fileID: 163478, guid: 16a89774751f1f740a89d9192e74dc7b, type: 2}
-  deathMessage: {fileID: 142680}
-  NLH: {fileID: 0}
-  audioClips:
-  - {fileID: 8300000, guid: e50aa662314f50b4ab4a410c17620700, type: 3}
-  - {fileID: 8300000, guid: da587fde069f42344bbc24403a91595e, type: 3}
-  body: {fileID: 145614}
+  infoHandler: {fileID: 0}
+  playerInfo: {fileID: 0}
+  charInfo: {fileID: 0}
 --- !u!114 &11447460
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2006,6 +1987,44 @@ MonoBehaviour:
   m_SnapThreshold: 5
   m_InterpolateRotation: 1
   m_InterpolateMovement: 1
+--- !u!114 &11453716
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 123130}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c14b85f66cb649448c9071231bc5830, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bodyparts:
+  - {fileID: 179032}
+  - {fileID: 157318}
+  - {fileID: 100432}
+  - {fileID: 149572}
+  - {fileID: 197514}
+  - {fileID: 183442}
+  - {fileID: 123036}
+  - {fileID: 184988}
+  - {fileID: 127490}
+  - {fileID: 116436}
+  deathMessage: {fileID: 142680}
+  infoHandler: {fileID: 0}
+  ballPrefab: {fileID: 163478, guid: 16a89774751f1f740a89d9192e74dc7b, type: 2}
+  body: {fileID: 145614}
+  health: 1
+  killable: 1
+  dead: 0
+  audioClips:
+  - {fileID: 8300000, guid: e50aa662314f50b4ab4a410c17620700, type: 3}
+  - {fileID: 8300000, guid: da587fde069f42344bbc24403a91595e, type: 3}
+  - {fileID: 8300000, guid: e50aa662314f50b4ab4a410c17620700, type: 3}
+  assignInfo: {fileID: 0}
+  NLH: {fileID: 0}
+  gat: {fileID: 0}
+  netInfo: {fileID: 0}
+  ballInfo: {fileID: 0}
 --- !u!114 &11468692
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2162,8 +2181,8 @@ MonoBehaviour:
   gat: {fileID: 0}
   audioLis: {fileID: 8163026}
   bodyParts:
-  - {fileID: 157318}
   - {fileID: 179032}
+  - {fileID: 157318}
   - {fileID: 100432}
   - {fileID: 149572}
   - {fileID: 197514}

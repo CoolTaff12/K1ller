@@ -23,7 +23,7 @@ public class PlayerTarget : NetworkBehaviour {
 //			RemoveChild ();
 			dead = true;
 			teamNumber = 0;
-			gameObject.GetComponent<GrabAndToss>().teamNumber = teamNumber;
+			gameObject.GetComponent<NetworkCharacterInfo>().teamNumber = teamNumber;
 		}
 	}
 //	public void RemoveChild(){

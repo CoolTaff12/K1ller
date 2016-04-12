@@ -85,7 +85,7 @@ public class DodgeBallBehaviour : NetworkBehaviour {
 		rb.velocity = Vector3.zero;
 		rb.angularVelocity = Vector3.zero;
 		rb.isKinematic = false;
-		thrownByTeam = gat.teamNumber;
+		thrownByTeam = currentPlayer.GetComponent<NetworkCharacterInfo> ().teamNumber;
 		coll.enabled = true;
 		rb.detectCollisions = true;
 		rb.AddForce(gat.head.transform.forward * gat.tossForce);

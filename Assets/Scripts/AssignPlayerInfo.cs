@@ -18,8 +18,8 @@ public class AssignPlayerInfo : NetworkBehaviour {
 	[ClientRpc]
 	public void Rpc_KillAPlayer(GameObject go)
 	{
-		go.GetComponent<GrabAndToss>().dead = true;
-		go.GetComponent<GrabAndToss>().teamNumber = 0;
+		go.GetComponent<PlayerInfo>().dead = true;
+		go.GetComponent<NetworkCharacterInfo>().teamNumber = 0;
 		go.GetComponent<BoxCollider> ().enabled = false;
 		//		foreach(GameObject go in bodyparts){
 		//			go.transform.SetParent (null);
@@ -37,21 +37,21 @@ public class AssignPlayerInfo : NetworkBehaviour {
 		rb.detectCollisions = false;
 		rb.useGravity = false;
 		rb.Sleep ();
-		go.GetComponent<GrabAndToss>().deathMessage.SetActive (true);
-		go.GetComponent<GrabAndToss> ().body.SetActive (false);
+		go.GetComponent<PlayerInfo>().deathMessage.SetActive (true);
+		go.GetComponent<PlayerInfo> ().body.SetActive (false);
 
 	}
 	[ClientRpc]
 	public void Rpc_SpawnHead(GameObject go)
 	{
-		GameObject HeadBall = Instantiate(go.GetComponent<GrabAndToss>().ballPrefab, go.GetComponent<GrabAndToss>().head.transform.position, Quaternion.identity) as GameObject;
-		HeadBall.GetComponent<Renderer> ().material.mainTexture = go.GetComponent<GrabAndToss>().bodyparts [0].GetComponent<Renderer> ().material.mainTexture;
-		NetworkServer.Spawn(go.GetComponent<GrabAndToss>().ballPrefab);
+		GameObject HeadBall = Instantiate(go.GetComponent<PlayerInfo>().ballPrefab, go.GetComponent<GrabAndToss>().head.transform.position, Quaternion.identity) as GameObject;
+		HeadBall.GetComponent<Renderer> ().material.mainTexture = go.GetComponent<PlayerInfo>().bodyparts [0].GetComponent<Renderer> ().material.mainTexture;
+		NetworkServer.Spawn(go.GetComponent<PlayerInfo>().ballPrefab);
 	}
 	[ClientRpc]
 	public void Rpc_DealDamage(GameObject go)
 	{
-		go.GetComponent<GrabAndToss> ().health -= 1;
+		go.GetComponent<PlayerInfo> ().health -= 1;
 	}
 
 }
