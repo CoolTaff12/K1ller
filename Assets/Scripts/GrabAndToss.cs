@@ -133,43 +133,8 @@ Debug.DrawRay (head.transform.position, head.transform.forward, Color.green, ray
 
 	void KillYourSelf(){
 		dead = true;
-        switch (teamNumber)
-        {
-            case 10:
-                print("Why hello there good sir! Let me teach you about Trigonometry!");
-                break;
-            case 9:
-                print("Hello and good day!");
-                break;
-            case 8:
-                print("Whadya want?");
-                break;
-            case 7:
-                print("Grog SMASH!");
-                break;
-            case 6:
-                NLH.CheackingList1(this.gameObject);
-                break;
-            case 5:
-                print("Why hello there good sir! Let me teach you about Trigonometry!");
-                break;
-            case 4:
-                print("Hello and good day!");
-                break;
-            case 3:
-                print("Whadya want?");
-                break;
-            case 2:
-                print("Grog SMASH!");
-                break;
-            case 1:
-                NLH.CheackingList1(this.gameObject);
-                break;
-            default:
-                break;
-        }
-        teamNumber = 0;
-		GetComponent<BoxCollider> ().enabled = false;
+        NLH.CheackingList();
+        GetComponent<BoxCollider> ().enabled = false;
 		bodyparts[8].layer = 9;
 		bodyparts [9].layer = 9;
 //		foreach(GameObject go in bodyparts){
@@ -194,8 +159,8 @@ Debug.DrawRay (head.transform.position, head.transform.forward, Color.green, ray
 			tossForce = 1f;
 			Cmd_Shoot (currentBall);
 		}
-        
-	}
+        teamNumber = 0;
+    }
 
 	[Command]
 	public void Cmd_TakeDamage(GameObject go) {

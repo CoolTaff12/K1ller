@@ -98,19 +98,77 @@ public class NetworkLobbyHook : LobbyHook
 
     }
 
-    public void CheackingList1(GameObject isDead)
+    public void CheackingList()
     {
-        Team1.Remove(isDead);
-        /* foreach(GameObject deadPlayer in Team1)
+         foreach(GameObject deadPlayer in Team1)
          {
              if(deadPlayer.GetComponent<GrabAndToss>().dead == true)
              {
                  Team1.Remove(deadPlayer);
              }
-         }*/
-    }
-    public void CheackingList2(GameObject isDead)
-    {
-        Team2.Remove(isDead);
+         }
+        foreach (GameObject deadPlayer in Team2)
+        {
+            if (deadPlayer.GetComponent<GrabAndToss>().dead == true)
+            {
+                Team2.Remove(deadPlayer);
+            }
+        }
+        foreach (GameObject deadPlayer in Team3)
+        {
+            if (deadPlayer.GetComponent<GrabAndToss>().dead == true)
+            {
+                Team3.Remove(deadPlayer);
+            }
+        }
+        foreach (GameObject deadPlayer in Team4)
+        {
+            if (deadPlayer.GetComponent<GrabAndToss>().dead == true)
+            {
+                Team4.Remove(deadPlayer);
+            }
+        }
+        foreach (GameObject deadPlayer in Team5)
+        {
+            if (deadPlayer.GetComponent<GrabAndToss>().dead == true)
+            {
+                Team5.Remove(deadPlayer);
+            }
+        }
+        foreach (GameObject deadPlayer in Team6)
+        {
+            if (deadPlayer.GetComponent<GrabAndToss>().dead == true)
+            {
+                Team6.Remove(deadPlayer);
+            }
+        }
+        foreach (GameObject deadPlayer in Team7)
+        {
+            if (deadPlayer.GetComponent<GrabAndToss>().dead == true)
+            {
+                Team7.Remove(deadPlayer);
+            }
+        }
+        foreach (GameObject deadPlayer in Team8)
+        {
+            if (deadPlayer.GetComponent<GrabAndToss>().dead == true)
+            {
+                Team8.Remove(deadPlayer);
+            }
+        }
+        foreach (GameObject deadPlayer in Team9)
+        {
+            if (deadPlayer.GetComponent<GrabAndToss>().dead == true)
+            {
+                Team9.Remove(deadPlayer);
+            }
+        }
+        foreach (GameObject deadPlayer in Team10)
+        {
+            if (deadPlayer.GetComponent<GrabAndToss>().dead == true)
+            {
+                Team10.Remove(deadPlayer);
+            }
+        }
     }
 }
