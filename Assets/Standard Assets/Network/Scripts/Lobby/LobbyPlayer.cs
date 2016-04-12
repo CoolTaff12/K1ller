@@ -357,7 +357,7 @@ namespace UnityStandardAssets.Network
             Debug.Log("here is " + textureoption);
             if(textureoption == 0)
             {
-                playersTexture = Resources.Load("Environment/TestTerrain/bentexture") as Texture;
+                playersTexture = Resources.Load("Environment/Animations/RD_idle2.fbm/bentexture") as Texture;
             }
             if (textureoption == 1)
             {
