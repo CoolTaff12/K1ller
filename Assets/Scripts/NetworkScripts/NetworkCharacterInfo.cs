@@ -20,7 +20,10 @@ public class NetworkCharacterInfo : NetworkBehaviour
     [SyncVar(hook = "OnLifeChanged")]
     public int lifeCount;
     [SyncVar]
-    public int teamNumber = 1;
+    public int teamNumber;
+
+    [SyncVar]
+    public Texture playertexture;
 
     protected Text ScoreText;
     //hard to control WHEN Init is called (networking make order between object spawning non deterministic)
@@ -38,13 +41,15 @@ public class NetworkCharacterInfo : NetworkBehaviour
     void Start ()
     {
         name = playerName;
+        //Renderar the colour and the texture player had choosen ealier
         Renderer[] CRends = GetComponentsInChildren<Renderer>();
-        Renderer TshirtRends = GameObject.Find(this.gameObject.name + "/Body/regular_dude_body").GetComponent<Renderer>();
-        TshirtRends.material.color = color;
-      /*  foreach (Renderer r in CRends)
+        Color headcolor = GameObject.Find(this.gameObject.name + "/Body/regular_dude_body").GetComponent<Renderer>().material.color;
+        foreach (Renderer r in CRends)
         {
-            r.material.color = color;
-        }*/
+            r.material.mainTexture = playertexture;
+                r.material.color = color;
+        }
+        GameObject.Find(this.gameObject.name + "/Body/regular_dude_head").GetComponent<Renderer>().material.color = headcolor;
     }
 	
 	// Update is called once per frame
