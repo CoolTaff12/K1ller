@@ -133,7 +133,7 @@ Debug.DrawRay (head.transform.position, head.transform.forward, Color.green, ray
 
 	void KillYourSelf(){
 		dead = true;
-        NLH.CheackingList();
+        NLH.CheackingList(this.gameObject);
         GetComponent<BoxCollider> ().enabled = false;
 		bodyparts[8].layer = 9;
 		bodyparts [9].layer = 9;

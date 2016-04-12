@@ -16,6 +16,8 @@ public class NetworkLobbyHook : LobbyHook
     public List<GameObject> Team8;
     public List<GameObject> Team9;
     public List<GameObject> Team10;
+    public GameObject DodgeballSpawner;
+    public bool isinLevel = false;
 
     public override void OnLobbyServerSceneLoadedForPlayer(NetworkManager manager, GameObject lobbyPlayer, GameObject gamePlayer)
     {
@@ -41,6 +43,7 @@ public class NetworkLobbyHook : LobbyHook
             characterInfo.score = 0;
             characterInfo.lifeCount = 3;
             CheckAvailablePlayers();
+            isinLevel = true;
         }
     }
 
@@ -90,85 +93,200 @@ public class NetworkLobbyHook : LobbyHook
                 Team10.Add(GnT);
             }
         }
-        return;
     }
 
     void Update()
     {
-
+        if(isinLevel)
+        {
+            /*DodgeballSpawner = GameObject.Find("Ballspawner");
+            GameObject[] Dodgeballs = GameObject.FindGameObjectsWithTag("Ball");
+            if (Dodgeballs[2] != null)
+            {
+                DodgeballSpawner.SetActive(false);
+            }
+            else
+            {
+                DodgeballSpawner.SetActive(true);
+            }*/
+            StartCoroutine(CheckforVictory(5.0F));
+        }
     }
 
-    public void CheackingList()
+    public void CheackingList(GameObject isdead)
     {
-         foreach(GameObject deadPlayer in Team1)
-         {
-             if(deadPlayer.GetComponent<GrabAndToss>().dead == true)
-             {
-                 Team1.Remove(deadPlayer);
-             }
-         }
-        foreach (GameObject deadPlayer in Team2)
+        if (isdead.GetComponent<GrabAndToss>().teamNumber == 1)
         {
-            if (deadPlayer.GetComponent<GrabAndToss>().dead == true)
+            foreach (GameObject deadPlayer in Team1)
             {
-                Team2.Remove(deadPlayer);
+                if (deadPlayer.GetComponent<GrabAndToss>().dead == true)
+                {
+                    Team1.Remove(deadPlayer);
+                }
             }
         }
-        foreach (GameObject deadPlayer in Team3)
+        if (isdead.GetComponent<GrabAndToss>().teamNumber == 2)
         {
-            if (deadPlayer.GetComponent<GrabAndToss>().dead == true)
+            foreach (GameObject deadPlayer in Team2)
             {
-                Team3.Remove(deadPlayer);
+                if (deadPlayer.GetComponent<GrabAndToss>().dead == true)
+                {
+                    Team2.Remove(deadPlayer);
+                }
             }
         }
-        foreach (GameObject deadPlayer in Team4)
+        if (isdead.GetComponent<GrabAndToss>().teamNumber == 3)
         {
-            if (deadPlayer.GetComponent<GrabAndToss>().dead == true)
+            foreach (GameObject deadPlayer in Team3)
             {
-                Team4.Remove(deadPlayer);
+                if (deadPlayer.GetComponent<GrabAndToss>().dead == true)
+                {
+                    Team3.Remove(deadPlayer);
+                }
             }
         }
-        foreach (GameObject deadPlayer in Team5)
+        if (isdead.GetComponent<GrabAndToss>().teamNumber == 4)
         {
-            if (deadPlayer.GetComponent<GrabAndToss>().dead == true)
+            foreach (GameObject deadPlayer in Team4)
             {
-                Team5.Remove(deadPlayer);
+                if (deadPlayer.GetComponent<GrabAndToss>().dead == true)
+                {
+                    Team4.Remove(deadPlayer);
+                }
             }
         }
-        foreach (GameObject deadPlayer in Team6)
+        if (isdead.GetComponent<GrabAndToss>().teamNumber == 5)
         {
-            if (deadPlayer.GetComponent<GrabAndToss>().dead == true)
+            foreach (GameObject deadPlayer in Team5)
             {
-                Team6.Remove(deadPlayer);
+                if (deadPlayer.GetComponent<GrabAndToss>().dead == true)
+                {
+                    Team5.Remove(deadPlayer);
+                }
             }
         }
-        foreach (GameObject deadPlayer in Team7)
+        if (isdead.GetComponent<GrabAndToss>().teamNumber == 6)
         {
-            if (deadPlayer.GetComponent<GrabAndToss>().dead == true)
+            foreach (GameObject deadPlayer in Team6)
             {
-                Team7.Remove(deadPlayer);
+                if (deadPlayer.GetComponent<GrabAndToss>().dead == true)
+                {
+                    Team6.Remove(deadPlayer);
+                }
             }
         }
-        foreach (GameObject deadPlayer in Team8)
+        if (isdead.GetComponent<GrabAndToss>().teamNumber == 7)
         {
-            if (deadPlayer.GetComponent<GrabAndToss>().dead == true)
+            foreach (GameObject deadPlayer in Team7)
             {
-                Team8.Remove(deadPlayer);
+                if (deadPlayer.GetComponent<GrabAndToss>().dead == true)
+                {
+                    Team7.Remove(deadPlayer);
+                }
             }
         }
-        foreach (GameObject deadPlayer in Team9)
+        if (isdead.GetComponent<GrabAndToss>().teamNumber == 8)
         {
-            if (deadPlayer.GetComponent<GrabAndToss>().dead == true)
+            foreach (GameObject deadPlayer in Team8)
             {
-                Team9.Remove(deadPlayer);
+                if (deadPlayer.GetComponent<GrabAndToss>().dead == true)
+                {
+                    Team8.Remove(deadPlayer);
+                }
             }
         }
-        foreach (GameObject deadPlayer in Team10)
+        if (isdead.GetComponent<GrabAndToss>().teamNumber == 9)
         {
-            if (deadPlayer.GetComponent<GrabAndToss>().dead == true)
+            foreach (GameObject deadPlayer in Team9)
             {
-                Team10.Remove(deadPlayer);
+                if (deadPlayer.GetComponent<GrabAndToss>().dead == true)
+                {
+                    Team9.Remove(deadPlayer);
+                }
             }
         }
+        if (isdead.GetComponent<GrabAndToss>().teamNumber == 10)
+        {
+            foreach (GameObject deadPlayer in Team10)
+            {
+                if (deadPlayer.GetComponent<GrabAndToss>().dead == true)
+                {
+                    Team10.Remove(deadPlayer);
+                }
+            }
+        }
+    }
+    private IEnumerator GoBacktoLobby(float waitTime)
+    {
+        yield return new WaitForSeconds(waitTime);
+        LobbyManager LM = GameObject.Find("LobbyManager").GetComponent<LobbyManager>();
+        UnityEngine.Cursor.visible = true;
+        LM.GoBackButton();
+    }
+
+    private IEnumerator CheckforVictory(float waitTime)
+    {
+        yield return new WaitForSeconds(waitTime);
+        if (Team1.Count != 0 && Team2.Count == 0 && Team3.Count == 0 && Team4.Count == 0 && Team5.Count == 0 &&
+            Team6.Count == 0 && Team7.Count == 0 && Team8.Count == 0 && Team9.Count == 0 && Team10.Count == 0)
+        {
+            Debug.Log("Victory for team 1");
+            StartCoroutine(GoBacktoLobby(10F));
+        }
+        if (Team1.Count == 0 && Team2.Count != 0 && Team3.Count == 0 && Team4.Count == 0 && Team5.Count == 0 &&
+          Team6.Count == 0 && Team7.Count == 0 && Team8.Count == 0 && Team9.Count == 0 && Team10.Count == 0)
+        {
+            Debug.Log("Victory for team 2");
+            StartCoroutine(GoBacktoLobby(10F));
+        }
+        if (Team1.Count == 0 && Team2.Count == 0 && Team3.Count != 0 && Team4.Count == 0 && Team5.Count == 0 &&
+          Team6.Count == 0 && Team7.Count == 0 && Team8.Count == 0 && Team9.Count == 0 && Team10.Count == 0)
+        {
+            Debug.Log("Victory for team 3");
+            StartCoroutine(GoBacktoLobby(10F));
+        }
+        if (Team1.Count == 0 && Team2.Count == 0 && Team3.Count == 0 && Team4.Count != 0 && Team5.Count == 0 &&
+          Team6.Count == 0 && Team7.Count == 0 && Team8.Count == 0 && Team9.Count == 0 && Team10.Count == 0)
+        {
+            Debug.Log("Victory for team 4");
+            StartCoroutine(GoBacktoLobby(10F));
+        }
+        if (Team1.Count == 0 && Team2.Count == 0 && Team3.Count == 0 && Team4.Count == 0 && Team5.Count != 0 &&
+          Team6.Count == 0 && Team7.Count == 0 && Team8.Count == 0 && Team9.Count == 0 && Team10.Count == 0)
+        {
+            Debug.Log("Victory for team 5");
+            StartCoroutine(GoBacktoLobby(10F));
+        }
+        if (Team1.Count == 0 && Team2.Count == 0 && Team3.Count == 0 && Team4.Count == 0 && Team5.Count == 0 &&
+          Team6.Count != 0 && Team7.Count == 0 && Team8.Count == 0 && Team9.Count == 0 && Team10.Count == 0)
+        {
+            Debug.Log("Victory for team 6");
+            StartCoroutine(GoBacktoLobby(10F));
+        }
+        if (Team1.Count == 0 && Team2.Count == 0 && Team3.Count == 0 && Team4.Count == 0 && Team5.Count == 0 &&
+          Team6.Count == 0 && Team7.Count != 0 && Team8.Count == 0 && Team9.Count == 0 && Team10.Count == 0)
+        {
+            Debug.Log("Victory for team 7");
+            StartCoroutine(GoBacktoLobby(10F));
+        }
+        if (Team1.Count == 0 && Team2.Count == 0 && Team3.Count == 0 && Team4.Count == 0 && Team5.Count == 0 &&
+          Team6.Count == 0 && Team7.Count == 0 && Team8.Count != 0 && Team9.Count == 0 && Team10.Count == 0)
+        {
+            Debug.Log("Victory for team 8");
+            StartCoroutine(GoBacktoLobby(10F));
+        }
+        if (Team1.Count == 0 && Team2.Count == 0 && Team3.Count == 0 && Team4.Count == 0 && Team5.Count == 0 &&
+          Team6.Count == 0 && Team7.Count == 0 && Team8.Count == 0 && Team9.Count != 0 && Team10.Count == 0)
+        {
+            Debug.Log("Victory for team 9");
+            StartCoroutine(GoBacktoLobby(10F));
+        }
+        if (Team1.Count == 0 && Team2.Count == 0 && Team3.Count == 0 && Team4.Count == 0 && Team5.Count == 0 &&
+          Team6.Count == 0 && Team7.Count == 0 && Team8.Count == 0 && Team9.Count == 0 && Team10.Count != 0)
+        {
+            Debug.Log("Victory for team 10");
+            StartCoroutine(GoBacktoLobby(10F));
+        }
+
     }
 }
