@@ -824,6 +824,7 @@ GameObject:
   - 114: {fileID: 11466428}
   - 114: {fileID: 11475086}
   - 114: {fileID: 11438678}
+  - 82: {fileID: 8212656}
   m_Layer: 5
   m_Name: LobbyManager
   m_TagString: Untagged
@@ -1450,6 +1451,80 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 0
+--- !u!82 &8212656
+AudioSource:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 155310}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
 --- !u!114 &11402288
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2773,6 +2848,8 @@ MonoBehaviour:
   Team8: []
   Team9: []
   Team10: []
+  DodgeballSpawner: {fileID: 0}
+  isinLevel: 0
 --- !u!114 &11439030
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2852,11 +2929,11 @@ MonoBehaviour:
     m_Options:
     - m_Text: GYM_FORT
       m_Image: {fileID: 0}
-    - m_Text: GYM_2
+    - m_Text: GYM_ARENA
       m_Image: {fileID: 0}
-    - m_Text: GYM_BridgeTwon
+    - m_Text: GYM_BRIDGETOWN
       m_Image: {fileID: 0}
-    - m_Text: Char_1
+    - m_Text: GYM_FLOORISLAVA
       m_Image: {fileID: 0}
     - m_Text: Bonus_AcrossTheSky
       m_Image: {fileID: 0}
@@ -3275,8 +3352,8 @@ MonoBehaviour:
   MapImages:
   - {fileID: 21300000, guid: cacfb970318c3e94dbca3e5cd814d84c, type: 3}
   - {fileID: 21300000, guid: 8a6e0d6e57d0ec149b13e1e4b005dcbe, type: 3}
-  - {fileID: 21300000, guid: eeb45a45bd9a2414b8f1538d12918047, type: 3}
-  - {fileID: 21300000, guid: 77255067e8fcab84497224aa00653e4b, type: 3}
+  - {fileID: 21300000, guid: c7bf6b4ce1bb33d4c957ea35d13e6fba, type: 3}
+  - {fileID: 21300000, guid: 2c6909e9f93d47048a80f3b37cb2b7cb, type: 3}
   - {fileID: 21300000, guid: e20db298203cf6340a3b6d6ffe7deef1, type: 3}
 --- !u!114 &11451604
 MonoBehaviour:
@@ -4156,7 +4233,7 @@ MonoBehaviour:
   m_ShowLobbyGUI: 0
   m_MaxPlayers: 10
   m_MaxPlayersPerConnection: 1
-  m_MinPlayers: 2
+  m_MinPlayers: 1
   m_LobbyPlayerPrefab: {fileID: 11487034, guid: ad727d7e1462ecc4f83c898ecc501997,
     type: 2}
   m_GamePlayerPrefab: {fileID: 123130, guid: 8da62885f0bb2c6438f3be2716a446c4, type: 2}

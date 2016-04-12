@@ -1458,7 +1458,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 123130}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.19048, y: -0.54970825, z: 1.3348789}
+  m_LocalPosition: {x: -387.69208, y: 385.30054, z: -357.5731}
   m_LocalScale: {x: 3, y: 3, z: 3}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
@@ -1711,7 +1711,7 @@ AudioListener:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 135626}
-  m_Enabled: 0
+  m_Enabled: 1
 --- !u!82 &8295842
 AudioSource:
   m_ObjectHideFlags: 1
@@ -1981,6 +1981,10 @@ MonoBehaviour:
   networkMgr: {fileID: 0}
   ballPrefab: {fileID: 163478, guid: 16a89774751f1f740a89d9192e74dc7b, type: 2}
   deathMessage: {fileID: 142680}
+  NLH: {fileID: 0}
+  audioClips:
+  - {fileID: 8300000, guid: e50aa662314f50b4ab4a410c17620700, type: 3}
+  - {fileID: 8300000, guid: da587fde069f42344bbc24403a91595e, type: 3}
   body: {fileID: 145614}
 --- !u!114 &11447460
 MonoBehaviour:

@@ -18,6 +18,7 @@ public class NetworkLobbyHook : LobbyHook
     public List<GameObject> Team10;
     public GameObject DodgeballSpawner;
     public bool isinLevel = false;
+    public AudioClip[] audioClips;
 
     public override void OnLobbyServerSceneLoadedForPlayer(NetworkManager manager, GameObject lobbyPlayer, GameObject gamePlayer)
     {
@@ -93,6 +94,14 @@ public class NetworkLobbyHook : LobbyHook
                 Team10.Add(GnT);
             }
         }
+    }
+
+    //-----------------Play Audio------------------------
+    //This will take the gameobjects AudioSource to switch the audioclips
+    public void PlaySound(int clip)
+    {
+        GetComponent<AudioSource>().clip = audioClips[clip];
+        GetComponent<AudioSource>().Play();
     }
 
     void Update()
@@ -231,62 +240,71 @@ public class NetworkLobbyHook : LobbyHook
             Team6.Count == 0 && Team7.Count == 0 && Team8.Count == 0 && Team9.Count == 0 && Team10.Count == 0)
         {
             Debug.Log("Victory for team 1");
+            PlaySound(0);
             StartCoroutine(GoBacktoLobby(10F));
         }
         if (Team1.Count == 0 && Team2.Count != 0 && Team3.Count == 0 && Team4.Count == 0 && Team5.Count == 0 &&
           Team6.Count == 0 && Team7.Count == 0 && Team8.Count == 0 && Team9.Count == 0 && Team10.Count == 0)
         {
             Debug.Log("Victory for team 2");
+            PlaySound(0);
             StartCoroutine(GoBacktoLobby(10F));
         }
         if (Team1.Count == 0 && Team2.Count == 0 && Team3.Count != 0 && Team4.Count == 0 && Team5.Count == 0 &&
           Team6.Count == 0 && Team7.Count == 0 && Team8.Count == 0 && Team9.Count == 0 && Team10.Count == 0)
         {
             Debug.Log("Victory for team 3");
+            PlaySound(0);
             StartCoroutine(GoBacktoLobby(10F));
         }
         if (Team1.Count == 0 && Team2.Count == 0 && Team3.Count == 0 && Team4.Count != 0 && Team5.Count == 0 &&
           Team6.Count == 0 && Team7.Count == 0 && Team8.Count == 0 && Team9.Count == 0 && Team10.Count == 0)
         {
             Debug.Log("Victory for team 4");
+            PlaySound(0);
             StartCoroutine(GoBacktoLobby(10F));
         }
         if (Team1.Count == 0 && Team2.Count == 0 && Team3.Count == 0 && Team4.Count == 0 && Team5.Count != 0 &&
           Team6.Count == 0 && Team7.Count == 0 && Team8.Count == 0 && Team9.Count == 0 && Team10.Count == 0)
         {
             Debug.Log("Victory for team 5");
+            PlaySound(0);
             StartCoroutine(GoBacktoLobby(10F));
         }
         if (Team1.Count == 0 && Team2.Count == 0 && Team3.Count == 0 && Team4.Count == 0 && Team5.Count == 0 &&
           Team6.Count != 0 && Team7.Count == 0 && Team8.Count == 0 && Team9.Count == 0 && Team10.Count == 0)
         {
             Debug.Log("Victory for team 6");
+            PlaySound(0);
             StartCoroutine(GoBacktoLobby(10F));
         }
         if (Team1.Count == 0 && Team2.Count == 0 && Team3.Count == 0 && Team4.Count == 0 && Team5.Count == 0 &&
           Team6.Count == 0 && Team7.Count != 0 && Team8.Count == 0 && Team9.Count == 0 && Team10.Count == 0)
         {
             Debug.Log("Victory for team 7");
+            PlaySound(0);
             StartCoroutine(GoBacktoLobby(10F));
         }
         if (Team1.Count == 0 && Team2.Count == 0 && Team3.Count == 0 && Team4.Count == 0 && Team5.Count == 0 &&
           Team6.Count == 0 && Team7.Count == 0 && Team8.Count != 0 && Team9.Count == 0 && Team10.Count == 0)
         {
             Debug.Log("Victory for team 8");
+            PlaySound(0);
             StartCoroutine(GoBacktoLobby(10F));
         }
         if (Team1.Count == 0 && Team2.Count == 0 && Team3.Count == 0 && Team4.Count == 0 && Team5.Count == 0 &&
           Team6.Count == 0 && Team7.Count == 0 && Team8.Count == 0 && Team9.Count != 0 && Team10.Count == 0)
         {
             Debug.Log("Victory for team 9");
+            PlaySound(0);
             StartCoroutine(GoBacktoLobby(10F));
         }
         if (Team1.Count == 0 && Team2.Count == 0 && Team3.Count == 0 && Team4.Count == 0 && Team5.Count == 0 &&
           Team6.Count == 0 && Team7.Count == 0 && Team8.Count == 0 && Team9.Count == 0 && Team10.Count != 0)
         {
             Debug.Log("Victory for team 10");
+            PlaySound(0);
             StartCoroutine(GoBacktoLobby(10F));
         }
-
     }
 }
