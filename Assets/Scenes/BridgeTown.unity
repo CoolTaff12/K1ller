@@ -229,7 +229,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff4ab879e9ea0a64682b99007e8ac698, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SpawningPositions: []
+  SpawningPositions:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   respawns: []
 --- !u!65 &367943462
 BoxCollider:
