@@ -18,6 +18,7 @@ namespace UnityStandardAssets.Network
         public Button colorButton;
         public InputField nameInput;
         public Dropdown teamNumber;
+        public Dropdown selectTexture;
         public Button readyButton;
         public Button waitingPlayerButton;
         public Button removePlayerButton;
@@ -32,6 +33,8 @@ namespace UnityStandardAssets.Network
         public Color playerColor = Color.white;
         [SyncVar(hook = "OnMyTeam")]
         public int setTeamNumber = 1;
+        [SyncVar(hook = "OnMyTexture")]
+        public Texture playersTexture;
 
         public Color OddRowColor = new Color(250.0f / 255.0f, 250.0f / 255.0f, 250.0f / 255.0f, 1.0f);
         public Color EvenRowColor = new Color(180.0f / 255.0f, 180.0f / 255.0f, 180.0f / 255.0f, 1.0f);
@@ -68,6 +71,7 @@ namespace UnityStandardAssets.Network
             OnMyName(playerName);
             OnMyTeam(setTeamNumber);
             OnMyColor(playerColor);
+            OnMyTexture(playersTexture);
         }
 
         public override void OnStartAuthority()
@@ -94,6 +98,7 @@ namespace UnityStandardAssets.Network
         {
             nameInput.interactable = false;
             teamNumber.interactable = false;
+            selectTexture.interactable = false;
             removePlayerButton.interactable = NetworkServer.active;
 
             ChangeReadyButtonColor(NotReadyColor);
@@ -108,6 +113,7 @@ namespace UnityStandardAssets.Network
         {
             nameInput.interactable = true;
             teamNumber.interactable = true;
+            selectTexture.interactable = true;
             remoteIcone.gameObject.SetActive(false);
             localIcone.gameObject.SetActive(true);
 
@@ -129,12 +135,16 @@ namespace UnityStandardAssets.Network
             colorButton.interactable = true;
             nameInput.interactable = true;
             teamNumber.interactable = true;
+            selectTexture.interactable = true;
 
             nameInput.onEndEdit.RemoveAllListeners();
             nameInput.onEndEdit.AddListener(OnNameChanged);
 
             teamNumber.onValueChanged.RemoveAllListeners();
             teamNumber.onValueChanged.AddListener(OnTeamSet);
+
+            selectTexture. onValueChanged.RemoveAllListeners();
+            selectTexture.onValueChanged.AddListener(OnTextureSet);
 
             colorButton.onClick.RemoveAllListeners();
             colorButton.onClick.AddListener(OnColorClicked);
@@ -205,6 +215,22 @@ namespace UnityStandardAssets.Network
             teamNumber.value = setTeamNumber;
         }
 
+        public void OnMyTexture(Texture textureselected)
+        {
+            playersTexture = textureselected;
+            if(textureselected.name == "bentexture")
+            {
+                selectTexture.value = 0;
+            }
+            if (textureselected.name == "military")
+            {
+                selectTexture.value = 1;
+            }
+            if (textureselected.name == "tuxedo")
+            {
+                selectTexture.value = 2;
+            }
+        }
 
         public void OnMyColor(Color newColor)
         {
@@ -234,6 +260,11 @@ namespace UnityStandardAssets.Network
         public void OnTeamSet(int nr)
         {
             CmdTeamSet(nr);
+        }
+
+        public void OnTextureSet(int tex)
+        {
+            CmdTextureSet(tex);
         }
 
         public void OnRemovePlayerClick()
@@ -318,6 +349,24 @@ namespace UnityStandardAssets.Network
         public void CmdTeamSet(int teamNr)
         {
             setTeamNumber = teamNr;
+        }
+
+        [Command]
+        public void CmdTextureSet(int textureoption)
+        {
+            Debug.Log("here is " + textureoption);
+            if(textureoption == 0)
+            {
+                playersTexture = Resources.Load("Environment/TestTerrain/bentexture") as Texture;
+            }
+            if (textureoption == 1)
+            {
+                playersTexture = Resources.Load("Environment/TestTerrain/military") as Texture;
+            }
+            if (textureoption == 2)
+            {
+                playersTexture = Resources.Load("Environment/TestTerrain/tuxedo") as Texture;
+            }
         }
 
         //Cleanup thing when get destroy (which happen when client kick or disconnect)
