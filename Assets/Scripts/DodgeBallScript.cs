@@ -4,7 +4,7 @@ using UnityEngine.Networking;
 
 public class DodgeBallScript : NetworkBehaviour
 {
-    public AudioClip[] audioClips = new AudioClip[1];
+    public AudioClip[] audioClips;
 	public PlayerTarget playerInfo;
 	[SyncVar]
 	public int thrownByTeam = 1;
@@ -17,7 +17,6 @@ public class DodgeBallScript : NetworkBehaviour
     {
         if(isLocalPlayer)
         {
-            audioClips[0] = Resources.Load("Sound/Basketball-BallBounce") as AudioClip;
             Sparks = Resources.Load("Particles/child prefabs/enmy Death") as GameObject;
         }
         else
@@ -56,7 +55,8 @@ public class DodgeBallScript : NetworkBehaviour
         }
         else if (col.gameObject.tag != "Player" || col.gameObject.tag != "ForceField")
         {
-            PlaySound(0);
+            int SelectSoundFile = Random.Range(0, 4);
+            PlaySound(SelectSoundFile);
         }
 
     }

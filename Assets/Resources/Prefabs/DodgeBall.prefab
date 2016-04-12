@@ -190,7 +190,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioClips:
-  - {fileID: 0}
+  - {fileID: 8300000, guid: d249930a2f7198b449ee4edd76c11639, type: 3}
+  - {fileID: 8300000, guid: 273a5fa90f061c943933be1c3a00c828, type: 3}
+  - {fileID: 8300000, guid: b22e5f05bc342834c98bebbf795846b8, type: 3}
+  - {fileID: 8300000, guid: 01d9cb2f0ce281e4897154a72799ac2a, type: 3}
   HitAudioClips:
   - {fileID: 0}
   - {fileID: 0}
@@ -205,6 +208,7 @@ MonoBehaviour:
   myTransform: {fileID: 0}
   pickedUp: 0
   currentPlayer: {fileID: 0}
+  bounces: 10
 --- !u!114 &11494516
 MonoBehaviour:
   m_ObjectHideFlags: 1

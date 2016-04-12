@@ -35,7 +35,8 @@ public class GrabAndToss : NetworkBehaviour
 	public GameObject ballPrefab;
 	public GameObject deathMessage;
     public NetworkLobbyHook NLH;
-	[SyncVar]
+    public AudioClip[] audioClips;
+    [SyncVar]
 	public GameObject body;
 
 	// Use this for initialization
@@ -50,8 +51,16 @@ public class GrabAndToss : NetworkBehaviour
         NLH = GameObject.Find("LobbyManager").GetComponent<NetworkLobbyHook>();
     }
 
-	// Update is called once per frame
-	void Update ()
+    //-----------------Play Audio------------------------
+    //This will take the gameobjects AudioSource to switch the audioclips
+    public void PlaySound(int clip)
+    {
+        GetComponent<AudioSource>().clip = audioClips[clip];
+        GetComponent<AudioSource>().Play();
+    }
+
+    // Update is called once per frame
+    void Update ()
 	{
 		if (health <= 0 && !dead) {
 			Cmd_SpawnHead(gameObject);
@@ -72,6 +81,7 @@ public class GrabAndToss : NetworkBehaviour
 				gameObject.transform.position = new Vector3 (transform.position.x, transform.position.y - 0.1f, transform.position.z);
 			}
 		}
+
 
 //DEBUG//
 Debug.DrawRay (head.transform.position, head.transform.forward, Color.green, rayDistance);
@@ -134,6 +144,8 @@ Debug.DrawRay (head.transform.position, head.transform.forward, Color.green, ray
 	void KillYourSelf(){
 		dead = true;
         NLH.CheackingList(this.gameObject);
+        int SelectSoundFile = Random.Range(0, 2);
+        PlaySound(SelectSoundFile);
         GetComponent<BoxCollider> ().enabled = false;
 		bodyparts[8].layer = 9;
 		bodyparts [9].layer = 9;
