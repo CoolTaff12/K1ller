@@ -15,41 +15,53 @@ public class AssignPlayerInfo : NetworkBehaviour {
 	
 	}
 		
-	[ClientRpc]
-	public void Rpc_KillAPlayer(GameObject go)
+	[Command]
+	public void Cmd_KillAPlayer(GameObject go)
 	{
-		go.GetComponent<PlayerInfo>().dead = true;
-		go.GetComponent<NetworkCharacterInfo>().teamNumber = 0;
-		go.GetComponent<BoxCollider> ().enabled = false;
-
-		go.layer = 10;
-
-		go.GetComponent<FirstPersonController> ().m_RunSpeed = 30;
-		go.GetComponent<FirstPersonController> ().m_WalkSpeed = 15;
-		go.GetComponent<FirstPersonController> ().m_JumpSpeed = 0;
-		go.GetComponent<FirstPersonController> ().m_GravityMultiplier = 0;
-		Rigidbody rb = go.GetComponent<Rigidbody>();
-		rb.detectCollisions = false;
-		rb.useGravity = false;
-		rb.Sleep ();
-		go.GetComponent<PlayerInfo>().deathMessage.SetActive (true);
-		go.GetComponent<PlayerInfo> ().body.SetActive (false);
-		foreach(GameObject gos in go.GetComponent<PlayerInfo> ().bodyparts){
-			gos.GetComponent<Renderer> ().material.mainTexture = go.GetComponent<PlayerInfo> ().mat;
-						}
+		go.GetComponent<PlayerInfo> ().Rpc_KillYourself ();
+//		go.GetComponent<PlayerInfo>().dead = true;
+//		go.GetComponent<NetworkCharacterInfo>().teamNumber = 0;
+//		go.GetComponent<BoxCollider> ().enabled = false;
+//
+//		go.layer = 10;
+//
+//		go.GetComponent<FirstPersonController> ().m_RunSpeed = 30;
+//		go.GetComponent<FirstPersonController> ().m_WalkSpeed = 15;
+//		go.GetComponent<FirstPersonController> ().m_JumpSpeed = 0;
+//		go.GetComponent<FirstPersonController> ().m_GravityMultiplier = 0;
+//		Rigidbody rb = go.GetComponent<Rigidbody>();
+//		rb.detectCollisions = false;
+//		rb.useGravity = false;
+//		rb.Sleep ();
+//		go.GetComponent<PlayerInfo>().deathMessage.SetActive (true);
+//		go.GetComponent<PlayerInfo> ().body.SetActive (false);
+//		foreach(GameObject gos in go.GetComponent<PlayerInfo> ().bodyparts){
+//			gos.GetComponent<Renderer> ().material.mainTexture = go.GetComponent<PlayerInfo> ().mat;
+//						}
 	}
-	[ClientRpc]
-	public void Rpc_SpawnHead(GameObject go)
+//	[ClientRpc]
+//	public void Rpc_SpawnHead(GameObject go)
+//	{
+//		GameObject HeadBall = Instantiate(go.GetComponent<PlayerInfo>().ballPrefab, go.GetComponent<GrabAndToss>().head.transform.position, Quaternion.identity) as GameObject;
+//		HeadBall.GetComponent<Renderer> ().material.mainTexture = go.GetComponent<PlayerInfo>().bodyparts [0].GetComponent<Renderer> ().material.mainTexture;
+//		NetworkServer.Spawn(go.GetComponent<PlayerInfo>().ballPrefab);
+//	}
+	[Command]
+	public void Cmd_SpawnHead(GameObject go)
 	{
 		GameObject HeadBall = Instantiate(go.GetComponent<PlayerInfo>().ballPrefab, go.GetComponent<GrabAndToss>().head.transform.position, Quaternion.identity) as GameObject;
 		HeadBall.GetComponent<Renderer> ().material.mainTexture = go.GetComponent<PlayerInfo>().bodyparts [0].GetComponent<Renderer> ().material.mainTexture;
-		NetworkServer.Spawn(go.GetComponent<PlayerInfo>().ballPrefab);
+		NetworkServer.Spawn(HeadBall);
 	}
-
-	[ClientRpc]
-	public void Rpc_DealDamage(GameObject go)
+	[Command]
+	public void Cmd_DealDamage(GameObject go)
 	{
 		go.GetComponent<PlayerInfo> ().health -= 1;
 	}
-
+//	[ClientRpc]
+//	public void Rpc_DealDamage(GameObject go)
+//	{
+//		go.GetComponent<PlayerInfo> ().health -= 1;
+//	}
+//
 }

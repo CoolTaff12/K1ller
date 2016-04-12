@@ -47,10 +47,10 @@ public class PlayerInfo : NetworkBehaviour {
 		}
 		if (dead && isLocalPlayer) {
 			if (Input.GetKey (KeyCode.Space)) {
-				gameObject.transform.position = new Vector3 (transform.position.x, transform.position.y + 0.1f, transform.position.z);
+				gameObject.transform.position = new Vector3 (transform.position.x, transform.position.y + 0.01f, transform.position.z);
 			}
 			if (Input.GetKey (KeyCode.LeftControl)) {
-				gameObject.transform.position = new Vector3 (transform.position.x, transform.position.y - 0.1f, transform.position.z);
+				gameObject.transform.position = new Vector3 (transform.position.x, transform.position.y - 0.01f, transform.position.z);
 			}
 		}
 	}
@@ -98,7 +98,7 @@ public class PlayerInfo : NetworkBehaviour {
 	void Cmd_SpawnHead(GameObject go){
 		infoHandler = GameObject.Find ("PlayerInfoHandler");
 		assignInfo = infoHandler.GetComponent<AssignPlayerInfo> ();
-		assignInfo.Rpc_SpawnHead(go);
+		assignInfo.Cmd_SpawnHead(go);
 //		GameObject HeadBall = Instantiate(ballPrefab, go.GetComponent<GrabAndToss>().head.transform.position, Quaternion.identity) as GameObject;
 //		HeadBall.GetComponent<Renderer> ().material.mainTexture = bodyparts [0].GetComponent<Renderer> ().material.mainTexture;
 //		NetworkServer.Spawn(ballPrefab);
@@ -107,36 +107,36 @@ public class PlayerInfo : NetworkBehaviour {
 	public void Cmd_KillYourself(GameObject go){
 		infoHandler = GameObject.Find ("PlayerInfoHandler");
 		assignInfo = infoHandler.GetComponent<AssignPlayerInfo> ();
-		assignInfo.Rpc_KillAPlayer(go);
-		KillYourSelf();
-//				dead = true;
-//				NLH.CheackingList(this.gameObject);
-//				int SelectSoundFile = Random.Range(0, 2);
-//				PlaySound(SelectSoundFile);
-//				GetComponent<BoxCollider> ().enabled = false;
-//				bodyparts[8].layer = 9;
-//				bodyparts [9].layer = 9;
-//				gameObject.layer = 10;
-//		
-//				GetComponent<FirstPersonController> ().m_RunSpeed = 30;
-//				GetComponent<FirstPersonController> ().m_WalkSpeed = 15;
-//				GetComponent<FirstPersonController> ().m_JumpSpeed = 0;
-//				GetComponent<FirstPersonController> ().m_GravityMultiplier = 0;
-//				Rigidbody rb = GetComponent<Rigidbody>();
-//				rb.detectCollisions = false;
-//				rb.useGravity = false;
-//				rb.Sleep ();
-//				deathMessage.SetActive (true);
-//				body.SetActive (false);
-//				foreach(GameObject gos in bodyparts){
-//					Network.Destroy(gos);
-//				}
+		assignInfo.Cmd_KillAPlayer(go);
 	}
 	[Command]
 	public void Cmd_TakeDamage(GameObject go) {
 //		health--;
 		infoHandler = GameObject.Find ("PlayerInfoHandler");
 		assignInfo = infoHandler.GetComponent<AssignPlayerInfo> ();
-		assignInfo.Rpc_DealDamage(go);
+		assignInfo.Cmd_DealDamage(go);
+	}
+	[ClientRpc]
+	public void Rpc_KillYourself()
+	{
+		gameObject.GetComponent<PlayerInfo>().dead = true;
+		gameObject.GetComponent<NetworkCharacterInfo>().teamNumber = 0;
+		gameObject.GetComponent<BoxCollider> ().enabled = false;
+
+		gameObject.layer = 10;
+
+		gameObject.GetComponent<FirstPersonController> ().m_RunSpeed = 30;
+		gameObject.GetComponent<FirstPersonController> ().m_WalkSpeed = 15;
+		gameObject.GetComponent<FirstPersonController> ().m_JumpSpeed = 0;
+		gameObject.GetComponent<FirstPersonController> ().m_GravityMultiplier = 0;
+		Rigidbody rb = gameObject.GetComponent<Rigidbody>();
+		rb.detectCollisions = false;
+		rb.useGravity = false;
+		rb.Sleep ();
+		deathMessage.SetActive (true);
+		body.SetActive (false);
+		foreach(GameObject gos in bodyparts){
+			gos.GetComponent<Renderer> ().material.mainTexture = mat;
+		}
 	}
 }
