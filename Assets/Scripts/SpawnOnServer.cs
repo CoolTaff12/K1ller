@@ -12,7 +12,7 @@ public class SpawnOnServer : NetworkBehaviour {
 //		objectName = gameObject.transform.name;
 		if(!onlyOne || GameObject.Find(objectName) == null){
 			GameObject gots = Instantiate(prefabToSpawn, transform.position, Quaternion.identity) as GameObject;
-			CmdSpawnOnServer (gots);
+			CmdSpawnOnServer (gots, transform.position);
 			gots.transform.name = objectName;
 			gots.transform.SetParent (gameObject.transform);
 			
@@ -24,7 +24,7 @@ public class SpawnOnServer : NetworkBehaviour {
 	
 	}
 	[Command]
-	public void CmdSpawnOnServer(GameObject go){
+	public void CmdSpawnOnServer(GameObject go, Vector3 pos){
 		NetworkServer.Spawn(go);
 	}
 }
