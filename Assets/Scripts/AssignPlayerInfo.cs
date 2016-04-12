@@ -21,12 +21,7 @@ public class AssignPlayerInfo : NetworkBehaviour {
 		go.GetComponent<PlayerInfo>().dead = true;
 		go.GetComponent<NetworkCharacterInfo>().teamNumber = 0;
 		go.GetComponent<BoxCollider> ().enabled = false;
-		//		foreach(GameObject go in bodyparts){
-		//			go.transform.SetParent (null);
-		//			go.GetComponent<Rigidbody> ().isKinematic = false;
-		//			go.GetComponent<Rigidbody> ().detectCollisions = true;
-		//			go.GetComponent<Rigidbody> ().useGravity = true;
-		//		}
+
 		go.layer = 10;
 
 		go.GetComponent<FirstPersonController> ().m_RunSpeed = 30;
@@ -39,7 +34,9 @@ public class AssignPlayerInfo : NetworkBehaviour {
 		rb.Sleep ();
 		go.GetComponent<PlayerInfo>().deathMessage.SetActive (true);
 		go.GetComponent<PlayerInfo> ().body.SetActive (false);
-
+		foreach(GameObject gos in go.GetComponent<PlayerInfo> ().bodyparts){
+			gos.GetComponent<Renderer> ().material.mainTexture = go.GetComponent<PlayerInfo> ().mat;
+						}
 	}
 	[ClientRpc]
 	public void Rpc_SpawnHead(GameObject go)
@@ -48,6 +45,7 @@ public class AssignPlayerInfo : NetworkBehaviour {
 		HeadBall.GetComponent<Renderer> ().material.mainTexture = go.GetComponent<PlayerInfo>().bodyparts [0].GetComponent<Renderer> ().material.mainTexture;
 		NetworkServer.Spawn(go.GetComponent<PlayerInfo>().ballPrefab);
 	}
+
 	[ClientRpc]
 	public void Rpc_DealDamage(GameObject go)
 	{

@@ -1459,7 +1459,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 123130}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -6.109621, y: -1.25, z: -0.86527014}
+  m_LocalPosition: {x: -12.310414, y: 5.01, z: -13.205624}
   m_LocalScale: {x: 3, y: 3, z: 3}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
@@ -2016,6 +2016,7 @@ MonoBehaviour:
   health: 1
   killable: 1
   dead: 0
+  mat: {fileID: 2800000, guid: f9cb50346a8027f40a0fe456ed3267b5, type: 3}
   audioClips:
   - {fileID: 8300000, guid: e50aa662314f50b4ab4a410c17620700, type: 3}
   - {fileID: 8300000, guid: da587fde069f42344bbc24403a91595e, type: 3}
