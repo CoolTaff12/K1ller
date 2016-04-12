@@ -21,3 +21,5 @@ EditorBuildSettings:
     path: Assets/Scenes/BridgeTown.unity
   - enabled: 1
     path: Assets/Scenes/RotateAcrossTheSky.unity
+  - enabled: 1
+    path: Assets/Scenes/Desert.unity
