@@ -30,11 +30,11 @@ public class hermControls : NetworkBehaviour
 
 	void Update () 
 	{ 
-		if(!isLocalPlayer)
-		{
-			return;
-
-		}
+//		if(!isLocalPlayer)
+//		{
+//			return;
+//
+//		}
 			
 		Move();
 		Jump();
