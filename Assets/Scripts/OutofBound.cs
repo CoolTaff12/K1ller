@@ -28,7 +28,7 @@ public class OutofBound : MonoBehaviour
     //If object has fallen out of bound
     void OnTriggerStay(Collider target)
     {
-        int Selected = Random.RandomRange(0, SpawningPositions.Count);
+        int Selected = Random.Range(0, SpawningPositions.Count);
         target.transform.position = SpawningPositions[Selected].transform.position;
     }
 }

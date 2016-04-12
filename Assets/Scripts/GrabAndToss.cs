@@ -34,6 +34,7 @@ public class GrabAndToss : NetworkBehaviour
 	public GameObject networkMgr; //NetworkManager found in scene.
 	public GameObject ballPrefab;
 	public GameObject deathMessage;
+    public NetworkLobbyHook NLH;
 	[SyncVar]
 	public GameObject body;
 
@@ -46,10 +47,8 @@ public class GrabAndToss : NetworkBehaviour
 //			go.GetComponent<Rigidbody> ().useGravity = false;
 //		}
 		anim = GetComponent<Animator>();
-		teamNumber = GetComponent<NetworkCharacterInfo> ().teamNumber;
-
-
-	}
+        NLH = GameObject.Find("LobbyManager").GetComponent<NetworkLobbyHook>();
+    }
 
 	// Update is called once per frame
 	void Update ()
@@ -134,8 +133,8 @@ Debug.DrawRay (head.transform.position, head.transform.forward, Color.green, ray
 
 	void KillYourSelf(){
 		dead = true;
-		teamNumber = 0;
-		GetComponent<BoxCollider> ().enabled = false;
+        NLH.CheackingList();
+        GetComponent<BoxCollider> ().enabled = false;
 		bodyparts[8].layer = 9;
 		bodyparts [9].layer = 9;
 //		foreach(GameObject go in bodyparts){
@@ -160,7 +159,9 @@ Debug.DrawRay (head.transform.position, head.transform.forward, Color.green, ray
 			tossForce = 1f;
 			Cmd_Shoot (currentBall);
 		}
-	}
+        teamNumber = 0;
+    }
+
 	[Command]
 	public void Cmd_TakeDamage(GameObject go) {
 		networkMgr = GameObject.Find ("PlayerInfoHandler");
