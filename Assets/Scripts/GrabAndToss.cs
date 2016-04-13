@@ -23,7 +23,7 @@ public class GrabAndToss : NetworkBehaviour
 	public GameObject currentBall; //Ball that is currently being held.
 	public GameObject holdPos; //Position of the held ball.
 	public GameObject infoHandler; //PlayerInfoHandler found in scene.
-
+	public GameObject fakeBall;
 	public PlayerInfo playerInfo;
 	public NetworkCharacterInfo charInfo;
 
@@ -57,6 +57,8 @@ Debug.DrawRay (head.transform.position, head.transform.forward, Color.green, ray
 					currentBall = hit.collider.gameObject;
 					Cmd_GetPickedUp (currentBall , gameObject);
 					holdingBall = true;
+//					Cmd_toggleFake (fakeBall);
+
 					}
 
 				}
@@ -71,8 +73,6 @@ Debug.DrawRay (head.transform.position, head.transform.forward, Color.green, ray
 				anim.SetBool ("isThrowing", false);
 				return;
 			}
-//			Rigidbody brb = currentBall.GetComponent<Rigidbody> ();
-//			currentBall.transform.parent = null;
 			if (!throwing && holdingBall) {
 				throwing = true;
 				anim.SetBool ("isThrowing", true);
@@ -102,10 +102,24 @@ Debug.DrawRay (head.transform.position, head.transform.forward, Color.green, ray
 		ballScript = bs.GetComponent<DodgeBallBehaviour> ();
 		ballScript.Rpc_GetPickedUp (go);
 	}
-
+//	[Command]
+//	void Cmd_toggleFake(GameObject go){
+//		Rpc_toggleFake (go);
+//	}
+//	[ClientRpc]
+//	void Rpc_toggleFake(GameObject go){
+//		if (holdingBall) {
+//			go.layer = 9;
+//		}
+//		if (!holdingBall) {
+//			go.GetComponent<Renderer> ().material.mainTexture = currentBall.GetComponent<Renderer> ().material.mainTexture;
+//			go.layer = 0;
+//		}
+//	}
 
 	IEnumerator StartThrow(float waitTime) 
 	{
 		yield return new WaitForSeconds(waitTime);
+//		Cmd_toggleFake (fakeBall);
 	}
 }

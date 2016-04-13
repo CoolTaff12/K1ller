@@ -64,29 +64,29 @@ public class PlayerInfo : NetworkBehaviour {
 			}
 		}
 	}
-	void KillYourSelf(){
-		dead = true;
-		NLH.CheackingList(this.gameObject);
-		int SelectSoundFile = Random.Range(0, 2);
-		PlaySound(SelectSoundFile);
-		GetComponent<BoxCollider> ().enabled = false;
-		bodyparts[8].layer = 9;
-		bodyparts [9].layer = 9;
-		gameObject.layer = 10;
-
-		GetComponent<FirstPersonController> ().m_RunSpeed = 30;
-		GetComponent<FirstPersonController> ().m_WalkSpeed = 15;
-		GetComponent<FirstPersonController> ().m_JumpSpeed = 0;
-		GetComponent<FirstPersonController> ().m_GravityMultiplier = 0;
-		Rigidbody rb = GetComponent<Rigidbody>();
-		rb.detectCollisions = false;
-		rb.useGravity = false;
-		rb.Sleep ();
-		deathMessage.SetActive (true);
-		foreach(GameObject gos in bodyparts){
-			gos.GetComponent<Renderer> ().material.mainTexture = mat;
-		}
-	}
+//	void KillYourSelf(){
+//		dead = true;
+//		NLH.CheackingList(this.gameObject);
+//		int SelectSoundFile = Random.Range(0, 2);
+//		PlaySound(SelectSoundFile);
+//		GetComponent<BoxCollider> ().enabled = false;
+//		bodyparts[8].layer = 9;
+//		bodyparts [9].layer = 9;
+//		gameObject.layer = 10;
+//
+//		GetComponent<FirstPersonController> ().m_RunSpeed = 30;
+//		GetComponent<FirstPersonController> ().m_WalkSpeed = 15;
+//		GetComponent<FirstPersonController> ().m_JumpSpeed = 0;
+//		GetComponent<FirstPersonController> ().m_GravityMultiplier = 0;
+//		Rigidbody rb = GetComponent<Rigidbody>();
+//		rb.detectCollisions = false;
+//		rb.useGravity = false;
+//		rb.Sleep ();
+//		deathMessage.SetActive (true);
+//		foreach(GameObject gos in bodyparts){
+//			gos.GetComponent<Renderer> ().material.mainTexture = mat;
+//		}
+//	}
 	//-----------------Play Audio------------------------
 	//This will take the gameobjects AudioSource to switch the audioclips
 	public void PlaySound(int clip)
@@ -111,10 +111,15 @@ public class PlayerInfo : NetworkBehaviour {
 	}
 	[Command]
 	public void Cmd_TakeDamage(GameObject go) {
-//		health--;
-		infoHandler = GameObject.Find ("PlayerInfoHandler");
-		assignInfo = infoHandler.GetComponent<AssignPlayerInfo> ();
-		assignInfo.Cmd_DealDamage(go);
+		Rpc_TakeDamage (go);
+//		infoHandler = GameObject.Find ("PlayerInfoHandler");
+//		assignInfo = infoHandler.GetComponent<AssignPlayerInfo> ();
+//		assignInfo.Cmd_DealDamage(go);
+	}
+	[ClientRpc]
+	public void Rpc_TakeDamage(GameObject go){
+		health--;
+		Debug.Log (go + " : " + health);
 	}
 	[ClientRpc]
 	public void Rpc_KillYourself()
@@ -134,7 +139,6 @@ public class PlayerInfo : NetworkBehaviour {
 		rb.useGravity = false;
 		rb.Sleep ();
 		deathMessage.SetActive (true);
-		body.SetActive (false);
 		foreach(GameObject gos in bodyparts){
 			gos.GetComponent<Renderer> ().material.mainTexture = mat;
 		}

@@ -77,6 +77,8 @@ public class DodgeBallBehaviour : NetworkBehaviour {
 		pickedUp = true;
 		rb.velocity = Vector3.zero;
 		rb.angularVelocity = Vector3.zero;
+//		gameObject.layer = 9;
+
 	
 	}
 	[ClientRpc]
@@ -91,6 +93,7 @@ public class DodgeBallBehaviour : NetworkBehaviour {
 		rb.AddForce(gat.head.transform.forward * gat.tossForce);
 		gat = null;
 		pickedUp = false;
+//		gameObject.layer = 0;
 	}
 
 }
