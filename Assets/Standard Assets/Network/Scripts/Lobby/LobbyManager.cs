@@ -5,6 +5,7 @@ using UnityEngine.Networking;
 using UnityEngine.Networking.Types;
 using UnityEngine.Networking.Match;
 using System.Collections;
+using System.Collections.Generic;
 
 
 namespace UnityStandardAssets.Network
@@ -55,6 +56,8 @@ namespace UnityStandardAssets.Network
 
         protected LobbyHook _lobbyHooks;
 
+        public List<GameObject> PlayersOnline;
+
         void Start()
         {
             UnityEngine.Cursor.visible = true;
@@ -68,6 +71,18 @@ namespace UnityStandardAssets.Network
             DontDestroyOnLoad(gameObject);
 
             SetServerInfo("Offline", "None");
+        }
+
+        void Update()
+        {
+            foreach (var playersOnline in FindObjectsOfType(typeof(GameObject)) as GameObject[])
+            {
+                if (playersOnline.name == "PlayerInfo(Clone)")
+                {
+                    PlayersOnline.Add(playersOnline);
+                }
+            }
+            minPlayers = PlayersOnline.Count;
         }
 
         public override void OnLobbyClientSceneChanged(NetworkConnection conn)

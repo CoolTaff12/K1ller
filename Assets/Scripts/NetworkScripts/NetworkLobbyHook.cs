@@ -109,16 +109,6 @@ public class NetworkLobbyHook : LobbyHook
     {
         if(isinLevel)
         {
-            /*DodgeballSpawner = GameObject.Find("Ballspawner");
-            GameObject[] Dodgeballs = GameObject.FindGameObjectsWithTag("Ball");
-            if (Dodgeballs[2] != null)
-            {
-                DodgeballSpawner.SetActive(false);
-            }
-            else
-            {
-                DodgeballSpawner.SetActive(true);
-            }*/
             StartCoroutine(CheckforVictory(5.0F));
         }
     }

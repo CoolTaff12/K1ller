@@ -47,7 +47,7 @@ public class NetworkCharacterInfo : NetworkBehaviour
         foreach (Renderer r in CRends)
         {
             r.material.mainTexture = playertexture;
-                r.material.color = color;
+            r.material.color = color;
         }
         GameObject.Find(this.gameObject.name + "/Body/regular_dude_head").GetComponent<Renderer>().material.color = headcolor;
     }
