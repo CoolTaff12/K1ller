@@ -96,6 +96,8 @@ namespace UnityStandardAssets.Network
 
         void SetupOtherPlayer()
         {
+            LobbyManager LM = GameObject.Find("LobbyManager").GetComponent<LobbyManager>();
+            LM.PlayersOnline.Add(this.gameObject);
             nameInput.interactable = false;
             teamNumber.interactable = false;
             selectTexture.interactable = false;

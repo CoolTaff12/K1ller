@@ -55,7 +55,7 @@ namespace UnityStandardAssets.Network
         protected ulong _currentMatchID;
 
         protected LobbyHook _lobbyHooks;
-
+       
         public List<GameObject> PlayersOnline;
 
         void Start()
@@ -75,14 +75,10 @@ namespace UnityStandardAssets.Network
 
         void Update()
         {
-            foreach (var playersOnline in FindObjectsOfType(typeof(GameObject)) as GameObject[])
+            if(PlayersOnline != null)
             {
-                if (playersOnline.name == "PlayerInfo(Clone)")
-                {
-                    PlayersOnline.Add(playersOnline);
-                }
+                minPlayers = (PlayersOnline.Count);
             }
-            minPlayers = PlayersOnline.Count;
         }
 
         public override void OnLobbyClientSceneChanged(NetworkConnection conn)

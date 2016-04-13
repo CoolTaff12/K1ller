@@ -24,6 +24,9 @@ public class NetworkCharacterInfo : NetworkBehaviour
 
     [SyncVar]
     public Texture playertexture;
+    public Texture[] selectableTextures;
+    [SyncVar]
+    public int checkingTexture;
 
     protected Text ScoreText;
     //hard to control WHEN Init is called (networking make order between object spawning non deterministic)
@@ -43,6 +46,18 @@ public class NetworkCharacterInfo : NetworkBehaviour
         name = playerName;
         //Renderar the colour and the texture player had choosen ealier
         Renderer[] CRends = GetComponentsInChildren<Renderer>();
+        if(checkingTexture == 1)
+        {
+            playertexture = selectableTextures[0];
+        }
+        if (checkingTexture == 2)
+        {
+            playertexture = selectableTextures[1];
+        }
+        if (checkingTexture == 3)
+        {
+            playertexture = selectableTextures[2];
+        }
         Color headcolor = GameObject.Find(this.gameObject.name + "/Body/regular_dude_body").GetComponent<Renderer>().material.color;
         foreach (Renderer r in CRends)
         {
@@ -56,28 +71,6 @@ public class NetworkCharacterInfo : NetworkBehaviour
 	void Update () {
         UnityEngine.Cursor.visible = true;
     }
-
-//    [ClientRpc]
-//    public void Rpc_SetTeamNumber(GameObject go)
-//    {
-//        go.GetComponent<GrabAndToss>().teamNumber = teamNumber;
-//        teamNumber++;
-//    }
-//    [ClientRpc]
-//    public void Rpc_SetName(GameObject go)
-//    {
-//        go.transform.name = "Player" + teamNumber;
-//    }
-//    [ClientRpc]
-//    public void Rpc_KillAPlayer(GameObject go)
-//    {
-//		go.GetComponent<PlayerInfo>().dead = true;
-//        go.GetComponent<GrabAndToss>().teamNumber = 0;
-//        go.transform.localScale = new Vector3(0.2f, 0.2f, 0.2f);
-//        Rigidbody rb = go.GetComponent<Rigidbody>();
-//        rb.detectCollisions = false;
-//        rb.useGravity = false;
-//    }
 
     public void Init()
     {
