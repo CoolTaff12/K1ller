@@ -33,13 +33,6 @@ public class NetworkCharacterInfo : NetworkBehaviour
     //so we call init from multiple location (depending on what between spaceship & manager is created first).
     protected bool WasInit = false;
 
-
-    void Awake()
-    {
-        //register the spaceship in the gamemanager, that will allow to loop on it.
-        NetworkGameManager.sCHaracter.Add(this);
-    }
-
     // Use this for initialization
     void Start ()
     {
@@ -78,15 +71,11 @@ public class NetworkCharacterInfo : NetworkBehaviour
             return;
 
         GameObject scoreGO = new GameObject(playerName + "score");
-        scoreGO.transform.SetParent(NetworkGameManager.sInstance.uiScoreZone.transform, false);
         ScoreText = scoreGO.AddComponent<Text>();
         ScoreText.alignment = TextAnchor.MiddleCenter;
-        ScoreText.font = NetworkGameManager.sInstance.uiScoreFont;
         ScoreText.resizeTextForBestFit = true;
         ScoreText.color = color;
         WasInit = true;
-
-        UpdateScoreLifeText();
     }
     // --- Score & Life management & display
     void OnScoreChanged(int newValue)

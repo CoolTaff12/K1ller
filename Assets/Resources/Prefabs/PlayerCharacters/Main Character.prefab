@@ -1907,6 +1907,11 @@ MonoBehaviour:
   lifeCount: 0
   teamNumber: 1
   playertexture: {fileID: 2800000, guid: 028fdb69e63271a47a3cc65168e259b8, type: 3}
+  selectableTextures:
+  - {fileID: 2800000, guid: 028fdb69e63271a47a3cc65168e259b8, type: 3}
+  - {fileID: 2800000, guid: f6de672afec96744da24105c66cfebd2, type: 3}
+  - {fileID: 2800000, guid: 93648e68c5dead44780a2213c3fa9dd2, type: 3}
+  checkingTexture: 0
 --- !u!114 &11432088
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -6,7 +6,6 @@ using System.Collections.Generic;
 
 public class NetworkGameManager : NetworkBehaviour
 {
-    static public List<NetworkSpaceship> sShips = new List<NetworkSpaceship>();
     static public List<NetworkCharacterInfo> sCHaracter = new List<NetworkCharacterInfo>();
     static public NetworkGameManager sInstance = null;
 
@@ -34,10 +33,6 @@ public class NetworkGameManager : NetworkBehaviour
             StartCoroutine(AsteroidCoroutine());
         }
 
-        for(int i = 0; i < sShips.Count; ++i)
-        {
-            sShips[i].Init();
-        }
         for (int i = 0; i < sCHaracter.Count; ++i)
         {
             sCHaracter[i].Init();
@@ -47,15 +42,13 @@ public class NetworkGameManager : NetworkBehaviour
     [ServerCallback]
     void Update()
     {
-        if (!_running || sShips.Count == 0)
-            return;
         if (!_running || sCHaracter.Count == 0)
             return;
 
         bool allDestroyed = true;
-        for (int i = 0; i < sShips.Count; ++i)
+        for (int i = 0; i < sCHaracter.Count; ++i)
         {
-            allDestroyed &= (sShips[i].lifeCount == 0);
+            allDestroyed &= (sCHaracter[i].lifeCount == 0);
         }
 
         if(allDestroyed)
@@ -112,18 +105,7 @@ public class NetworkGameManager : NetworkBehaviour
 
             GameObject ast = Instantiate(asteroidPrefabs[asteroidPrefabs.Length - 1], position, Quaternion.Euler(Random.value * 360.0f, Random.value * 360.0f, Random.value * 360.0f)) as GameObject;
 
-            NetworkAsteroid asteroid = ast.GetComponent<NetworkAsteroid>();
-            asteroid.SetupStartParameters(-position.normalized * 1000.0f, Random.insideUnitSphere * Random.Range(500.0f, 1500.0f));
-
             NetworkServer.Spawn(ast);
         }
-    }
-
-
-    public IEnumerator WaitForRespawn(NetworkSpaceship ship)
-    {
-        yield return new WaitForSeconds(4.0f);
-
-        ship.Respawn();
     }
 }
