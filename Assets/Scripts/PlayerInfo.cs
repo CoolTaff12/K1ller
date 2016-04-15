@@ -5,25 +5,31 @@ using UnityEngine.Networking;
 using UnityStandardAssets.Characters.FirstPerson;
 
 public class PlayerInfo : NetworkBehaviour {
-	public GameObject[] bodyparts; //List of bodypart segments.
-	public GameObject deathMessage;
-	public GameObject infoHandler; //PlayerInfoHandler found in scene.
-	public GameObject ballPrefab;
-	[SyncVar]
-	public GameObject body;
-	[SyncVar]
-	public float health = 1f; //Amount of hits the character can take before dying.
-	[SyncVar]
-	public bool killable = true; //Can this character be killed?
-	[SyncVar]
-	public bool dead = false; //Is this character dead?
-	public Texture mat;
-	public AudioClip[] audioClips;
-	public AssignPlayerInfo assignInfo; //Script to set initial info such as teamNumber.
-	public NetworkLobbyHook NLH;
-	public GrabAndToss gat;
-	public NetworkCharacterInfo netInfo;
-	public DodgeBallBehaviour ballInfo; //Script on the ball colliding with the player;
+	[SerializeField]
+	private GameObject[] bodyparts; //List of bodypart segments.
+	[SerializeField]
+	private GameObject deathMessage;
+	private GameObject infoHandler; //PlayerInfoHandler found in scene.
+	[SerializeField]
+	private GameObject ballPrefab;
+	[SyncVar][SerializeField]
+	private GameObject body;
+	[SyncVar][SerializeField]
+	private float health = 1f; //Amount of hits the character can take before dying.
+	[SyncVar][SerializeField]
+	private bool killable = true; //Can this character be killed?
+	[SyncVar][SerializeField]
+	private bool dead = false; //Is this character dead?
+	public bool c_Dead {get{return dead;}}
+	[SerializeField]
+	private Texture mat;
+	[SerializeField]
+	private AudioClip[] audioClips;
+	private AssignPlayerInfo assignInfo; //Script to set initial info such as teamNumber.
+	private NetworkLobbyHook NLH;
+	private GrabAndToss gat;
+	private NetworkCharacterInfo netInfo;
+	private DodgeBallBehaviour ballInfo; //Script on the ball colliding with the player;
 
 	// Use this for initialization
 	void Start () {
@@ -36,13 +42,12 @@ public class PlayerInfo : NetworkBehaviour {
 	void Update () {
 		if (health <= 0 && !dead) {
 			Cmd_SpawnHead(gameObject);
-			//			KillYourSelf();
 			Cmd_KillYourself(gameObject);
 			dead = true;
 			netInfo.teamNumber = 0;
-			if (gat.holdingBall) {
-				gat.tossForce = 1f;
-				gat.Cmd_Shoot (gat.currentBall);
+			if (gat.c_HoldingBall) {
+				gat.c_TossForce = 1f;
+				gat.Cmd_Shoot (gat.c_CurrentBall, gat.c_Head);
 			}
 		}
 		if (dead && isLocalPlayer) {
@@ -59,7 +64,7 @@ public class PlayerInfo : NetworkBehaviour {
 		if (col.gameObject.tag == "Ball")
 		{
 			ballInfo = col.gameObject.GetComponent<DodgeBallBehaviour>();
-			if (netInfo.teamNumber != ballInfo.thrownByTeam && ballInfo.thrownByTeam != 0) {
+			if (netInfo.teamNumber != ballInfo.b_ThrownByTeam && ballInfo.b_ThrownByTeam != 0 && killable) {
 				Cmd_TakeDamage (gameObject);
 			}
 		}
@@ -94,33 +99,48 @@ public class PlayerInfo : NetworkBehaviour {
 		GetComponent<AudioSource>().clip = audioClips[clip];
 		GetComponent<AudioSource>().Play();
 	}
+
+/// <summary>
+/// Command to spawn a ball to simulate the player dropping their head.
+/// </summary>
+/// <param name="go">Character droppping the head : self</param>
 	[Command]
 	void Cmd_SpawnHead(GameObject go){
 		infoHandler = GameObject.Find ("PlayerInfoHandler");
 		assignInfo = infoHandler.GetComponent<AssignPlayerInfo> ();
-		assignInfo.Cmd_SpawnHead(go);
-//		GameObject HeadBall = Instantiate(ballPrefab, go.GetComponent<GrabAndToss>().head.transform.position, Quaternion.identity) as GameObject;
-//		HeadBall.GetComponent<Renderer> ().material.mainTexture = bodyparts [0].GetComponent<Renderer> ().material.mainTexture;
-//		NetworkServer.Spawn(ballPrefab);
+		assignInfo.Cmd_SpawnHead(ballPrefab, gat.c_Head);
 	}
+	/// <summary>
+	/// Command that kills the character.
+	/// </summary>
+	/// <param name="go">Character dying : self</param>
 	[Command]
 	public void Cmd_KillYourself(GameObject go){
 		infoHandler = GameObject.Find ("PlayerInfoHandler");
 		assignInfo = infoHandler.GetComponent<AssignPlayerInfo> ();
 		assignInfo.Cmd_KillAPlayer(go);
 	}
+	/// <summary>
+	/// Command to take damage, starts Rpc_TakeDamage.
+	/// </summary>
+	/// <param name="go">Character taking damage : self</param>
 	[Command]
 	public void Cmd_TakeDamage(GameObject go) {
-		Rpc_TakeDamage (go);
-//		infoHandler = GameObject.Find ("PlayerInfoHandler");
-//		assignInfo = infoHandler.GetComponent<AssignPlayerInfo> ();
-//		assignInfo.Cmd_DealDamage(go);
+		Rpc_TakeDamage (go, 1);
 	}
+/// <summary>
+/// Rpc that decreases health.
+/// </summary>
+/// <param name="go">Character taking damage : self</param>
+/// <param name="i">Damage taken</param>
 	[ClientRpc]
-	public void Rpc_TakeDamage(GameObject go){
-		health--;
-		Debug.Log (go + " : " + health);
+	public void Rpc_TakeDamage(GameObject go, int i){
+		health -= i;
 	}
+
+	/// <summary>
+	/// Rpc that sets all the values when dying.
+	/// </summary>
 	[ClientRpc]
 	public void Rpc_KillYourself()
 	{
