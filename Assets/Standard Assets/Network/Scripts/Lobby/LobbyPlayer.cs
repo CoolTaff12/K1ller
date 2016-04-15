@@ -34,7 +34,7 @@ namespace UnityStandardAssets.Network
         [SyncVar(hook = "OnMyTeam")]
         public int setTeamNumber = 1;
         [SyncVar(hook = "OnMyTexture")]
-        public Texture playersTexture;
+        public int playersTexture;
 
         public Color OddRowColor = new Color(250.0f / 255.0f, 250.0f / 255.0f, 250.0f / 255.0f, 1.0f);
         public Color EvenRowColor = new Color(180.0f / 255.0f, 180.0f / 255.0f, 180.0f / 255.0f, 1.0f);
@@ -217,18 +217,18 @@ namespace UnityStandardAssets.Network
             teamNumber.value = setTeamNumber;
         }
 
-        public void OnMyTexture(Texture textureselected)
+        public void OnMyTexture(int textureselected)
         {
             playersTexture = textureselected;
-            if(textureselected.name == "bentexture")
+            if(textureselected == 0)
             {
                 selectTexture.value = 0;
             }
-            if (textureselected.name == "military")
+            if (textureselected == 1)
             {
                 selectTexture.value = 1;
             }
-            if (textureselected.name == "tuxedo")
+            if (textureselected == 2)
             {
                 selectTexture.value = 2;
             }
@@ -359,15 +359,15 @@ namespace UnityStandardAssets.Network
             Debug.Log("here is " + textureoption);
             if(textureoption == 0)
             {
-                playersTexture = Resources.Load("Environment/Animations/RD_idle2.fbm/bentexture") as Texture;
+                playersTexture = 0;
             }
             if (textureoption == 1)
             {
-                playersTexture = Resources.Load("Environment/TestTerrain/military") as Texture;
+                playersTexture = 1;
             }
             if (textureoption == 2)
             {
-                playersTexture = Resources.Load("Environment/TestTerrain/tuxedo") as Texture;
+                playersTexture = 2;
             }
         }
 

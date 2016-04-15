@@ -31,3 +31,7 @@ sysinfo.txt
 # Builds
 *.apk
 *.unitypackage
+Assets/Resources/Environment/El Don.meta
+Assets/Resources/Environment/El Don/Imported.meta
+Assets/Resources/Environment/El Don/Prefabs.meta
+Assets/Resources/Environment/El Don/Materials.meta
