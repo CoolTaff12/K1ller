@@ -5,16 +5,16 @@ using UnityStandardAssets.CrossPlatformInput;
 using UnityStandardAssets.Characters.FirstPerson;
 
 public class AnimateMovement : NetworkBehaviour {
-	public Animator anim;
+	private Animator anim;
 	private FirstPersonController Fpc;
-	public GrabAndToss gat;
+	private GrabAndToss gat;
 	private bool jumpPlayed = false;
-	private bool throwPlayed = false;
 
 	// Use this for initialization
 	void Start () {
 		anim = GetComponent<Animator>();
 		Fpc = gameObject.GetComponent<FirstPersonController> ();
+		gat = gameObject.GetComponent<GrabAndToss> ();
 	
 	}
 	
@@ -22,6 +22,9 @@ public class AnimateMovement : NetworkBehaviour {
 	void Update () {
 		UpdateMoveAnim ();
 	}
+	/// <summary>
+	/// Check if an animation should be playing and play it.
+	/// </summary>
 	void UpdateMoveAnim(){
 		if (isLocalPlayer) {
 			if (Input.GetButton("Vertical"))
@@ -43,20 +46,6 @@ public class AnimateMovement : NetworkBehaviour {
 				anim.SetBool("isJumping", false);
 				anim.SetBool("isIdle", true);
 			}
-//			if (gat.throwing && !throwPlayed) {
-//				anim.SetBool ("isThrowing", true);
-//				throwPlayed = true;
-//			}
-//				if (!gat.throwing && throwPlayed) {
-//					anim.SetBool ("isThrowing", false);
-//				throwPlayed = false;
-//			}
-
-//			} else if (!gameObject.GetComponent<GrabAndToss> ().throwing){
-//							if (anim.GetNextAnimatorStateInfo (0).IsName ("isThrowing")) {
-//								anim.SetBool ("isThrowing", false);
-//							}
-//			}
 
 	}
 		
