@@ -29,21 +29,7 @@ public class NetworkLobbyHook : LobbyHook
 
             characterInfo.playerName = lobby.name;
             characterInfo.name = characterInfo.playerName;
-            characterInfo.playertexture = lobby.playersTexture;
-            if (lobby.playersTexture.name == "bentexture")
-            {
-                characterInfo.checkingTexture = 1;
-            }
-            if (lobby.playersTexture.name == "military")
-            {
-                characterInfo.checkingTexture = 2;
-            }
-            if (lobby.playersTexture.name == "tuxedo")
-            {
-                characterInfo.checkingTexture = 3;
-            }
-            Debug.Log("texture name is " + lobby.playersTexture.name);
-
+            characterInfo.checkingTexture = lobby.playersTexture;
             characterInfo.color = lobby.playerColor;
             characterInfo.teamNumber = (lobby.setTeamNumber + 1);
 			characterInfo.gameObject.GetComponent<NetworkCharacterInfo>().teamNumber = (lobby.setTeamNumber + 1);
