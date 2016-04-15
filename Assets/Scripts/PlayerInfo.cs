@@ -69,29 +69,7 @@ public class PlayerInfo : NetworkBehaviour {
 			}
 		}
 	}
-//	void KillYourSelf(){
-//		dead = true;
-//		NLH.CheackingList(this.gameObject);
-//		int SelectSoundFile = Random.Range(0, 2);
-//		PlaySound(SelectSoundFile);
-//		GetComponent<BoxCollider> ().enabled = false;
-//		bodyparts[8].layer = 9;
-//		bodyparts [9].layer = 9;
-//		gameObject.layer = 10;
-//
-//		GetComponent<FirstPersonController> ().m_RunSpeed = 30;
-//		GetComponent<FirstPersonController> ().m_WalkSpeed = 15;
-//		GetComponent<FirstPersonController> ().m_JumpSpeed = 0;
-//		GetComponent<FirstPersonController> ().m_GravityMultiplier = 0;
-//		Rigidbody rb = GetComponent<Rigidbody>();
-//		rb.detectCollisions = false;
-//		rb.useGravity = false;
-//		rb.Sleep ();
-//		deathMessage.SetActive (true);
-//		foreach(GameObject gos in bodyparts){
-//			gos.GetComponent<Renderer> ().material.mainTexture = mat;
-//		}
-//	}
+
 	//-----------------Play Audio------------------------
 	//This will take the gameobjects AudioSource to switch the audioclips
 	public void PlaySound(int clip)
@@ -148,7 +126,6 @@ public class PlayerInfo : NetworkBehaviour {
 		gameObject.GetComponent<NetworkCharacterInfo>().teamNumber = 0;
 		gameObject.GetComponent<BoxCollider> ().enabled = false;
 
-		gameObject.layer = 10;
 
 		gameObject.GetComponent<FirstPersonController> ().m_RunSpeed = 30;
 		gameObject.GetComponent<FirstPersonController> ().m_WalkSpeed = 15;
@@ -161,6 +138,8 @@ public class PlayerInfo : NetworkBehaviour {
 		deathMessage.SetActive (true);
 		foreach(GameObject gos in bodyparts){
 			gos.GetComponent<Renderer> ().material.mainTexture = mat;
+			gos.layer = 10;
 		}
+		gameObject.layer = 10;
 	}
 }
