@@ -1,0 +1,372 @@
+﻿Vilka scripts som gör vad, hur de sammanflätas och vilka objekt de ligger på.
+
+
+
+
+1 Scriptnamn: NetworkLobbyHook 
+(Från Assets Store och har redigerats)
+
+
+Vad gör den?
+Den kallar på LobbyPlayer för sin spelare och den ger ut värden som den har fått av LobbyPlayer vid Start, som till exempel; spelarnamn, spelartextur, teamnummer.
+
+
+Den kollar även listorna för teamen; vilka som är kvar och vilka som ska bort. Utöver detta kollar den Victory Condition.
+
+
+Var ligger den?
+./Assets/Scripts/Edited Scripts/
+
+
+Refererar till:
+LobbyPlayer
+NetworkManager
+NetworkCharacterInfo
+LobbyManager
+
+
+
+
+2 Scriptnamn: MapSelection
+
+
+Vad gör den?
+Det är en del av LobbyManager. Vid Start kollar den vad dess LobbyManager, dropdown listens text som har selectat. och imagen av dess build den ska skapa. 
+Vid Update kollar den
+
+
+Var ligger den?
+./Assets/Scripts/
+
+
+Refererar till:
+LobbyManager 
+
+
+
+
+3 Scriptnamn: GrabAndToss
+
+
+Vad gör den?
+Tillåter spelaren att plocka upp bollen med tangent “E” och kasta bollen med tangent “F”. 
+
+
+
+
+Var ligger den?
+./Assets/Scripts
+
+
+Vilket objekt ligger den på?
+På karaktärens root objekt.
+
+
+Refererar till:
+AssignPlayerInfo
+DodgeballBehavior
+NetworkCharacterInfo
+PlayerInfo
+
+
+
+
+4 Scriptnamn: PlayerInfo
+
+
+Vad gör den?
+Tillhandahåller spelarens värden såsom spelarens “health” och vad som händer när karaktären blir träffad/dör.
+
+
+Var ligger den?
+./Assets/Scripts
+
+
+Vilket objekt ligger den på?
+Den ligger på karaktärens root objekt.
+
+
+Refererar till:
+AssignPlayerInfo
+AssignPlayerInfo
+FirstPersonController
+NetworkCharacterInfo
+NetworkLobbyHook
+GrabAndToss
+
+
+
+
+5 Scriptnamn: AssignPlayerInfo
+
+
+Vad gör den?
+Skapades för att ändra spelarens värden på servern men ersattes till mestadels av PlayerInfo. Nu används den för att anropa en Rpc i PlayerInfo samt spawna en boll när spelaren dör.                
+
+
+Var ligger den?
+./Assets/Scripts
+
+
+Vilket objekt ligger den på?
+På objektet PlayerInfoHandler som har server authority.
+
+
+Refererar till:
+GrabAndToss
+PlayerInfo
+
+
+6 Scriptnamn: DodgeBallBehaviour
+
+
+Vad gör den?                
+Styr hur Dodgeball beter sig. Styr vad som händer med själva bollen när spelaren clickar på den samt när spelaren kastar den.
+
+
+Var ligger den?
+./Assets/Scripts
+
+
+Vilket objekt ligger den på?
+Den ligger på DodgeBall objektet. Dvs bollen.
+
+
+Refererar till:
+GrabAndToss
+
+
+7 Scriptnamn: Parkour
+
+
+Vad gör den?
+Styr de olika rays som kollar runt spelaren efter objekt som denne kan använda sig av Hash koder för att t.ex. Klättra eller ta avstamp från väggar. 
+Detta sattes som lågprio eftersom det var viktigare att fixa sync problem så att spelet är spelbart. Kommer att läggas till senare.
+
+
+Var ligger den?
+./Assets/Scripts
+
+
+Vilket objekt ligger den på?
+Är inte aktiv. Skall ligga på karaktärens root.
+
+
+Refererar till:
+
+
+8 Scriptnamn: Raybox
+
+
+Vad gör den?                
+Styr de objekt som skjuter ut raycasts åt parkour scriptet.
+
+
+Var ligger den?
+./Assets/Scripts
+
+
+Vilket objekt ligger den på?
+Är inte aktiv. Ska ligga på childobjects som omger karaktären.
+
+
+Refererar till:
+
+
+9 Scriptnamn: Trampoline
+(Från Bun Bun Studios och har redigerats)
+
+
+Vad gör den?                
+Detta script tillåter objekt samt spelaren att studtsa samt att hoppa högre genom att kalla på objektets rigigbody. För spelaren så ändrar den att den m_jump är sant och att dens kraft blir mycket högre. Hur högt beror på om random range väljer mellan ‘Normal-’ eller ‘Strongforce’. 
+
+
+Var ligger den?
+./Assets/Scripts/Edited Scripts
+
+
+Vilket objekt ligger den på?
+En trampoline som har en box collider
+
+
+Refererar till:
+FirstPersonController
+
+
+10 Scriptnamn: OutofBound
+
+
+Vad gör den?                
+Den tar varenda objekt som hamnar på den och skickar den transform position till en av de spawn points som finns på kartan.
+
+
+Var ligger den?
+./Assets/Scripts
+
+
+Vilket objekt ligger den på?
+På en collider som ligger utanför bannan, oftast på botten.
+
+
+Refererar till:
+Ingent script är refererad. 
+
+
+11 Scriptnamn: SpriteAnimation
+
+
+Vad gör den?                
+Den animerar genom att ändra en sprite beroende på hur mycket frames spelas.
+
+
+Var ligger den?
+./Assets/Scripts
+
+
+Vilket objekt ligger den på?
+Den ligger
+
+
+Refererar till:
+Ingent script är refererad. 
+
+
+12 Scriptnamn: RotateTheRings
+
+
+Vad gör den?                
+Den roterar objektet
+
+
+Var ligger den?
+./Assets/Scripts
+
+
+Vilket objekt ligger den på?
+Oftast på ringarna på scenen ‘RotateAcrossTheSky’ eller på ballspawner.
+
+
+Refererar till:
+Ingent script är refererad. 
+
+
+13 Scriptnamn: NetworkCharacterInfo
+
+
+Vad gör den?
+Den 
+
+
+Var ligger den?
+./Assets/Scripts
+
+
+Vilket objekt ligger den på?
+Den ligger på spelaren.
+
+
+Refererar till:
+Inget script är refererad. 
+
+
+Scriptnamn: SpawnOnServer
+
+
+Vad gör den?                
+Instantierar och spawnar en angiven prefab på servern.
+
+
+Var ligger den?
+./Assets/Scripts
+
+
+Vilket objekt ligger den på?
+Ligger bl.a. på Ballspawner.
+
+
+Refererar till:
+Inget
+Scriptnamn: SpawnBall
+
+
+Vad gör den?                
+Spawnar en angiven prefab varje gång ett objekt taggat som “Player” rör sig in dess trigger. Används för att testa saker utan att få slut på bollar.
+
+
+Var ligger den?
+./Assets/Scripts
+
+
+Vilket objekt ligger den på?
+Eget GameObject
+
+
+Refererar till:
+Inget
+
+
+Scriptnamn: AnimateMovement
+
+
+Vad gör den?
+Spelar upp en viss animation när spelaren gör någonting. De aktuella animationerna är Gå och Hoppa.        
+
+
+Var ligger den?
+./Assets/Scripts
+
+
+Vilket objekt ligger den på?
+SpelarKaraktärens root objekt
+
+
+Refererar till:
+FirstPersonController
+
+
+Scriptnamn: PlayeNetworkBehaviour
+
+
+Vad gör den?
+Ser till att spelarobjektet endast använder sig av sitt egna script genom att aktivera dessa script när spelaren instantieras.        
+
+
+Var ligger den?
+./Assets/Scripts
+
+
+Vilket objekt ligger den på?
+Spelarkaraktärens root objekt.
+
+
+Refererar till:
+GrabAndToss
+
+
+Scriptnamn: LobbyPlayer
+(Från Assets Store och har redigerats)
+
+
+Vad gör den?                
+Denna kod tar emot och ger ut värden samt färger från spelarnas val i PlayerInfo(Clone) prefaben.
+
+
+Var ligger den?
+./Assets/Scripts/
+
+
+Vilket objekt ligger den på?
+
+
+Refererar till:
+LobbyPlayerList
+LobbyManager
+
+
+
+
+Andra Scripts som kom från Assets Store
+NetworkGameManager
+Lobby - serien (förutom LobbyPlayer) som finns på
+./Assets/Standard Assets/Network/Scripts/
+FirstPersonController
