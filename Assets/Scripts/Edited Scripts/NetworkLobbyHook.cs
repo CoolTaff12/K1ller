@@ -110,7 +110,7 @@ public class NetworkLobbyHook : LobbyHook
         {
             foreach (GameObject c_DeadPlayer in Team1)
             {
-				if (c_DeadPlayer.GetComponent<PlayerInfo>().c_Dead == true)
+				if (c_DeadPlayer.name == isc_Dead.name)
                 {
                     Team1.Remove(c_DeadPlayer);
                 }
@@ -120,7 +120,7 @@ public class NetworkLobbyHook : LobbyHook
         {
             foreach (GameObject c_DeadPlayer in Team2)
             {
-				if (c_DeadPlayer.GetComponent<PlayerInfo>().c_Dead == true)
+				if (c_DeadPlayer.name == isc_Dead.name)
                 {
                     Team2.Remove(c_DeadPlayer);
                 }
@@ -130,7 +130,7 @@ public class NetworkLobbyHook : LobbyHook
         {
             foreach (GameObject c_DeadPlayer in Team3)
             {
-				if (c_DeadPlayer.GetComponent<PlayerInfo>().c_Dead == true)
+				if (c_DeadPlayer.name == isc_Dead.name)
                 {
                     Team3.Remove(c_DeadPlayer);
                 }
@@ -140,7 +140,7 @@ public class NetworkLobbyHook : LobbyHook
         {
             foreach (GameObject c_DeadPlayer in Team4)
             {
-				if (c_DeadPlayer.GetComponent<PlayerInfo>().c_Dead == true)
+				if (c_DeadPlayer.name == isc_Dead.name)
                 {
                     Team4.Remove(c_DeadPlayer);
                 }
@@ -150,7 +150,7 @@ public class NetworkLobbyHook : LobbyHook
         {
             foreach (GameObject c_DeadPlayer in Team5)
             {
-				if (c_DeadPlayer.GetComponent<PlayerInfo>().c_Dead == true)
+				if (c_DeadPlayer.name == isc_Dead.name)
                 {
                     Team5.Remove(c_DeadPlayer);
                 }
@@ -160,7 +160,7 @@ public class NetworkLobbyHook : LobbyHook
         {
             foreach (GameObject c_DeadPlayer in Team6)
             {
-				if (c_DeadPlayer.GetComponent<PlayerInfo>().c_Dead == true)
+				if (c_DeadPlayer.name == isc_Dead.name)
                 {
                     Team6.Remove(c_DeadPlayer);
                 }
@@ -170,7 +170,7 @@ public class NetworkLobbyHook : LobbyHook
         {
             foreach (GameObject c_DeadPlayer in Team7)
             {
-				if (c_DeadPlayer.GetComponent<PlayerInfo>().c_Dead == true)
+				if (c_DeadPlayer.name == isc_Dead.name)
                 {
                     Team7.Remove(c_DeadPlayer);
                 }
@@ -180,7 +180,7 @@ public class NetworkLobbyHook : LobbyHook
         {
             foreach (GameObject c_DeadPlayer in Team8)
             {
-				if (c_DeadPlayer.GetComponent<PlayerInfo>().c_Dead == true)
+				if (c_DeadPlayer.name == isc_Dead.name)
                 {
                     Team8.Remove(c_DeadPlayer);
                 }
@@ -190,7 +190,7 @@ public class NetworkLobbyHook : LobbyHook
         {
             foreach (GameObject c_DeadPlayer in Team9)
             {
-				if (c_DeadPlayer.GetComponent<PlayerInfo>().c_Dead == true)
+				if (c_DeadPlayer.name == isc_Dead.name)
                 {
                     Team9.Remove(c_DeadPlayer);
                 }
@@ -200,7 +200,7 @@ public class NetworkLobbyHook : LobbyHook
         {
             foreach (GameObject c_DeadPlayer in Team10)
             {
-				if (c_DeadPlayer.GetComponent<PlayerInfo>().c_Dead == true)
+				if (c_DeadPlayer.name == isc_Dead.name)
                 {
                     Team10.Remove(c_DeadPlayer);
                 }
