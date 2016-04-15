@@ -9,7 +9,7 @@ PlayerSettings:
   targetDevice: 2
   useOnDemandResources: 0
   accelerometerFrequency: 60
-  companyName: 2Morrow
+  companyName: Yes--Sterday & 2Morrow Studios
   productName: K!ller
   defaultCursor: {fileID: 0}
   cursorHotspot: {x: 0, y: 0}
@@ -88,7 +88,7 @@ PlayerSettings:
     5:4: 1
     16:10: 1
     16:9: 1
-    Others: 1
+    Others: 0
   bundleIdentifier: com.unity.sampleassets
   bundleVersion: 1.0
   preloadedAssets: []
