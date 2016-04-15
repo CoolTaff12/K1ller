@@ -21,9 +21,9 @@ public class AssignPlayerInfo : NetworkBehaviour {
 		go.GetComponent<PlayerInfo> ().Rpc_KillYourself ();
 	}
 	[Command]
-	public void Cmd_SpawnHead(GameObject go)
+	public void Cmd_SpawnHead(GameObject go, GameObject dir)
 	{
-		GameObject HeadBall = Instantiate(go.GetComponent<PlayerInfo>().ballPrefab, go.GetComponent<GrabAndToss>().head.transform.position, Quaternion.identity) as GameObject;
+		GameObject HeadBall = Instantiate(go, dir.transform.position, Quaternion.identity) as GameObject;
 //		HeadBall.GetComponent<Renderer> ().material.mainTexture = go.GetComponent<PlayerInfo>().bodyparts [0].GetComponent<Renderer> ().material.mainTexture;
 		NetworkServer.Spawn(HeadBall);
 	}

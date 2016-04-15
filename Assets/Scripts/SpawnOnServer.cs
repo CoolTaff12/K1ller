@@ -23,6 +23,11 @@ public class SpawnOnServer : NetworkBehaviour {
 	void Update () {
 	
 	}
+	/// <summary>
+	/// Spawn an object on the server.
+	/// </summary>
+	/// <param name="go">Object to spawn</param>
+	/// <param name="pos">Where to spawn the object</param>
 	[Command]
 	public void CmdSpawnOnServer(GameObject go, Vector3 pos){
 		NetworkServer.Spawn(go);

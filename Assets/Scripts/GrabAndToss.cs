@@ -8,24 +8,33 @@ public class GrabAndToss : NetworkBehaviour
 {
 
 	RaycastHit hit;
-	public float rayDistance = 4f; //Length of Ray. Default set to 5.
-	public float rayRadius = 0.75f; //Radius of Ray. Default set to 0.75
-	public float tossForce = 20f; //Force added to ball when tossed. Default set to 20;
+	[SerializeField]
+	private float rayDistance = 4f; //Length of Ray. Default set to 5.
+	[SerializeField]
+	private float rayRadius = 0.75f; //Radius of Ray. Default set to 0.75
+	private float tossForce = 20f; //Force added to ball when tossed. Default set to 20;
+	public float c_TossForce{get{return tossForce;}set{tossForce = value;}}
 //	public int killed = 1; //Is this character killed? 1 for true, 0 for false;
-	[SyncVar]
-	public bool holdingBall; //Is this character holding a ball?
-	public bool throwing = false;
-	public DodgeBallBehaviour ballScript; //Script on the ball hit by the players' raycast.
-	public AssignPlayerInfo assignInfo; //Script to set initial info such as teamNumber.
-	public Animator anim;//Animator attached to the player.
-	public GameObject fpc; //FirstPersonController connected to the player.
-	public GameObject head; //Head of the player;
-	public GameObject currentBall; //Ball that is currently being held.
-	public GameObject holdPos; //Position of the held ball.
-	public GameObject infoHandler; //PlayerInfoHandler found in scene.
-	public GameObject fakeBall;
-	public PlayerInfo playerInfo;
-	public NetworkCharacterInfo charInfo;
+	[SyncVar][SerializeField]
+	private bool holdingBall; //Is this character holding a ball?
+	[HideInInspector]
+	public bool c_HoldingBall{get{return holdingBall;}}
+	private bool throwing = false;
+	private DodgeBallBehaviour ballScript; //Script on the ball hit by the players' raycast.
+	private AssignPlayerInfo assignInfo; //Script to set initial info such as teamNumber.
+	private Animator anim;//Animator attached to the player.
+	private GameObject fpc; //FirstPersonController connected to the player.
+	public GameObject c_FPC {get{return fpc;}}
+	private GameObject head; //Head of the player;
+	public GameObject c_Head {get{return head;}}
+	private GameObject currentBall; //Ball that is currently being held.
+	public GameObject c_CurrentBall{get{return currentBall;}}
+	private GameObject holdPos; //Position of the held ball.
+	public GameObject c_HoldPos{get{return holdPos;}}
+//	[SerializeField]
+//	private GameObject fakeBall;
+	private PlayerInfo playerInfo;
+	private NetworkCharacterInfo charInfo;
 
 
 
@@ -45,15 +54,18 @@ public class GrabAndToss : NetworkBehaviour
 
 
 //DEBUG//
-Debug.DrawRay (head.transform.position, head.transform.forward, Color.green, rayDistance);
+//Debug.DrawRay (head.transform.position, head.transform.forward, Color.green, rayDistance);
+
+		//Is the player looking at a ball?
 		if (Physics.SphereCast (head.transform.position, rayRadius, head.transform.forward, out hit, rayDistance)) {
 			if (!isLocalPlayer) {
 				return;
 			}
 			if (hit.collider.GetComponent<DodgeBallBehaviour> () != null) {
-				print ("Ball!");
-				if (Input.GetKey (KeyCode.E) || CrossPlatformInputManager.GetButton ("Fire1") && !holdingBall && !playerInfo.dead) {
-					if (!hit.collider.GetComponent<DodgeBallBehaviour> ().pickedUp) {
+//				print ("Ball!");
+				//Pick up the ball
+				if (CrossPlatformInputManager.GetButton ("Fire1") && !holdingBall && !playerInfo.c_Dead) {
+					if (!hit.collider.GetComponent<DodgeBallBehaviour> ().b_PickedUp) {
 					currentBall = hit.collider.gameObject;
 					Cmd_GetPickedUp (currentBall , gameObject);
 					holdingBall = true;
@@ -79,24 +91,33 @@ Debug.DrawRay (head.transform.position, head.transform.forward, Color.green, ray
 			} 
 			holdingBall = false;
 			StartCoroutine(StartThrow(0.5F));
-			Cmd_Shoot (currentBall);
+			Cmd_Shoot (currentBall, head);
 //			brb.AddForce(head.transform.forward * tossForce);
 			currentBall = null;
 			ballScript = null;
 
 		}
-		if (Input.GetButtonUp ("Fire2") && throwing) {
+		if (CrossPlatformInputManager.GetButtonUp ("Fire2") && throwing) {
 			throwing = false;
 			anim.SetBool ("isThrowing", false);
 		}
 
 	}
-		
+		/// <summary>
+		/// Command that requests that the ball will shoot/get tossed.
+		/// </summary>
+		/// <param name="bs">Script attached to the ball</param>
+		/// <param name="dir">What direction will the ball be tossed </param>
 	[Command]
-	public void Cmd_Shoot(GameObject bs){
+	public void Cmd_Shoot(GameObject bs, GameObject dir){
 		ballScript = bs.GetComponent<DodgeBallBehaviour> ();
-		ballScript.Rpc_Shoot ();
+		ballScript.Rpc_Shoot (dir);
 	}
+	/// <summary>
+	/// Command that requests the ball to get picked up.
+	/// </summary>
+	/// <param name="bs">Script attached to the ball</param>
+	/// <param name="go">The ball that is affected</param>
 	[Command]
 	void Cmd_GetPickedUp(GameObject bs, GameObject go){
 		ballScript = bs.GetComponent<DodgeBallBehaviour> ();
@@ -116,7 +137,11 @@ Debug.DrawRay (head.transform.position, head.transform.forward, Color.green, ray
 //			go.layer = 0;
 //		}
 //	}
-
+	/// <summary>
+	/// timer that lets the animation run a bit before proceeding.
+	/// </summary>
+	/// <returns></returns>
+	/// <param name="waitTime">Time to wait before proceeding</param>
 	IEnumerator StartThrow(float waitTime) 
 	{
 		yield return new WaitForSeconds(waitTime);

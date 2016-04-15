@@ -3,21 +3,28 @@ using System.Collections;
 using UnityEngine.Networking;
 
 public class DodgeBallBehaviour : NetworkBehaviour {
-	public AudioClip[] audioClips = new AudioClip[1];
-    public AudioClip[] HitAudioClips = new AudioClip[4];
-	public PlayerTarget playerInfo;
-	public GrabAndToss gat;
-	public Rigidbody rb;
-	public Collider coll;
-	[SyncVar]
-	public int thrownByTeam = 1;
-	public GameObject Sparks;
+	[SerializeField]
+	private AudioClip[] audioClips;
+	[SerializeField]
+	private AudioClip[] HitAudioClips;
+	private GrabAndToss gat;
+	private Rigidbody rb;
+	private Collider coll;
+	[SyncVar][SerializeField]
+	private int thrownByTeam = 1;
+	[HideInInspector]
+	public int b_ThrownByTeam{get{return thrownByTeam;}}
+	[SerializeField]
+	private GameObject Sparks;
 	[SerializeField]
 	private Transform myTransform;
-	public bool pickedUp;
-	public GameObject currentPlayer;
-	[SyncVar]
-	public int bounces = 10;
+	[SerializeField]
+	private bool pickedUp;
+	[HideInInspector]
+	public bool b_PickedUp{get{return pickedUp;}}
+	private GameObject currentPlayer;
+	[SyncVar][SerializeField]
+	private int bounces = 10;
 
 	// Use this for initialization
 	void Start ()
@@ -28,16 +35,14 @@ public class DodgeBallBehaviour : NetworkBehaviour {
 		if (!isLocalPlayer) {
 			return;
 		}
-			audioClips[0] = Resources.Load("Sound/Basketball-BallBounce") as AudioClip;
-			Sparks = Resources.Load("Particles/child prefabs/enmy Death") as GameObject;
 		}
 
 	// Update is called once per frame;
 	void Update ()
 	{
 		if (pickedUp) {
-			gameObject.transform.position = gat.holdPos.transform.position;
-			gameObject.transform.rotation = gat.fpc.transform.rotation;
+			gameObject.transform.position = gat.c_HoldPos.transform.position;
+			gameObject.transform.rotation = gat.c_FPC.transform.rotation;
 		}
 		if (bounces <= 0) {
 			thrownByTeam = 0;
@@ -67,6 +72,10 @@ public class DodgeBallBehaviour : NetworkBehaviour {
 		}
 
 	}
+	/// <summary>
+	/// Rpc for ball to get picked up.
+	/// </summary>
+	/// <param name="go">Player character picking up the ball</param>
 	[ClientRpc]
 	public void Rpc_GetPickedUp (GameObject go){
 		coll.enabled = false;
@@ -81,8 +90,11 @@ public class DodgeBallBehaviour : NetworkBehaviour {
 
 	
 	}
+	/// <summary>
+	/// Rpc for setting the ball in motion, Shooting/Tossing the ball.
+	/// </summary>
 	[ClientRpc]
-	public void Rpc_Shoot (){
+	public void Rpc_Shoot (GameObject dir){
 		bounces = 10;
 		rb.velocity = Vector3.zero;
 		rb.angularVelocity = Vector3.zero;
@@ -90,7 +102,7 @@ public class DodgeBallBehaviour : NetworkBehaviour {
 		thrownByTeam = currentPlayer.GetComponent<NetworkCharacterInfo> ().teamNumber;
 		coll.enabled = true;
 		rb.detectCollisions = true;
-		rb.AddForce(gat.head.transform.forward * gat.tossForce);
+		rb.AddForce(dir.transform.forward * gat.c_TossForce);
 		gat = null;
 		pickedUp = false;
 //		gameObject.layer = 0;

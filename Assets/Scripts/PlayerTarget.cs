@@ -45,7 +45,7 @@ public class PlayerTarget : NetworkBehaviour {
 		if (col.gameObject.tag == "Ball")
 		{
 			ballInfo = col.gameObject.GetComponent<DodgeBallBehaviour>();
-			if (teamNumber != ballInfo.thrownByTeam) {
+			if (teamNumber != ballInfo.b_ThrownByTeam) {
 				Cmd_TakeDamage ();
 			}
 }

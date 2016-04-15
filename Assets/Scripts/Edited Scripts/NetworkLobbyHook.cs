@@ -118,105 +118,105 @@ public class NetworkLobbyHook : LobbyHook
         }
     }
 
-    public void CheackingList(GameObject isdead)
+    public void CheackingList(GameObject isc_Dead)
     {
-		if (isdead.GetComponent<NetworkCharacterInfo>().teamNumber == 1)
+		if (isc_Dead.GetComponent<NetworkCharacterInfo>().teamNumber == 1)
         {
-            foreach (GameObject deadPlayer in Team1)
+            foreach (GameObject c_DeadPlayer in Team1)
             {
-				if (deadPlayer.GetComponent<PlayerInfo>().dead == true)
+				if (c_DeadPlayer.GetComponent<PlayerInfo>().c_Dead == true)
                 {
-                    Team1.Remove(deadPlayer);
+                    Team1.Remove(c_DeadPlayer);
                 }
             }
         }
-		if (isdead.GetComponent<NetworkCharacterInfo>().teamNumber == 2)
+		if (isc_Dead.GetComponent<NetworkCharacterInfo>().teamNumber == 2)
         {
-            foreach (GameObject deadPlayer in Team2)
+            foreach (GameObject c_DeadPlayer in Team2)
             {
-				if (deadPlayer.GetComponent<PlayerInfo>().dead == true)
+				if (c_DeadPlayer.GetComponent<PlayerInfo>().c_Dead == true)
                 {
-                    Team2.Remove(deadPlayer);
+                    Team2.Remove(c_DeadPlayer);
                 }
             }
         }
-		if (isdead.GetComponent<NetworkCharacterInfo>().teamNumber == 3)
+		if (isc_Dead.GetComponent<NetworkCharacterInfo>().teamNumber == 3)
         {
-            foreach (GameObject deadPlayer in Team3)
+            foreach (GameObject c_DeadPlayer in Team3)
             {
-				if (deadPlayer.GetComponent<PlayerInfo>().dead == true)
+				if (c_DeadPlayer.GetComponent<PlayerInfo>().c_Dead == true)
                 {
-                    Team3.Remove(deadPlayer);
+                    Team3.Remove(c_DeadPlayer);
                 }
             }
         }
-		if (isdead.GetComponent<NetworkCharacterInfo>().teamNumber == 4)
+		if (isc_Dead.GetComponent<NetworkCharacterInfo>().teamNumber == 4)
         {
-            foreach (GameObject deadPlayer in Team4)
+            foreach (GameObject c_DeadPlayer in Team4)
             {
-				if (deadPlayer.GetComponent<PlayerInfo>().dead == true)
+				if (c_DeadPlayer.GetComponent<PlayerInfo>().c_Dead == true)
                 {
-                    Team4.Remove(deadPlayer);
+                    Team4.Remove(c_DeadPlayer);
                 }
             }
         }
-		if (isdead.GetComponent<NetworkCharacterInfo>().teamNumber == 5)
+		if (isc_Dead.GetComponent<NetworkCharacterInfo>().teamNumber == 5)
         {
-            foreach (GameObject deadPlayer in Team5)
+            foreach (GameObject c_DeadPlayer in Team5)
             {
-				if (deadPlayer.GetComponent<PlayerInfo>().dead == true)
+				if (c_DeadPlayer.GetComponent<PlayerInfo>().c_Dead == true)
                 {
-                    Team5.Remove(deadPlayer);
+                    Team5.Remove(c_DeadPlayer);
                 }
             }
         }
-		if (isdead.GetComponent<NetworkCharacterInfo>().teamNumber == 6)
+		if (isc_Dead.GetComponent<NetworkCharacterInfo>().teamNumber == 6)
         {
-            foreach (GameObject deadPlayer in Team6)
+            foreach (GameObject c_DeadPlayer in Team6)
             {
-				if (deadPlayer.GetComponent<PlayerInfo>().dead == true)
+				if (c_DeadPlayer.GetComponent<PlayerInfo>().c_Dead == true)
                 {
-                    Team6.Remove(deadPlayer);
+                    Team6.Remove(c_DeadPlayer);
                 }
             }
         }
-		if (isdead.GetComponent<NetworkCharacterInfo>().teamNumber == 7)
+		if (isc_Dead.GetComponent<NetworkCharacterInfo>().teamNumber == 7)
         {
-            foreach (GameObject deadPlayer in Team7)
+            foreach (GameObject c_DeadPlayer in Team7)
             {
-				if (deadPlayer.GetComponent<PlayerInfo>().dead == true)
+				if (c_DeadPlayer.GetComponent<PlayerInfo>().c_Dead == true)
                 {
-                    Team7.Remove(deadPlayer);
+                    Team7.Remove(c_DeadPlayer);
                 }
             }
         }
-		if (isdead.GetComponent<NetworkCharacterInfo>().teamNumber == 8)
+		if (isc_Dead.GetComponent<NetworkCharacterInfo>().teamNumber == 8)
         {
-            foreach (GameObject deadPlayer in Team8)
+            foreach (GameObject c_DeadPlayer in Team8)
             {
-				if (deadPlayer.GetComponent<PlayerInfo>().dead == true)
+				if (c_DeadPlayer.GetComponent<PlayerInfo>().c_Dead == true)
                 {
-                    Team8.Remove(deadPlayer);
+                    Team8.Remove(c_DeadPlayer);
                 }
             }
         }
-		if (isdead.GetComponent<NetworkCharacterInfo>().teamNumber == 9)
+		if (isc_Dead.GetComponent<NetworkCharacterInfo>().teamNumber == 9)
         {
-            foreach (GameObject deadPlayer in Team9)
+            foreach (GameObject c_DeadPlayer in Team9)
             {
-				if (deadPlayer.GetComponent<PlayerInfo>().dead == true)
+				if (c_DeadPlayer.GetComponent<PlayerInfo>().c_Dead == true)
                 {
-                    Team9.Remove(deadPlayer);
+                    Team9.Remove(c_DeadPlayer);
                 }
             }
         }
-		if (isdead.GetComponent<NetworkCharacterInfo>().teamNumber == 10)
+		if (isc_Dead.GetComponent<NetworkCharacterInfo>().teamNumber == 10)
         {
-            foreach (GameObject deadPlayer in Team10)
+            foreach (GameObject c_DeadPlayer in Team10)
             {
-				if (deadPlayer.GetComponent<PlayerInfo>().dead == true)
+				if (c_DeadPlayer.GetComponent<PlayerInfo>().c_Dead == true)
                 {
-                    Team10.Remove(deadPlayer);
+                    Team10.Remove(c_DeadPlayer);
                 }
             }
         }
