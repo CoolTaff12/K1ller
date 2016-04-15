@@ -6,12 +6,12 @@ using UnityStandardAssets.Characters.FirstPerson;
 
 public class PlayerInfo : NetworkBehaviour {
 	[SerializeField]
-	private GameObject[] bodyparts; //List of bodypart segments.
+	private GameObject[] bodyparts = null; //List of bodypart segments.
 	[SerializeField]
-	private GameObject deathMessage;
+	private GameObject deathMessage = null;
 	private GameObject infoHandler; //PlayerInfoHandler found in scene.
 	[SerializeField]
-	private GameObject ballPrefab;
+	private GameObject ballPrefab = null;
 	[SyncVar][SerializeField]
 	private GameObject body;
 	[SyncVar][SerializeField]
@@ -22,9 +22,9 @@ public class PlayerInfo : NetworkBehaviour {
 	private bool dead = false; //Is this character dead?
 	public bool c_Dead {get{return dead;}}
 	[SerializeField]
-	private Texture mat;
+	private Texture mat = null;
 	[SerializeField]
-	private AudioClip[] audioClips;
+	private AudioClip[] audioClips = null;
 	private AssignPlayerInfo assignInfo; //Script to set initial info such as teamNumber.
 	private NetworkLobbyHook NLH;
 	private GrabAndToss gat;
@@ -52,10 +52,10 @@ public class PlayerInfo : NetworkBehaviour {
 		}
 		if (dead && isLocalPlayer) {
 			if (Input.GetKey (KeyCode.Space)) {
-				gameObject.transform.position = new Vector3 (transform.position.x, transform.position.y + 0.01f, transform.position.z);
+				gameObject.transform.position = new Vector3 (transform.position.x, transform.position.y + 0.1f *Time.deltaTime , transform.position.z);
 			}
 			if (Input.GetKey (KeyCode.LeftControl)) {
-				gameObject.transform.position = new Vector3 (transform.position.x, transform.position.y - 0.01f, transform.position.z);
+				gameObject.transform.position = new Vector3 (transform.position.x, transform.position.y - 0.1f * Time.deltaTime , transform.position.z);
 			}
 		}
 	}

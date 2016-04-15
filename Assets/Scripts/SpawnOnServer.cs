@@ -3,9 +3,12 @@ using System.Collections;
 using UnityEngine.Networking;
 
 public class SpawnOnServer : NetworkBehaviour {
-	public GameObject prefabToSpawn;
-	public string objectName;
-	public bool onlyOne = false;
+	[SerializeField]
+	private GameObject prefabToSpawn = null;
+	[SerializeField]
+	private string objectName = null;
+	[SerializeField]
+	private bool onlyOne = false;
 
 	// Use this for initialization
 	void Start () {

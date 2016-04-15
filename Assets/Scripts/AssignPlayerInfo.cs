@@ -20,10 +20,15 @@ public class AssignPlayerInfo : NetworkBehaviour {
 	{
 		go.GetComponent<PlayerInfo> ().Rpc_KillYourself ();
 	}
+	/// <summary>
+	/// Request spawning of a ball when a player character dies.
+	/// </summary>
+	/// <param name="go">Prefab of the object that should spawn.</param>
+	/// <param name="pos">spawnposition</param>
 	[Command]
-	public void Cmd_SpawnHead(GameObject go, GameObject dir)
+	public void Cmd_SpawnHead(GameObject go, GameObject pos)
 	{
-		GameObject HeadBall = Instantiate(go, dir.transform.position, Quaternion.identity) as GameObject;
+		GameObject HeadBall = Instantiate(go, pos.transform.position, Quaternion.identity) as GameObject;
 //		HeadBall.GetComponent<Renderer> ().material.mainTexture = go.GetComponent<PlayerInfo>().bodyparts [0].GetComponent<Renderer> ().material.mainTexture;
 		NetworkServer.Spawn(HeadBall);
 	}

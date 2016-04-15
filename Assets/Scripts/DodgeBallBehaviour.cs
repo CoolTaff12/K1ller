@@ -4,7 +4,7 @@ using UnityEngine.Networking;
 
 public class DodgeBallBehaviour : NetworkBehaviour {
 	[SerializeField]
-	private AudioClip[] audioClips;
+	private AudioClip[] audioClips = null;
 	[SerializeField]
 	private AudioClip[] HitAudioClips;
 	private GrabAndToss gat;
@@ -15,7 +15,7 @@ public class DodgeBallBehaviour : NetworkBehaviour {
 	[HideInInspector]
 	public int b_ThrownByTeam{get{return thrownByTeam;}}
 	[SerializeField]
-	private GameObject Sparks;
+	private GameObject Sparks = null;
 	[SerializeField]
 	private Transform myTransform;
 	[SerializeField]

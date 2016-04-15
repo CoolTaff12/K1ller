@@ -4,10 +4,10 @@ using UnityEngine.Networking;
 
 public class PlayerNetworkBehavior : NetworkBehaviour {
 
-	[SerializeField] Camera cam;
+	[SerializeField] Camera cam = null;
 	[SerializeField] GrabAndToss gat;
-	[SerializeField] AudioListener audioLis;
-	[SerializeField] GameObject[] bodyParts;
+	[SerializeField] AudioListener audioLis = null;
+	[SerializeField] GameObject[] bodyParts = null;
 
 
 	public override void OnStartLocalPlayer ()

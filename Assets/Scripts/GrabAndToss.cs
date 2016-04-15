@@ -23,13 +23,13 @@ public class GrabAndToss : NetworkBehaviour
 	private DodgeBallBehaviour ballScript; //Script on the ball hit by the players' raycast.
 	private AssignPlayerInfo assignInfo; //Script to set initial info such as teamNumber.
 	private Animator anim;//Animator attached to the player.
-	private GameObject fpc; //FirstPersonController connected to the player.
+	private GameObject fpc = null; //FirstPersonController connected to the player.
 	public GameObject c_FPC {get{return fpc;}}
-	private GameObject head; //Head of the player;
+	private GameObject head  = null; //Head of the player;
 	public GameObject c_Head {get{return head;}}
 	private GameObject currentBall; //Ball that is currently being held.
 	public GameObject c_CurrentBall{get{return currentBall;}}
-	private GameObject holdPos; //Position of the held ball.
+	private GameObject holdPos  = null; //Position of the held ball.
 	public GameObject c_HoldPos{get{return holdPos;}}
 //	[SerializeField]
 //	private GameObject fakeBall;
@@ -123,10 +123,18 @@ public class GrabAndToss : NetworkBehaviour
 		ballScript = bs.GetComponent<DodgeBallBehaviour> ();
 		ballScript.Rpc_GetPickedUp (go);
 	}
+//	/// <summary>
+//	/// Requests that the fake ball switches layer.
+//	/// </summary>
+//	/// <param name="go">fake ball object</param>
 //	[Command]
 //	void Cmd_toggleFake(GameObject go){
 //		Rpc_toggleFake (go);
 //	}
+//	/// <summary>
+//	/// Switches the layer of the fake ball
+//	/// </summary>
+//	/// <param name="go">fake ball object</param>
 //	[ClientRpc]
 //	void Rpc_toggleFake(GameObject go){
 //		if (holdingBall) {
