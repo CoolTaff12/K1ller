@@ -25,7 +25,7 @@ public class Trampoline : MonoBehaviour
 	
 	void OnTriggerEnter(Collider other)
 	{
-        Debug.Log("Hey, what are you doing here?!");
+        //If the object is not the player
 		if (other.isTrigger || !other.GetComponent<Rigidbody>())
 			return;
 		
@@ -41,6 +41,8 @@ public class Trampoline : MonoBehaviour
 			other.GetComponent<Rigidbody>().AddRelativeForce(force-other.GetComponent<Rigidbody>().velocity, ForceMode.VelocityChange);
 		else
 			other.GetComponent<Rigidbody>().AddForce(force-other.GetComponent<Rigidbody>().velocity, ForceMode.VelocityChange);
+
+        //If the object is the player
         if (other.gameObject.GetComponent<UnityStandardAssets.Characters.FirstPerson.FirstPersonController>())
         {
             AppliedForce = Random.Range(1, 3);
@@ -54,7 +56,6 @@ public class Trampoline : MonoBehaviour
             }
             other.gameObject.GetComponent<UnityStandardAssets.Characters.FirstPerson.FirstPersonController>().m_JumpSpeed = TrampolineForce;
             other.gameObject.GetComponent<UnityStandardAssets.Characters.FirstPerson.FirstPersonController>().m_Jump = true;
-            Debug.Log("Gottcha!");
         }
      }
 }

@@ -11,6 +11,7 @@ public class OutofBound : MonoBehaviour
     // Use this for initialization
     void Start ()
     {
+        //Finds all spawn points on the map
         respawns = GameObject.FindGameObjectsWithTag("Spawn");
 
         foreach (GameObject spawns in respawns)
@@ -19,13 +20,7 @@ public class OutofBound : MonoBehaviour
         }
     }
 	
-	// Update is called once per frame
-	void Update ()
-    {
-	
-	}
-
-    //If object has fallen out of bound
+    //If object has fallen out of bound, they get send to one of the spawn points on the map
     void OnTriggerStay(Collider target)
     {
         int Selected = Random.Range(0, SpawningPositions.Count);

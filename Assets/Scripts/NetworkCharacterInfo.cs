@@ -36,6 +36,7 @@ public class NetworkCharacterInfo : NetworkBehaviour
     // Use this for initialization
     void Start ()
     {
+        //Tells the player what its name is
         name = playerName;
         //Renderar the colour and the texture player had choosen ealier
         Renderer[] CRends = GetComponentsInChildren<Renderer>();
@@ -70,6 +71,7 @@ public class NetworkCharacterInfo : NetworkBehaviour
         if (WasInit)
             return;
 
+        //Make a score text
         GameObject scoreGO = new GameObject(playerName + "score");
         ScoreText = scoreGO.AddComponent<Text>();
         ScoreText.alignment = TextAnchor.MiddleCenter;
@@ -90,6 +92,8 @@ public class NetworkCharacterInfo : NetworkBehaviour
         UpdateScoreLifeText();
     }
 
+
+    //This is for the score text
     void UpdateScoreLifeText()
     {
         if (ScoreText != null)
