@@ -12,6 +12,7 @@ public class GrabAndToss : NetworkBehaviour
 	private float rayDistance = 4f; //Length of Ray. Default set to 5.
 	[SerializeField]
 	private float rayRadius = 0.75f; //Radius of Ray. Default set to 0.75
+	[SerializeField]
 	private float tossForce = 20f; //Force added to ball when tossed. Default set to 20;
 	public float c_TossForce{get{return tossForce;}set{tossForce = value;}}
 //	public int killed = 1; //Is this character killed? 1 for true, 0 for false;
@@ -23,12 +24,15 @@ public class GrabAndToss : NetworkBehaviour
 	private DodgeBallBehaviour ballScript; //Script on the ball hit by the players' raycast.
 	private AssignPlayerInfo assignInfo; //Script to set initial info such as teamNumber.
 	private Animator anim;//Animator attached to the player.
+	[SerializeField]
 	private GameObject fpc = null; //FirstPersonController connected to the player.
 	public GameObject c_FPC {get{return fpc;}}
+	[SerializeField]
 	private GameObject head  = null; //Head of the player;
 	public GameObject c_Head {get{return head;}}
 	private GameObject currentBall; //Ball that is currently being held.
 	public GameObject c_CurrentBall{get{return currentBall;}}
+	[SerializeField]
 	private GameObject holdPos  = null; //Position of the held ball.
 	public GameObject c_HoldPos{get{return holdPos;}}
 //	[SerializeField]
@@ -57,7 +61,7 @@ public class GrabAndToss : NetworkBehaviour
 //Debug.DrawRay (head.transform.position, head.transform.forward, Color.green, rayDistance);
 
 		//Is the player looking at a ball?
-		if (Physics.SphereCast (head.transform.position, rayRadius, head.transform.forward, out hit, rayDistance)) {
+		if (Physics.SphereCast (c_Head.transform.position, rayRadius, c_Head.transform.forward, out hit, rayDistance)) {
 			if (!isLocalPlayer) {
 				return;
 			}
@@ -77,7 +81,7 @@ public class GrabAndToss : NetworkBehaviour
 			}
 		}
 //--THROW BALL--//
-		if (CrossPlatformInputManager.GetButton ("Fire2")) {
+		if (Input.GetButton ("Fire2")) {
 			if (!isLocalPlayer) {
 				return;
 			}
@@ -91,13 +95,13 @@ public class GrabAndToss : NetworkBehaviour
 			} 
 			holdingBall = false;
 			StartCoroutine(StartThrow(0.5F));
-			Cmd_Shoot (currentBall, head);
+			Cmd_Shoot (currentBall, tossForce);
 //			brb.AddForce(head.transform.forward * tossForce);
 			currentBall = null;
 			ballScript = null;
 
 		}
-		if (CrossPlatformInputManager.GetButtonUp ("Fire2") && throwing) {
+		if (Input.GetButtonUp ("Fire2") && throwing) {
 			throwing = false;
 			anim.SetBool ("isThrowing", false);
 		}
@@ -109,9 +113,9 @@ public class GrabAndToss : NetworkBehaviour
 		/// <param name="bs">Script attached to the ball</param>
 		/// <param name="dir">What direction will the ball be tossed </param>
 	[Command]
-	public void Cmd_Shoot(GameObject bs, GameObject dir){
+	public void Cmd_Shoot(GameObject bs, float force){
 		ballScript = bs.GetComponent<DodgeBallBehaviour> ();
-		ballScript.Rpc_Shoot (dir);
+		ballScript.Rpc_Shoot (force);
 	}
 	/// <summary>
 	/// Command that requests the ball to get picked up.

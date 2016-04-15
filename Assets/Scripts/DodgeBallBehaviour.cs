@@ -94,7 +94,7 @@ public class DodgeBallBehaviour : NetworkBehaviour {
 	/// Rpc for setting the ball in motion, Shooting/Tossing the ball.
 	/// </summary>
 	[ClientRpc]
-	public void Rpc_Shoot (GameObject dir){
+	public void Rpc_Shoot (float force){
 		bounces = 10;
 		rb.velocity = Vector3.zero;
 		rb.angularVelocity = Vector3.zero;
@@ -102,7 +102,7 @@ public class DodgeBallBehaviour : NetworkBehaviour {
 		thrownByTeam = currentPlayer.GetComponent<NetworkCharacterInfo> ().teamNumber;
 		coll.enabled = true;
 		rb.detectCollisions = true;
-		rb.AddForce(dir.transform.forward * gat.c_TossForce);
+		rb.AddForce(gat.c_Head.transform.forward * force);
 		gat = null;
 		pickedUp = false;
 //		gameObject.layer = 0;

@@ -47,7 +47,7 @@ public class PlayerInfo : NetworkBehaviour {
 			netInfo.teamNumber = 0;
 			if (gat.c_HoldingBall) {
 				gat.c_TossForce = 1f;
-				gat.Cmd_Shoot (gat.c_CurrentBall, gat.c_Head);
+				gat.Cmd_Shoot (gat.c_CurrentBall, gat.c_TossForce);
 			}
 		}
 		if (dead && isLocalPlayer) {
