@@ -212,6 +212,7 @@ public class NetworkLobbyHook : LobbyHook
         yield return new WaitForSeconds(waitTime);
         LobbyManager LM = GameObject.Find("LobbyManager").GetComponent<LobbyManager>();
         UnityEngine.Cursor.visible = true;
+        StopCoroutine("CheckforVictory");
         LM.GoBackButton();
     }
 
