@@ -59,6 +59,9 @@ public class NetworkCharacterInfo : NetworkBehaviour
             r.material.color = color;
         }
         GameObject.Find(this.gameObject.name + "/Body/regular_dude_head").GetComponent<Renderer>().material.color = headcolor;
+        //Two Materials
+   /*     GameObject.Find(this.gameObject.name + "/Body/regular_dude_right_hand").GetComponent<Renderer>().material.color = headcolor;
+        GameObject.Find(this.gameObject.name + "/Body/regular_dude_right_hand").GetComponent<Renderer>().material.color = headcolor;*/
     }
 	
 	// Update is called once per frame

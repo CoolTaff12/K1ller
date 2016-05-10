@@ -175,6 +175,7 @@ namespace UnityStandardAssets.Network
         public void GoBackButton()
         {
             backDelegate();
+
         }
 
         // ----------------- Server management

@@ -11,7 +11,8 @@ namespace UnityStandardAssets.Network
     //Any LobbyHook can then grab it and pass those value to the game player prefab (see the Pong Example in the Samples Scenes)
     public class LobbyPlayer : NetworkLobbyPlayer
     {
-        static Color[] Colors = new Color[] { Color.magenta, Color.red, Color.cyan, Color.blue, Color.green, Color.yellow };
+        static Color[] Colors = new Color[] {Color.cyan, Color.blue, Color.green, Color.HSVToRGB(0.155F, 0.695F, 0.545F)/*Khaki*/,
+                                            Color.HSVToRGB(0.088F, 0F, 1F)/*HumanSkin*/, Color.yellow, Color.HSVToRGB(0.075F, 0.85F, 1F)/*Orange*/, Color.red, Color.HSVToRGB(0.83F,1F,0.5F)/*Purple*/,  Color.HSVToRGB(0.93F, 0.41F, 1F)/*Pink*/};
         //used on server to avoid assigning the same color to two player
         static List<int> _colorInUse = new List<int>();
 
@@ -32,7 +33,7 @@ namespace UnityStandardAssets.Network
         [SyncVar(hook = "OnMyColor")]
         public Color playerColor = Color.white;
         [SyncVar(hook = "OnMyTeam")]
-        public int setTeamNumber = 1;
+        public int setTeamNumber = 0;
         [SyncVar(hook = "OnMyTexture")]
         public int playersTexture;
 
@@ -74,6 +75,7 @@ namespace UnityStandardAssets.Network
             OnMyTexture(playersTexture);
         }
 
+
         public override void OnStartAuthority()
         {
             base.OnStartAuthority();
@@ -114,7 +116,7 @@ namespace UnityStandardAssets.Network
         void SetupLocalPlayer()
         {
             nameInput.interactable = true;
-            teamNumber.interactable = true;
+            teamNumber.interactable = false;
             selectTexture.interactable = true;
             remoteIcone.gameObject.SetActive(false);
             localIcone.gameObject.SetActive(true);
@@ -136,7 +138,7 @@ namespace UnityStandardAssets.Network
             //we switch from simple name display to name input
             colorButton.interactable = true;
             nameInput.interactable = true;
-            teamNumber.interactable = true;
+            teamNumber.interactable = false;
             selectTexture.interactable = true;
 
             nameInput.onEndEdit.RemoveAllListeners();
@@ -329,16 +331,18 @@ namespace UnityStandardAssets.Network
             }
             while (alreadyInUse);
 
-            if (inUseIdx >= 0)
+           /* if (inUseIdx >= 0)
             {//if we already add an entry in the colorTabs, we change it
                 _colorInUse[inUseIdx] = idx;
             }
             else
             {//else we add it
                 _colorInUse.Add(idx);
-            }
+            }*/
 
             playerColor = Colors[idx];
+            setTeamNumber = idx;
+            Debug.Log("Number of set team is " + setTeamNumber);
         }
 
         [Command]
