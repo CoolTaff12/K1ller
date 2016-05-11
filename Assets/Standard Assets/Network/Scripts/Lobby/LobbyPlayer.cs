@@ -335,10 +335,10 @@ namespace UnityStandardAssets.Network
             {//if we already add an entry in the colorTabs, we change it
                 _colorInUse[inUseIdx] = idx;
             }
-            
+            /*
             {//else we add it
                 _colorInUse.Add(idx);
-            }
+            }*/
 
             playerColor = Colors[idx];
             setTeamNumber = idx;
