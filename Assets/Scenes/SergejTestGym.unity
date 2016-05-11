@@ -158,7 +158,7 @@ Transform:
   - {fileID: 1121574899}
   - {fileID: 1101345609}
   m_Father: {fileID: 0}
-  m_RootOrder: 12
+  m_RootOrder: 11
 --- !u!1 &123811097
 GameObject:
   m_ObjectHideFlags: 0
@@ -1614,72 +1614,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.34, y: 2.07, z: 47.3}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!1001 &984725714
-Prefab:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 497878, guid: 2b9fa37ac0f417041ba6f6b207c59ea5, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: -7.4329
-      objectReference: {fileID: 0}
-    - target: {fileID: 497878, guid: 2b9fa37ac0f417041ba6f6b207c59ea5, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: 5.6588
-      objectReference: {fileID: 0}
-    - target: {fileID: 497878, guid: 2b9fa37ac0f417041ba6f6b207c59ea5, type: 2}
-      propertyPath: m_LocalPosition.z
-      value: -5.5647
-      objectReference: {fileID: 0}
-    - target: {fileID: 497878, guid: 2b9fa37ac0f417041ba6f6b207c59ea5, type: 2}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 497878, guid: 2b9fa37ac0f417041ba6f6b207c59ea5, type: 2}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 497878, guid: 2b9fa37ac0f417041ba6f6b207c59ea5, type: 2}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 497878, guid: 2b9fa37ac0f417041ba6f6b207c59ea5, type: 2}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 497878, guid: 2b9fa37ac0f417041ba6f6b207c59ea5, type: 2}
-      propertyPath: m_RootOrder
-      value: 11
-      objectReference: {fileID: 0}
-    - target: {fileID: 11455392, guid: 2b9fa37ac0f417041ba6f6b207c59ea5, type: 2}
-      propertyPath: m_OfflineScene
-      value: SergejTestGym
-      objectReference: {fileID: 0}
-    - target: {fileID: 11455392, guid: 2b9fa37ac0f417041ba6f6b207c59ea5, type: 2}
-      propertyPath: m_OnlineScene
-      value: SergejTestGym
-      objectReference: {fileID: 0}
-    - target: {fileID: 11455392, guid: 2b9fa37ac0f417041ba6f6b207c59ea5, type: 2}
-      propertyPath: m_PlayerPrefab
-      value: 
-      objectReference: {fileID: 123130, guid: 8da62885f0bb2c6438f3be2716a446c4, type: 2}
-    - target: {fileID: 497878, guid: 2b9fa37ac0f417041ba6f6b207c59ea5, type: 2}
-      propertyPath: m_LocalScale.x
-      value: 0.7737754
-      objectReference: {fileID: 0}
-    - target: {fileID: 497878, guid: 2b9fa37ac0f417041ba6f6b207c59ea5, type: 2}
-      propertyPath: m_LocalScale.y
-      value: 0.7737746
-      objectReference: {fileID: 0}
-    - target: {fileID: 497878, guid: 2b9fa37ac0f417041ba6f6b207c59ea5, type: 2}
-      propertyPath: m_LocalScale.z
-      value: 0.7737746
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_ParentPrefab: {fileID: 100100000, guid: 2b9fa37ac0f417041ba6f6b207c59ea5, type: 2}
-  m_IsPrefabParent: 0
 --- !u!1 &1005561003 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 100188, guid: 307611a703b4def4393ed3245d4bdc50, type: 3}
