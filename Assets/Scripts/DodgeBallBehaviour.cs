@@ -25,6 +25,8 @@ public class DodgeBallBehaviour : NetworkBehaviour {
 	private GameObject currentPlayer;
 	[SyncVar][SerializeField]
 	private int bounces = 10;
+    [SyncVar][SerializeField]
+    private GameObject ParticlesAwareness;
 
 	// Use this for initialization
 	void Start ()
@@ -84,6 +86,7 @@ public class DodgeBallBehaviour : NetworkBehaviour {
 		currentPlayer = go;
 		gat = currentPlayer.GetComponent<GrabAndToss> ();
 		pickedUp = true;
+        ParticlesAwareness.SetActive(false);
 		rb.velocity = Vector3.zero;
 		rb.angularVelocity = Vector3.zero;
 //		gameObject.layer = 9;
@@ -104,7 +107,8 @@ public class DodgeBallBehaviour : NetworkBehaviour {
 		rb.detectCollisions = true;
 		rb.AddForce(gat.c_Head.transform.forward * force);
 		gat = null;
-		pickedUp = false;
+        ParticlesAwareness.SetActive(true);
+        pickedUp = false;
 //		gameObject.layer = 0;
 	}
 

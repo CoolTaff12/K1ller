@@ -49,7 +49,6 @@ namespace UnityStandardAssets.Network
 
         //used to show which map was selected
         public string matchMap;
-        public int mapNumberSelected;
 
         protected bool _disconnectServer = false;
         

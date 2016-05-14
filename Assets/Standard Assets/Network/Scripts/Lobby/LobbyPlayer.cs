@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Networking;
+using UnityEngine.Networking.Match;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -36,6 +37,8 @@ namespace UnityStandardAssets.Network
         public int setTeamNumber = 0;
         [SyncVar(hook = "OnMyTexture")]
         public int playersTexture;
+
+        public int MaxPlayers;
 
         public Color OddRowColor = new Color(250.0f / 255.0f, 250.0f / 255.0f, 250.0f / 255.0f, 1.0f);
         public Color EvenRowColor = new Color(180.0f / 255.0f, 180.0f / 255.0f, 180.0f / 255.0f, 1.0f);
@@ -303,6 +306,11 @@ namespace UnityStandardAssets.Network
         }
 
         //====== Server Command
+
+        public void Amount(MatchDesc match)
+        {
+            MaxPlayers = match.maxSize;
+        }
 
         [Command]
         public void CmdColorChange()

@@ -46,11 +46,6 @@ public class NetworkGameManager : NetworkBehaviour
             return;
 
         bool allDestroyed = true;
-        for (int i = 0; i < sCHaracter.Count; ++i)
-        {
-            allDestroyed &= (sCHaracter[i].lifeCount == 0);
-        }
-
         if(allDestroyed)
         {
             StartCoroutine(ReturnToLoby());

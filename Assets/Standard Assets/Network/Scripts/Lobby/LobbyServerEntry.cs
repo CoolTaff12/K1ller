@@ -3,7 +3,9 @@ using UnityEngine.UI;
 using UnityEngine.Networking;
 using UnityEngine.Networking.Match;
 using UnityEngine.Networking.Types;
+using System;
 using System.Collections;
+using System.Collections.Generic;
 
 namespace UnityStandardAssets.Network
 {
@@ -11,14 +13,11 @@ namespace UnityStandardAssets.Network
     {
         public Text serverInfoText;
         public Text slotInfo;
-        public Text mapInfo;
         public Button joinButton;
 
         public void Populate(MatchDesc match, LobbyManager lobbyManager, Color c)
         {
             serverInfoText.text = match.name;
-
-            mapInfo.text = lobbyManager.matchMap;
 
             slotInfo.text = match.currentSize.ToString() + "/" + match.maxSize.ToString(); ;
 

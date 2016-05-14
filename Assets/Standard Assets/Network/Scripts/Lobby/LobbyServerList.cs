@@ -4,6 +4,7 @@ using UnityEngine.Networking;
 using UnityEngine.Networking.Match;
 using System.Collections;
 using System;
+using System.Collections.Generic;
 
 namespace UnityStandardAssets.Network
 {
@@ -55,9 +56,6 @@ namespace UnityStandardAssets.Network
             for (int i = 0; i < response.matches.Count; ++i)
             {
                 GameObject o = Instantiate(serverEntryPrefab) as GameObject;
-               /* long temp = Convert.ToInt32(lobbyManager.mapNumberSelected);
-                Debug.Log("Whatever happened to " + temp + "?");
-                response.matches[i].matchAttributes.Add("MapName", temp);*/
                 o.GetComponent<LobbyServerEntry>().Populate(response.matches[i], lobbyManager, (i%2 == 0) ? OddServerColor : EvenServerColor);
 
                 o.transform.SetParent(serverListRect, false);

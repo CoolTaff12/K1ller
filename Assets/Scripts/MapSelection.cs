@@ -24,21 +24,18 @@ public class MapSelection : MonoBehaviour
         {
             GameObject.Find("LobbyManager").GetComponent<UnityStandardAssets.Network.LobbyManager>().playScene = "HermanGympasal";
             GameObject.Find("LobbyManager").GetComponent<UnityStandardAssets.Network.LobbyManager>().matchMap = "GYM_FORT";
-            GameObject.Find("LobbyManager").GetComponent<UnityStandardAssets.Network.LobbyManager>().mapNumberSelected = 0;
             MapFolder.sprite = MapImages[0];
         }
         if (OptionSelected.text == "GYM_ARENA")
         {
             GameObject.Find("LobbyManager").GetComponent<UnityStandardAssets.Network.LobbyManager>().playScene = "SergejTestGym";
             GameObject.Find("LobbyManager").GetComponent<UnityStandardAssets.Network.LobbyManager>().matchMap = "GYM_ARENA";
-            GameObject.Find("LobbyManager").GetComponent<UnityStandardAssets.Network.LobbyManager>().mapNumberSelected = 1;
             MapFolder.sprite = MapImages[1];
         }
         if (OptionSelected.text == "GYM_BRIDGETOWN")
         {
             GameObject.Find("LobbyManager").GetComponent<UnityStandardAssets.Network.LobbyManager>().playScene = "BridgeTown";
             GameObject.Find("LobbyManager").GetComponent<UnityStandardAssets.Network.LobbyManager>().matchMap = "GYM_BRIDGETOWN";
-            GameObject.Find("LobbyManager").GetComponent<UnityStandardAssets.Network.LobbyManager>().mapNumberSelected = 2;
             MapFolder.sprite = MapImages[2];
         }
 
@@ -46,7 +43,6 @@ public class MapSelection : MonoBehaviour
         {
             GameObject.Find("LobbyManager").GetComponent<UnityStandardAssets.Network.LobbyManager>().playScene = "TheFloorIsLava";
             GameObject.Find("LobbyManager").GetComponent<UnityStandardAssets.Network.LobbyManager>().matchMap = "GYM_FLOORISLAVA";
-            GameObject.Find("LobbyManager").GetComponent<UnityStandardAssets.Network.LobbyManager>().mapNumberSelected = 3;
             MapFolder.sprite = MapImages[3];
         }
 
@@ -54,7 +50,6 @@ public class MapSelection : MonoBehaviour
         {
             GameObject.Find("LobbyManager").GetComponent<UnityStandardAssets.Network.LobbyManager>().playScene = "RotateAcrossTheSky";
             GameObject.Find("LobbyManager").GetComponent<UnityStandardAssets.Network.LobbyManager>().matchMap = "Bonus_AcrossTheSky";
-            GameObject.Find("LobbyManager").GetComponent<UnityStandardAssets.Network.LobbyManager>().mapNumberSelected = 4;
             MapFolder.sprite = MapImages[4];
         }
     }

@@ -34,7 +34,6 @@ public class NetworkLobbyHook : LobbyHook
             characterInfo.teamNumber = (lobby.setTeamNumber + 1);
 			characterInfo.gameObject.GetComponent<NetworkCharacterInfo>().teamNumber = (lobby.setTeamNumber + 1);
             characterInfo.score = 0;
-            characterInfo.lifeCount = 3;
             CheckAvailablePlayers();
             isinLevel = true;
         }
