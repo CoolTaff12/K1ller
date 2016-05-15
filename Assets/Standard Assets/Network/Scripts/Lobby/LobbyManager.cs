@@ -174,8 +174,8 @@ namespace UnityStandardAssets.Network
         public BackButtonDelegate backDelegate;
         public void GoBackButton()
         {
+            PlayersOnline = new List<GameObject>();
             backDelegate();
-
         }
 
         // ----------------- Server management
