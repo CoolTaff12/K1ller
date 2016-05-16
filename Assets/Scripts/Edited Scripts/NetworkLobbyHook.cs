@@ -18,7 +18,10 @@ public class NetworkLobbyHook : LobbyHook
     public List<GameObject> Team10;
     public GameObject DodgeballSpawner;
     public bool isinLevel = false;
+    public bool showResults = false;
     public AudioClip[] audioClips;
+
+    public LobbyManager LM;
 
     public override void OnLobbyServerSceneLoadedForPlayer(NetworkManager manager, GameObject lobbyPlayer, GameObject gamePlayer)
     {
@@ -33,7 +36,6 @@ public class NetworkLobbyHook : LobbyHook
             characterInfo.color = lobby.playerColor;
             characterInfo.teamNumber = (lobby.setTeamNumber + 1);
             characterInfo.gameObject.GetComponent<NetworkCharacterInfo>().teamNumber = (lobby.setTeamNumber + 1);
-            characterInfo.score = 0;
             CheckAvailablePlayers();
             isinLevel = true;
         }
@@ -100,6 +102,20 @@ public class NetworkLobbyHook : LobbyHook
         if (isinLevel)
         {
             StartCoroutine(CheckforVictory(5.0F));
+        }
+        if (Input.GetKey(KeyCode.Escape) && showResults == false)
+        {
+            Team1 = new List<GameObject>();
+            Team2 = new List<GameObject>();
+            Team3 = new List<GameObject>();
+            Team4 = new List<GameObject>();
+            Team5 = new List<GameObject>();
+            Team6 = new List<GameObject>();
+            Team7 = new List<GameObject>();
+            Team8 = new List<GameObject>();
+            Team9 = new List<GameObject>();
+            Team10 = new List<GameObject>();
+            LM.GoBackButton();
         }
     }
 
@@ -279,9 +295,9 @@ public class NetworkLobbyHook : LobbyHook
     private IEnumerator GoBacktoLobby(float waitTime)
     {
         yield return new WaitForSeconds(waitTime);
-        LobbyManager LM = GameObject.Find("LobbyManager").GetComponent<LobbyManager>();
         UnityEngine.Cursor.visible = true;
         StopCoroutine("CheckforVictory");
+        showResults = false;
         LM.GoBackButton();
     }
 
@@ -293,6 +309,7 @@ public class NetworkLobbyHook : LobbyHook
         {
             Debug.Log("Victory for team 1");
             PlaySound(0);
+            showResults = true;
             StartCoroutine(GoBacktoLobby(10F));
         }
         if (Team1.Count == 0 && Team2.Count != 0 && Team3.Count == 0 && Team4.Count == 0 && Team5.Count == 0 &&
@@ -300,6 +317,7 @@ public class NetworkLobbyHook : LobbyHook
         {
             Debug.Log("Victory for team 2");
             PlaySound(0);
+            showResults = true;
             StartCoroutine(GoBacktoLobby(10F));
         }
         if (Team1.Count == 0 && Team2.Count == 0 && Team3.Count != 0 && Team4.Count == 0 && Team5.Count == 0 &&
@@ -307,6 +325,7 @@ public class NetworkLobbyHook : LobbyHook
         {
             Debug.Log("Victory for team 3");
             PlaySound(0);
+            showResults = true;
             StartCoroutine(GoBacktoLobby(10F));
         }
         if (Team1.Count == 0 && Team2.Count == 0 && Team3.Count == 0 && Team4.Count != 0 && Team5.Count == 0 &&
@@ -314,6 +333,7 @@ public class NetworkLobbyHook : LobbyHook
         {
             Debug.Log("Victory for team 4");
             PlaySound(0);
+            showResults = true;
             StartCoroutine(GoBacktoLobby(10F));
         }
         if (Team1.Count == 0 && Team2.Count == 0 && Team3.Count == 0 && Team4.Count == 0 && Team5.Count != 0 &&
@@ -321,6 +341,7 @@ public class NetworkLobbyHook : LobbyHook
         {
             Debug.Log("Victory for team 5");
             PlaySound(0);
+            showResults = true;
             StartCoroutine(GoBacktoLobby(10F));
         }
         if (Team1.Count == 0 && Team2.Count == 0 && Team3.Count == 0 && Team4.Count == 0 && Team5.Count == 0 &&
@@ -328,6 +349,7 @@ public class NetworkLobbyHook : LobbyHook
         {
             Debug.Log("Victory for team 6");
             PlaySound(0);
+            showResults = true;
             StartCoroutine(GoBacktoLobby(10F));
         }
         if (Team1.Count == 0 && Team2.Count == 0 && Team3.Count == 0 && Team4.Count == 0 && Team5.Count == 0 &&
@@ -335,6 +357,7 @@ public class NetworkLobbyHook : LobbyHook
         {
             Debug.Log("Victory for team 7");
             PlaySound(0);
+            showResults = true;
             StartCoroutine(GoBacktoLobby(10F));
         }
         if (Team1.Count == 0 && Team2.Count == 0 && Team3.Count == 0 && Team4.Count == 0 && Team5.Count == 0 &&
@@ -342,6 +365,7 @@ public class NetworkLobbyHook : LobbyHook
         {
             Debug.Log("Victory for team 8");
             PlaySound(0);
+            showResults = true;
             StartCoroutine(GoBacktoLobby(10F));
         }
         if (Team1.Count == 0 && Team2.Count == 0 && Team3.Count == 0 && Team4.Count == 0 && Team5.Count == 0 &&
@@ -349,6 +373,7 @@ public class NetworkLobbyHook : LobbyHook
         {
             Debug.Log("Victory for team 9");
             PlaySound(0);
+            showResults = true;
             StartCoroutine(GoBacktoLobby(10F));
         }
         if (Team1.Count == 0 && Team2.Count == 0 && Team3.Count == 0 && Team4.Count == 0 && Team5.Count == 0 &&
@@ -356,6 +381,7 @@ public class NetworkLobbyHook : LobbyHook
         {
             Debug.Log("Victory for team 10");
             PlaySound(0);
+            showResults = true;
             StartCoroutine(GoBacktoLobby(10F));
         }
     }

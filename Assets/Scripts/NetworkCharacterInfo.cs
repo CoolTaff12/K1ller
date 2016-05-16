@@ -11,14 +11,10 @@ public class NetworkCharacterInfo : NetworkBehaviour
 {
 
     //Network syncvar
-   [SyncVar(hook = "OnScoreChanged")]
-    public int score;
     [SyncVar]
     public Color color;
     [SyncVar]
     public string playerName;
-    [SyncVar(hook = "OnLifeChanged")]
-    public int lifeCount;
     [SyncVar]
     public int teamNumber;
 
@@ -28,7 +24,7 @@ public class NetworkCharacterInfo : NetworkBehaviour
     [SyncVar]
     public int checkingTexture;
 
-    protected Text ScoreText;
+
     //hard to control WHEN Init is called (networking make order between object spawning non deterministic)
     //so we call init from multiple location (depending on what between spaceship & manager is created first).
     protected bool WasInit = false;
@@ -76,34 +72,6 @@ public class NetworkCharacterInfo : NetworkBehaviour
 
         //Make a score text
         GameObject scoreGO = new GameObject(playerName + "score");
-        ScoreText = scoreGO.AddComponent<Text>();
-        ScoreText.alignment = TextAnchor.MiddleCenter;
-        ScoreText.resizeTextForBestFit = true;
-        ScoreText.color = color;
         WasInit = true;
-    }
-    // --- Score & Life management & display
-    void OnScoreChanged(int newValue)
-    {
-        score = newValue;
-        UpdateScoreLifeText();
-    }
-
-    void OnLifeChanged(int newValue)
-    {
-        lifeCount = newValue;
-        UpdateScoreLifeText();
-    }
-
-
-    //This is for the score text
-    void UpdateScoreLifeText()
-    {
-        if (ScoreText != null)
-        {
-            ScoreText.text = playerName + "\nSCORE : " + score + "\nLIFE : ";
-            for (int i = 1; i <= lifeCount; ++i)
-                ScoreText.text += "X";
-        }
     }
 }
