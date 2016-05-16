@@ -16,6 +16,8 @@ public class PlayerInfo : NetworkBehaviour {
 	private GameObject body;
 	[SyncVar][SerializeField]
 	private float health = 1f; //Amount of hits the character can take before dying.
+	[SerializeField]
+	private float flySpeed = 4f;
 	[SyncVar][SerializeField]
 	private bool killable = true; //Can this character be killed?
 	[SyncVar][SerializeField]
@@ -40,22 +42,24 @@ public class PlayerInfo : NetworkBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (health <= 0 && !dead) {
-			Cmd_SpawnHead(gameObject);
-			Cmd_KillYourself(gameObject);
-			dead = true;
-			netInfo.teamNumber = 0;
-			if (gat.c_HoldingBall) {
-				gat.c_TossForce = 1f;
-				gat.Cmd_Shoot (gat.c_CurrentBall, gat.c_TossForce);
+		if (health <= 0 && !c_Dead) {
+//			dead = true;
+			Debug.Log ("GetDead");
+				Cmd_SpawnHead(gameObject);
+				Cmd_KillYourself(gameObject);
+				netInfo.teamNumber = 0;
+			Debug.Log ("SpawnHead");
+				if (gat.c_HoldingBall) {
+					gat.c_TossForce = 1f;
+					gat.Cmd_Shoot (gat.c_CurrentBall, gat.c_TossForce);
 			}
 		}
 		if (dead && isLocalPlayer) {
 			if (Input.GetKey (KeyCode.Space)) {
-				gameObject.transform.position = new Vector3 (transform.position.x, transform.position.y + 0.1f *Time.deltaTime , transform.position.z);
+				gameObject.transform.position = new Vector3 (transform.position.x, transform.position.y + flySpeed *Time.deltaTime , transform.position.z);
 			}
 			if (Input.GetKey (KeyCode.LeftControl)) {
-				gameObject.transform.position = new Vector3 (transform.position.x, transform.position.y - 0.1f * Time.deltaTime , transform.position.z);
+				gameObject.transform.position = new Vector3 (transform.position.x, transform.position.y - flySpeed * Time.deltaTime , transform.position.z);
 			}
 		}
 	}
