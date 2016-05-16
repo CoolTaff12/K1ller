@@ -79,6 +79,7 @@ namespace UnityStandardAssets.Network
             {
                 minPlayers = (PlayersOnline.Count);
             }
+            UnityEngine.Cursor.visible = true;
         }
 
         public override void OnLobbyClientSceneChanged(NetworkConnection conn)
@@ -176,6 +177,20 @@ namespace UnityStandardAssets.Network
         {
             PlayersOnline = new List<GameObject>();
             backDelegate();
+        }
+
+        public void Exiting(UnityStandardAssets.Characters.FirstPerson.FirstPersonController MouseLock, bool isInGame)
+        {
+            if(isInGame)
+            {
+                MouseLock.m_MouseLook.lockCursor = false;
+                UnityEngine.Cursor.visible = true;
+                GoBackButton();
+            }
+            else if(!isInGame)
+            {
+                GoBackButton();
+            }
         }
 
         // ----------------- Server management

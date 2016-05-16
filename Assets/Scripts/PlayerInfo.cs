@@ -127,7 +127,6 @@ public class PlayerInfo : NetworkBehaviour {
 	public void Rpc_KillYourself()
 	{
 		gameObject.GetComponent<PlayerInfo>().dead = true;
-		gameObject.GetComponent<NetworkCharacterInfo>().teamNumber = 0;
 		gameObject.GetComponent<BoxCollider> ().enabled = false;
 
 
@@ -144,6 +143,12 @@ public class PlayerInfo : NetworkBehaviour {
 			gos.GetComponent<Renderer> ().material.mainTexture = mat;
 			gos.layer = 10;
 		}
-		gameObject.layer = 10;
+        GameObject[] CharactersInfo = GameObject.FindGameObjectsWithTag("Player");
+        foreach (GameObject NCI in CharactersInfo)
+        {
+            NCI.GetComponent<NetworkCharacterInfo>().CheackingList(gameObject);
+        }
+        gameObject.GetComponent<NetworkCharacterInfo>().teamNumber = 0;
+        gameObject.layer = 10;
 	}
 }
