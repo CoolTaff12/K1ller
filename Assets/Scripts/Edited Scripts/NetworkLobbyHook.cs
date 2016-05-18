@@ -7,9 +7,9 @@ using UnityEngine.Networking;
 
 public class NetworkLobbyHook : LobbyHook
 {
-    public GameObject DodgeballSpawner;
     public bool isinLevel = false;
     public bool showResults = false;
+    public GameObject DodgeballSpawner;
     public GameObject OurPlayer;
 
     public LobbyManager LM;

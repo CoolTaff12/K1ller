@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine.Networking;
 using UnityStandardAssets.Characters.FirstPerson;
 
@@ -18,8 +19,8 @@ public class AssignPlayerInfo : NetworkBehaviour {
 	[Command]
 	public void Cmd_KillAPlayer(GameObject go)
 	{
-		go.GetComponent<PlayerInfo> ().Rpc_KillYourself ();
-	}
+        go.GetComponent<PlayerInfo> ().Rpc_KillYourself ();
+    }
 	/// <summary>
 	/// Request spawning of a ball when a player character dies.
 	/// </summary>

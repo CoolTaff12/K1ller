@@ -43,7 +43,7 @@ public class PlayerInfo : NetworkBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if (health <= 0 && !c_Dead) {
-//			dead = true;
+			dead = true;
 			Debug.Log ("GetDead");
 				Cmd_SpawnHead(gameObject);
 				Cmd_KillYourself(gameObject);
@@ -128,11 +128,11 @@ public class PlayerInfo : NetworkBehaviour {
         GameObject[] CharactersInfo = GameObject.FindGameObjectsWithTag("Player");
         foreach (GameObject NCI in CharactersInfo)
         {
-            NCI.GetComponent<NetworkCharacterInfo>().CheckingList(gameObject);
+            NCI.GetComponent<NetworkCharacterInfo>().Rpc_CheckingList(gameObject);
             Debug.Log("Players name " + NCI.name);
         }
-        gameObject.GetComponent<PlayerInfo>().dead = true;
-		gameObject.GetComponent<BoxCollider> ().enabled = false;
+        //  gameObject.GetComponent<PlayerInfo>().dead = true;
+        gameObject.GetComponent<BoxCollider> ().enabled = false;
 
 
 		gameObject.GetComponent<FirstPersonController> ().m_RunSpeed = 30;

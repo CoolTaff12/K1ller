@@ -5,7 +5,7 @@ using System.Collections.Generic;
 public class OutofBound : MonoBehaviour
 {
 
-    public List<GameObject> SpawningPositions;
+    public List<GameObject> SpawningPositions = new List<GameObject>();
     public GameObject[] respawns;
 
     // Use this for initialization

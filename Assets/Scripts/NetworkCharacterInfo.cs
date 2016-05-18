@@ -26,6 +26,7 @@ public class NetworkCharacterInfo : NetworkBehaviour
     public int checkingTexture;
     public int checkingPlayers;
 
+    public int[] Teams;
     public List<GameObject> Team1;
     public List<GameObject> Team2;
     public List<GameObject> Team3;
@@ -60,6 +61,21 @@ public class NetworkCharacterInfo : NetworkBehaviour
         gameObject.transform.FindChild("FirstPersonCharacter").GetComponent<AudioSource>().Play();
     }
 
+    void Awake()
+    {
+        Teams = new int[10];
+        Team1 = new List<GameObject>();
+        Team2 = new List<GameObject>();
+        Team3 = new List<GameObject>();
+        Team4 = new List<GameObject>();
+        Team5 = new List<GameObject>();
+        Team6 = new List<GameObject>();
+        Team7 = new List<GameObject>();
+        Team8 = new List<GameObject>();
+        Team9 = new List<GameObject>();
+        Team10 = new List<GameObject>();
+        TeamPlayers = new List<GameObject>();
+    }
 
     // Use this for initialization
     void Start ()
@@ -181,120 +197,50 @@ public class NetworkCharacterInfo : NetworkBehaviour
         Debug.Log("isc_Dead team is" + isc_Dead.GetComponent<NetworkCharacterInfo>().teamNumber);
         if (isc_Dead.GetComponent<NetworkCharacterInfo>().teamNumber == 1)
         {
-            foreach (GameObject c_DeadPlayer in Team1)
-            {
-                if (c_DeadPlayer.name == isc_Dead.name)
-                {
-                    Team1.Remove(c_DeadPlayer);
-                    c_DeadPlayer.GetComponent<NetworkCharacterInfo>().teamNumber = 0;
-                }
-            }
+            Team1.Remove(isc_Dead);
         }
         if (isc_Dead.GetComponent<NetworkCharacterInfo>().teamNumber == 2)
         {
-            foreach (GameObject c_DeadPlayer in Team2)
-            {
-                if (c_DeadPlayer.name == isc_Dead.name)
-                {
-                    Team2.Remove(c_DeadPlayer);
-                    c_DeadPlayer.GetComponent<NetworkCharacterInfo>().teamNumber = 0;
-                }
-            }
+            Team2.Remove(isc_Dead);
         }
         if (isc_Dead.GetComponent<NetworkCharacterInfo>().teamNumber == 3)
         {
-            foreach (GameObject c_DeadPlayer in Team3)
-            {
-                if (c_DeadPlayer.name == isc_Dead.name)
-                {
-                    Team3.Remove(c_DeadPlayer);
-                    c_DeadPlayer.GetComponent<NetworkCharacterInfo>().teamNumber = 0;
-                }
-            }
+            Team3.Remove(isc_Dead);
         }
         if (isc_Dead.GetComponent<NetworkCharacterInfo>().teamNumber == 4)
         {
-            foreach (GameObject c_DeadPlayer in Team4)
-            {
-                if (c_DeadPlayer.name == isc_Dead.name)
-                {
-                    Team4.Remove(c_DeadPlayer);
-                    c_DeadPlayer.GetComponent<NetworkCharacterInfo>().teamNumber = 0;
-                }
-            }
+            Team4.Remove(isc_Dead);
         }
         if (isc_Dead.GetComponent<NetworkCharacterInfo>().teamNumber == 5)
         {
-            foreach (GameObject c_DeadPlayer in Team5)
-            {
-                if (c_DeadPlayer.name == isc_Dead.name)
-                {
-                    Team5.Remove(c_DeadPlayer);
-                    c_DeadPlayer.GetComponent<NetworkCharacterInfo>().teamNumber = 0;
-                }
-            }
+            Team5.Remove(isc_Dead);
         }
         if (isc_Dead.GetComponent<NetworkCharacterInfo>().teamNumber == 6)
         {
-            foreach (GameObject c_DeadPlayer in Team6)
-            {
-                if (c_DeadPlayer.name == isc_Dead.name)
-                {
-                    Team6.Remove(c_DeadPlayer);
-                    c_DeadPlayer.GetComponent<NetworkCharacterInfo>().teamNumber = 0;
-                }
-            }
+            Team6.Remove(isc_Dead);
         }
         if (isc_Dead.GetComponent<NetworkCharacterInfo>().teamNumber == 7)
         {
-            foreach (GameObject c_DeadPlayer in Team7)
-            {
-                if (c_DeadPlayer.name == isc_Dead.name)
-                {
-                    Team7.Remove(c_DeadPlayer);
-                    c_DeadPlayer.GetComponent<NetworkCharacterInfo>().teamNumber = 0;
-                }
-            }
+            Team7.Remove(isc_Dead);
         }
         if (isc_Dead.GetComponent<NetworkCharacterInfo>().teamNumber == 8)
         {
-            foreach (GameObject c_DeadPlayer in Team8)
-            {
-                if (c_DeadPlayer.name == isc_Dead.name)
-                {
-                    Team8.Remove(c_DeadPlayer);
-                    c_DeadPlayer.GetComponent<NetworkCharacterInfo>().teamNumber = 0;
-                }
-            }
+            Team8.Remove(isc_Dead);
         }
         if (isc_Dead.GetComponent<NetworkCharacterInfo>().teamNumber == 9)
         {
-            foreach (GameObject c_DeadPlayer in Team9)
-            {
-                if (c_DeadPlayer.name == isc_Dead.name)
-                {
-                    Team9.Remove(c_DeadPlayer);
-                    c_DeadPlayer.GetComponent<NetworkCharacterInfo>().teamNumber = 0;
-                }
-            }
+            Team9.Remove(isc_Dead);
         }
         if (isc_Dead.GetComponent<NetworkCharacterInfo>().teamNumber == 10)
         {
-            foreach (GameObject c_DeadPlayer in Team10)
-            {
-                if (c_DeadPlayer.name == isc_Dead.name)
-                {
-                    Team10.Remove(c_DeadPlayer);
-                    c_DeadPlayer.GetComponent<NetworkCharacterInfo>().teamNumber = 0;
-                }
-            }
+            Team10.Remove(isc_Dead);
         }
-        StartCoroutine(CheckforTeamStatus(1.0F));
+        isc_Dead.GetComponent<NetworkCharacterInfo>().teamNumber = 0;
+        CheckforTeamStatus();
     }
 
-    private IEnumerator CheckforTeamStatus(float waitTime)
+    private void CheckforTeamStatus()
     {
-        yield return new WaitForSeconds(waitTime);
         Debug.Log("Here I go again on my own");
         if (Team1.Count != 0 && Team2.Count == 0 && Team3.Count == 0 && Team4.Count == 0 && Team5.Count == 0 &&
             Team6.Count == 0 && Team7.Count == 0 && Team8.Count == 0 && Team9.Count == 0 && Team10.Count == 0)
@@ -426,5 +372,9 @@ public class NetworkCharacterInfo : NetworkBehaviour
         //Make a score text
         GameObject scoreGO = new GameObject(playerName + "score");
         WasInit = true;
+    }
+    [ClientRpc]
+    public void Rpc_CheckingList(GameObject go) {
+        CheckingList(go);
     }
 }

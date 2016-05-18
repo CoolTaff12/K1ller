@@ -2411,6 +2411,7 @@ MonoBehaviour:
   - {fileID: 2800000, guid: f6de672afec96744da24105c66cfebd2, type: 3}
   - {fileID: 2800000, guid: 93648e68c5dead44780a2213c3fa9dd2, type: 3}
   checkingTexture: 0
+  checkingPlayers: 0
   Team1: []
   Team2: []
   Team3: []
@@ -2422,7 +2423,9 @@ MonoBehaviour:
   Team9: []
   Team10: []
   Victory: {fileID: 142680}
+  TeamPlayers: []
   NLH: {fileID: 0}
+  LM: {fileID: 0}
   audioClips:
   - {fileID: 8300000, guid: a971d00c81efb174a82b7ca613dbe8e3, type: 3}
 --- !u!114 &11432088
@@ -2527,7 +2530,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rayDistance: 5
   rayRadius: 0.75
-  tossForce: 20
+  tossForce: 15
   holdingBall: 0
   fpc: {fileID: 135626}
   head: {fileID: 123280}
