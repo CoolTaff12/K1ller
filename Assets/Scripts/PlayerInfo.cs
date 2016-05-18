@@ -47,7 +47,6 @@ public class PlayerInfo : NetworkBehaviour {
 			Debug.Log ("GetDead");
 				Cmd_SpawnHead(gameObject);
 				Cmd_KillYourself(gameObject);
-				netInfo.teamNumber = 0;
 			Debug.Log ("SpawnHead");
 				if (gat.c_HoldingBall) {
 					gat.c_TossForce = 1f;
@@ -121,12 +120,18 @@ public class PlayerInfo : NetworkBehaviour {
 	}
 
 	/// <summary>
-	/// Rpc that sets all the values when dying.
+	/// Rpc that sets all the values when dying and call all players lists that it have i
 	/// </summary>
 	[ClientRpc]
 	public void Rpc_KillYourself()
 	{
-		gameObject.GetComponent<PlayerInfo>().dead = true;
+        GameObject[] CharactersInfo = GameObject.FindGameObjectsWithTag("Player");
+        foreach (GameObject NCI in CharactersInfo)
+        {
+            NCI.GetComponent<NetworkCharacterInfo>().CheckingList(gameObject);
+            Debug.Log("Players name " + NCI.name);
+        }
+        gameObject.GetComponent<PlayerInfo>().dead = true;
 		gameObject.GetComponent<BoxCollider> ().enabled = false;
 
 
@@ -143,12 +148,6 @@ public class PlayerInfo : NetworkBehaviour {
 			gos.GetComponent<Renderer> ().material.mainTexture = mat;
 			gos.layer = 10;
 		}
-        GameObject[] CharactersInfo = GameObject.FindGameObjectsWithTag("Player");
-        foreach (GameObject NCI in CharactersInfo)
-        {
-            NCI.GetComponent<NetworkCharacterInfo>().CheckingList(gameObject);
-        }
-        gameObject.GetComponent<NetworkCharacterInfo>().teamNumber = 0;
         gameObject.layer = 10;
 	}
 }

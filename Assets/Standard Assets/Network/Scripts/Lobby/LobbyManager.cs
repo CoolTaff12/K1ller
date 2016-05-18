@@ -173,6 +173,9 @@ namespace UnityStandardAssets.Network
 
         public delegate void BackButtonDelegate();
         public BackButtonDelegate backDelegate;
+        /// <summary>
+        /// Button that goes back to menu and makes the mouse move and visable. 
+        /// </summary>
         public void GoBackButton()
         {
             PlayersOnline = new List<GameObject>();
@@ -183,6 +186,8 @@ namespace UnityStandardAssets.Network
             backDelegate();
         }
 
+        /// <param name="MouseLock">Players own FirstPersonController</param>
+        /// <param name="isInGame">Is it in game</param>
         public void Exiting(UnityStandardAssets.Characters.FirstPerson.FirstPersonController MouseLock, bool isInGame)
         {
             if(isInGame)

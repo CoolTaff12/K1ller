@@ -93,7 +93,6 @@ public class NetworkCharacterInfo : NetworkBehaviour
         //Two Materials
         /*     GameObject.Find(this.gameObject.name + "/Body/regular_dude_right_hand").GetComponent<Renderer>().material.color = headcolor;
              GameObject.Find(this.gameObject.name + "/Body/regular_dude_right_hand").GetComponent<Renderer>().material.color = headcolor;*/
-        StartCoroutine(CheckforTeamStatus(6.0F));
     }
 
     void Update()
@@ -101,11 +100,18 @@ public class NetworkCharacterInfo : NetworkBehaviour
         if(checkingPlayers > 0)
         {
             GameObject[] AvalibleEntries = GameObject.FindGameObjectsWithTag("Player");
-            foreach (GameObject New in AvalibleEntries)
+            foreach (GameObject NewPlayer in AvalibleEntries)
             {
-                TeamPlayers.Add(New);
-                CheckAvailablePlayers();
-                checkingPlayers--;
+                if(TeamPlayers.Contains(NewPlayer))
+                {
+
+                }
+                else
+                {
+                    TeamPlayers.Add(NewPlayer);
+                    CheckAvailablePlayers();
+                    checkingPlayers--;
+                }
             }
         }
     }
@@ -171,6 +177,8 @@ public class NetworkCharacterInfo : NetworkBehaviour
 
     public void CheckingList(GameObject isc_Dead)
     {
+        Debug.Log("isc_Dead name is " + isc_Dead);
+        Debug.Log("isc_Dead team is" + isc_Dead.GetComponent<NetworkCharacterInfo>().teamNumber);
         if (isc_Dead.GetComponent<NetworkCharacterInfo>().teamNumber == 1)
         {
             foreach (GameObject c_DeadPlayer in Team1)
@@ -178,13 +186,7 @@ public class NetworkCharacterInfo : NetworkBehaviour
                 if (c_DeadPlayer.name == isc_Dead.name)
                 {
                     Team1.Remove(c_DeadPlayer);
-                }
-            }
-            for (var k = Team1.Count - 1; k >= 0; k--)
-            {
-                if (Team1[k] == null)
-                {
-                    Team1.RemoveAt(k);
+                    c_DeadPlayer.GetComponent<NetworkCharacterInfo>().teamNumber = 0;
                 }
             }
         }
@@ -195,13 +197,7 @@ public class NetworkCharacterInfo : NetworkBehaviour
                 if (c_DeadPlayer.name == isc_Dead.name)
                 {
                     Team2.Remove(c_DeadPlayer);
-                }
-            }
-            for (var k = Team2.Count - 1; k >= 0; k--)
-            {
-                if (Team2[k] == null)
-                {
-                    Team2.RemoveAt(k);
+                    c_DeadPlayer.GetComponent<NetworkCharacterInfo>().teamNumber = 0;
                 }
             }
         }
@@ -212,13 +208,7 @@ public class NetworkCharacterInfo : NetworkBehaviour
                 if (c_DeadPlayer.name == isc_Dead.name)
                 {
                     Team3.Remove(c_DeadPlayer);
-                }
-            }
-            for (var k = Team3.Count - 1; k >= 0; k--)
-            {
-                if (Team3[k] == null)
-                {
-                    Team3.RemoveAt(k);
+                    c_DeadPlayer.GetComponent<NetworkCharacterInfo>().teamNumber = 0;
                 }
             }
         }
@@ -229,13 +219,7 @@ public class NetworkCharacterInfo : NetworkBehaviour
                 if (c_DeadPlayer.name == isc_Dead.name)
                 {
                     Team4.Remove(c_DeadPlayer);
-                }
-            }
-            for (var k = Team4.Count - 1; k >= 0; k--)
-            {
-                if (Team4[k] == null)
-                {
-                    Team4.RemoveAt(k);
+                    c_DeadPlayer.GetComponent<NetworkCharacterInfo>().teamNumber = 0;
                 }
             }
         }
@@ -246,13 +230,7 @@ public class NetworkCharacterInfo : NetworkBehaviour
                 if (c_DeadPlayer.name == isc_Dead.name)
                 {
                     Team5.Remove(c_DeadPlayer);
-                }
-            }
-            for (var k = Team5.Count - 1; k >= 0; k--)
-            {
-                if (Team5[k] == null)
-                {
-                    Team5.RemoveAt(k);
+                    c_DeadPlayer.GetComponent<NetworkCharacterInfo>().teamNumber = 0;
                 }
             }
         }
@@ -263,13 +241,7 @@ public class NetworkCharacterInfo : NetworkBehaviour
                 if (c_DeadPlayer.name == isc_Dead.name)
                 {
                     Team6.Remove(c_DeadPlayer);
-                }
-            }
-            for (var k = Team6.Count - 1; k >= 0; k--)
-            {
-                if (Team6[k] == null)
-                {
-                    Team6.RemoveAt(k);
+                    c_DeadPlayer.GetComponent<NetworkCharacterInfo>().teamNumber = 0;
                 }
             }
         }
@@ -280,13 +252,7 @@ public class NetworkCharacterInfo : NetworkBehaviour
                 if (c_DeadPlayer.name == isc_Dead.name)
                 {
                     Team7.Remove(c_DeadPlayer);
-                }
-            }
-            for (var k = Team7.Count - 1; k >= 0; k--)
-            {
-                if (Team7[k] == null)
-                {
-                    Team7.RemoveAt(k);
+                    c_DeadPlayer.GetComponent<NetworkCharacterInfo>().teamNumber = 0;
                 }
             }
         }
@@ -297,13 +263,7 @@ public class NetworkCharacterInfo : NetworkBehaviour
                 if (c_DeadPlayer.name == isc_Dead.name)
                 {
                     Team8.Remove(c_DeadPlayer);
-                }
-            }
-            for (var k = Team8.Count - 1; k >= 0; k--)
-            {
-                if (Team8[k] == null)
-                {
-                    Team8.RemoveAt(k);
+                    c_DeadPlayer.GetComponent<NetworkCharacterInfo>().teamNumber = 0;
                 }
             }
         }
@@ -314,13 +274,7 @@ public class NetworkCharacterInfo : NetworkBehaviour
                 if (c_DeadPlayer.name == isc_Dead.name)
                 {
                     Team9.Remove(c_DeadPlayer);
-                }
-            }
-            for (var k = Team9.Count - 1; k >= 0; k--)
-            {
-                if (Team9[k] == null)
-                {
-                    Team9.RemoveAt(k);
+                    c_DeadPlayer.GetComponent<NetworkCharacterInfo>().teamNumber = 0;
                 }
             }
         }
@@ -331,16 +285,11 @@ public class NetworkCharacterInfo : NetworkBehaviour
                 if (c_DeadPlayer.name == isc_Dead.name)
                 {
                     Team10.Remove(c_DeadPlayer);
-                }
-            }
-            for (var k = Team10.Count - 1; k >= 0; k--)
-            {
-                if (Team10[k] == null)
-                {
-                    Team10.RemoveAt(k);
+                    c_DeadPlayer.GetComponent<NetworkCharacterInfo>().teamNumber = 0;
                 }
             }
         }
+        StartCoroutine(CheckforTeamStatus(1.0F));
     }
 
     private IEnumerator CheckforTeamStatus(float waitTime)
