@@ -146,7 +146,7 @@ public class PlayerInfo : NetworkBehaviour {
         GameObject[] CharactersInfo = GameObject.FindGameObjectsWithTag("Player");
         foreach (GameObject NCI in CharactersInfo)
         {
-            NCI.GetComponent<NetworkCharacterInfo>().CheackingList(gameObject);
+            NCI.GetComponent<NetworkCharacterInfo>().CheckingList(gameObject);
         }
         gameObject.GetComponent<NetworkCharacterInfo>().teamNumber = 0;
         gameObject.layer = 10;

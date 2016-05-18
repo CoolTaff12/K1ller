@@ -106,7 +106,7 @@ GameObject:
   - 222: {fileID: 22284000}
   - 114: {fileID: 11465094}
   m_Layer: 5
-  m_Name: Image
+  m_Name: Dead
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -549,7 +549,7 @@ GameObject:
   - 222: {fileID: 22254636}
   - 114: {fileID: 11468692}
   m_Layer: 5
-  m_Name: ImageVic
+  m_Name: Victory
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1771,7 +1771,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 123130}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.4839277, y: -4.453828, z: 4.5172095}
+  m_LocalPosition: {x: 20.275364, y: -0.078814745, z: 3.0834684}
   m_LocalScale: {x: 3, y: 3, z: 3}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
@@ -2421,6 +2421,7 @@ MonoBehaviour:
   Team8: []
   Team9: []
   Team10: []
+  Victory: {fileID: 142680}
   NLH: {fileID: 0}
   audioClips:
   - {fileID: 8300000, guid: a971d00c81efb174a82b7ca613dbe8e3, type: 3}
@@ -4202,7 +4203,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0.000102996826, y: -0.00030517578}
-  m_SizeDelta: {x: 200, y: 200}
+  m_SizeDelta: {x: 300, y: 300}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &22418342
 RectTransform:
@@ -4393,7 +4394,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 200, y: 200}
+  m_SizeDelta: {x: 300, y: 300}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &22464980
 RectTransform:

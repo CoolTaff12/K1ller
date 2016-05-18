@@ -24,6 +24,7 @@ public class NetworkCharacterInfo : NetworkBehaviour
     public Texture[] selectableTextures;
     [SyncVar]
     public int checkingTexture;
+    public int checkingPlayers;
 
     public List<GameObject> Team1;
     public List<GameObject> Team2;
@@ -35,14 +36,21 @@ public class NetworkCharacterInfo : NetworkBehaviour
     public List<GameObject> Team8;
     public List<GameObject> Team9;
     public List<GameObject> Team10;
+    [SerializeField]
+    private GameObject Victory;
+    [SerializeField]
+    private List<GameObject> TeamPlayers;
 
     public NetworkLobbyHook NLH;
+    public UnityStandardAssets.Network.LobbyManager LM;
 
     public AudioClip[] audioClips;
 
     //hard to control WHEN Init is called (networking make order between object spawning non deterministic)
     //so we call init from multiple location (depending on what between spaceship & manager is created first).
     protected bool WasInit = false;
+
+    protected bool CheckedPlayers = false;
 
     //-----------------Play Audio------------------------
     //This will take the gameobjects AudioSource to switch the audioclips
@@ -57,8 +65,10 @@ public class NetworkCharacterInfo : NetworkBehaviour
     void Start ()
     {
         NLH = GameObject.Find("LobbyManager").GetComponent<NetworkLobbyHook>();
+        LM = GameObject.Find("LobbyManager").GetComponent<UnityStandardAssets.Network.LobbyManager>();
+        checkingPlayers = LM.PlayersOnline.Count;
         //Tells the player what its name is
-        name = playerName;
+        gameObject.name = playerName;
         //Renderar the colour and the texture player had choosen ealier
         Renderer[] CRends = GetComponentsInChildren<Renderer>();
         if(checkingTexture == 1)
@@ -83,60 +93,83 @@ public class NetworkCharacterInfo : NetworkBehaviour
         //Two Materials
         /*     GameObject.Find(this.gameObject.name + "/Body/regular_dude_right_hand").GetComponent<Renderer>().material.color = headcolor;
              GameObject.Find(this.gameObject.name + "/Body/regular_dude_right_hand").GetComponent<Renderer>().material.color = headcolor;*/
-        CheckAvailablePlayers();
-        StartCoroutine(CheckforTeamStatus(5.0F));
+        StartCoroutine(CheckforTeamStatus(6.0F));
     }
 
-
-    public void CheckAvailablePlayers()
+    void Update()
     {
-        GameObject[] TeamPlayers = GameObject.FindGameObjectsWithTag("Player");
-        foreach (GameObject GnT in TeamPlayers)
+        if(checkingPlayers > 0)
         {
-            if (GnT.GetComponent<NetworkCharacterInfo>().teamNumber == 1)
+            GameObject[] AvalibleEntries = GameObject.FindGameObjectsWithTag("Player");
+            foreach (GameObject New in AvalibleEntries)
             {
-                Team1.Add(GnT);
-            }
-            if (GnT.GetComponent<NetworkCharacterInfo>().teamNumber == 2)
-            {
-                Team2.Add(GnT);
-            }
-            if (GnT.GetComponent<NetworkCharacterInfo>().teamNumber == 3)
-            {
-                Team3.Add(GnT);
-            }
-            if (GnT.GetComponent<NetworkCharacterInfo>().teamNumber == 4)
-            {
-                Team4.Add(GnT);
-            }
-            if (GnT.GetComponent<NetworkCharacterInfo>().teamNumber == 5)
-            {
-                Team5.Add(GnT);
-            }
-            if (GnT.GetComponent<NetworkCharacterInfo>().teamNumber == 6)
-            {
-                Team6.Add(GnT);
-            }
-            if (GnT.GetComponent<NetworkCharacterInfo>().teamNumber == 7)
-            {
-                Team7.Add(GnT);
-            }
-            if (GnT.GetComponent<NetworkCharacterInfo>().teamNumber == 8)
-            {
-                Team8.Add(GnT);
-            }
-            if (GnT.GetComponent<NetworkCharacterInfo>().teamNumber == 9)
-            {
-                Team9.Add(GnT);
-            }
-            if (GnT.GetComponent<NetworkCharacterInfo>().teamNumber == 10)
-            {
-                Team10.Add(GnT);
+                TeamPlayers.Add(New);
+                CheckAvailablePlayers();
+                checkingPlayers--;
             }
         }
     }
 
-    public void CheackingList(GameObject isc_Dead)
+
+    public  void CheckAvailablePlayers()
+    {
+        foreach (GameObject GnT in TeamPlayers)
+        {
+            Debug.Log("Passed here again");
+            if (GnT.GetComponent<NetworkCharacterInfo>().teamNumber == 1)
+            {
+                if(!Team1.Contains(GnT))
+                { Team1.Add(GnT); }
+            }
+            if (GnT.GetComponent<NetworkCharacterInfo>().teamNumber == 2)
+            {
+                if (!Team2.Contains(GnT))
+                { Team2.Add(GnT); }
+            }
+            if (GnT.GetComponent<NetworkCharacterInfo>().teamNumber == 3)
+            {
+                if (!Team3.Contains(GnT))
+                { Team3.Add(GnT); }
+            }
+            if (GnT.GetComponent<NetworkCharacterInfo>().teamNumber == 4)
+            {
+                if (!Team4.Contains(GnT))
+                { Team4.Add(GnT); }
+            }
+            if (GnT.GetComponent<NetworkCharacterInfo>().teamNumber == 5)
+            {
+                if (!Team5.Contains(GnT))
+                { Team5.Add(GnT); }
+            }
+            if (GnT.GetComponent<NetworkCharacterInfo>().teamNumber == 6)
+            {
+                if (!Team6.Contains(GnT))
+                { Team6.Add(GnT); }
+            }
+            if (GnT.GetComponent<NetworkCharacterInfo>().teamNumber == 7)
+            {
+                if (!Team7.Contains(GnT))
+                { Team7.Add(GnT); }
+            }
+            if (GnT.GetComponent<NetworkCharacterInfo>().teamNumber == 8)
+            {
+                if (!Team8.Contains(GnT))
+                { Team8.Add(GnT); }
+            }
+            if (GnT.GetComponent<NetworkCharacterInfo>().teamNumber == 9)
+            {
+                if (!Team9.Contains(GnT))
+                { Team9.Add(GnT); }
+            }
+            if (GnT.GetComponent<NetworkCharacterInfo>().teamNumber == 10)
+            {
+                if (!Team10.Contains(GnT))
+                { Team10.Add(GnT); }
+            }
+        }
+    }
+
+    public void CheckingList(GameObject isc_Dead)
     {
         if (isc_Dead.GetComponent<NetworkCharacterInfo>().teamNumber == 1)
         {
@@ -313,91 +346,127 @@ public class NetworkCharacterInfo : NetworkBehaviour
     private IEnumerator CheckforTeamStatus(float waitTime)
     {
         yield return new WaitForSeconds(waitTime);
+        Debug.Log("Here I go again on my own");
         if (Team1.Count != 0 && Team2.Count == 0 && Team3.Count == 0 && Team4.Count == 0 && Team5.Count == 0 &&
             Team6.Count == 0 && Team7.Count == 0 && Team8.Count == 0 && Team9.Count == 0 && Team10.Count == 0)
         {
             Debug.Log("Victory for team 1");
-            PlaySound(0);
-            NLH.showResults = true;
-            StartCoroutine(NLH.GoBacktoLobby(10f));
+            foreach (GameObject Winners in Team1)
+            {
+                Winners.GetComponent<NetworkCharacterInfo>().Victory.SetActive(true);
+                Winners.GetComponent<NetworkCharacterInfo>().PlaySound(0);
+                Winners.GetComponent<NetworkCharacterInfo>().NLH.showResults = true;
+                Winners.GetComponent<NetworkCharacterInfo>().StartCoroutine(NLH.GoBacktoLobby(10f));
+            }
         }
         if (Team1.Count == 0 && Team2.Count != 0 && Team3.Count == 0 && Team4.Count == 0 && Team5.Count == 0 &&
           Team6.Count == 0 && Team7.Count == 0 && Team8.Count == 0 && Team9.Count == 0 && Team10.Count == 0)
         {
             Debug.Log("Victory for team 2");
-            PlaySound(0);
-            NLH.showResults = true;
-            StartCoroutine(NLH.GoBacktoLobby(10f));
+            foreach (GameObject Winners in Team2)
+            {
+                Winners.GetComponent<NetworkCharacterInfo>().Victory.SetActive(true);
+                Winners.GetComponent<NetworkCharacterInfo>().PlaySound(0);
+                Winners.GetComponent<NetworkCharacterInfo>().NLH.showResults = true;
+                Winners.GetComponent<NetworkCharacterInfo>().StartCoroutine(NLH.GoBacktoLobby(10f));
+            }
         }
         if (Team1.Count == 0 && Team2.Count == 0 && Team3.Count != 0 && Team4.Count == 0 && Team5.Count == 0 &&
           Team6.Count == 0 && Team7.Count == 0 && Team8.Count == 0 && Team9.Count == 0 && Team10.Count == 0)
         {
             Debug.Log("Victory for team 3");
-            PlaySound(0);
-            NLH.showResults = true;
-            StartCoroutine(NLH.GoBacktoLobby(10f));
+            foreach (GameObject Winners in Team3)
+            {
+                Winners.GetComponent<NetworkCharacterInfo>().Victory.SetActive(true);
+                Winners.GetComponent<NetworkCharacterInfo>().PlaySound(0);
+                Winners.GetComponent<NetworkCharacterInfo>().NLH.showResults = true;
+                Winners.GetComponent<NetworkCharacterInfo>().StartCoroutine(NLH.GoBacktoLobby(10f));
+            }
         }
         if (Team1.Count == 0 && Team2.Count == 0 && Team3.Count == 0 && Team4.Count != 0 && Team5.Count == 0 &&
           Team6.Count == 0 && Team7.Count == 0 && Team8.Count == 0 && Team9.Count == 0 && Team10.Count == 0)
         {
             Debug.Log("Victory for team 4");
-            PlaySound(0);
-            NLH.showResults = true;
-            StartCoroutine(NLH.GoBacktoLobby(10f));
+            foreach (GameObject Winners in Team4)
+            {
+                Winners.GetComponent<NetworkCharacterInfo>().Victory.SetActive(true);
+                Winners.GetComponent<NetworkCharacterInfo>().PlaySound(0);
+                Winners.GetComponent<NetworkCharacterInfo>().NLH.showResults = true;
+                Winners.GetComponent<NetworkCharacterInfo>().StartCoroutine(NLH.GoBacktoLobby(10f));
+            }
         }
         if (Team1.Count == 0 && Team2.Count == 0 && Team3.Count == 0 && Team4.Count == 0 && Team5.Count != 0 &&
           Team6.Count == 0 && Team7.Count == 0 && Team8.Count == 0 && Team9.Count == 0 && Team10.Count == 0)
         {
             Debug.Log("Victory for team 5");
-            PlaySound(0);
-            NLH.showResults = true;
-            StartCoroutine(NLH.GoBacktoLobby(10f));
+            foreach (GameObject Winners in Team5)
+            {
+                Winners.GetComponent<NetworkCharacterInfo>().Victory.SetActive(true);
+                Winners.GetComponent<NetworkCharacterInfo>().PlaySound(0);
+                Winners.GetComponent<NetworkCharacterInfo>().NLH.showResults = true;
+                Winners.GetComponent<NetworkCharacterInfo>().StartCoroutine(NLH.GoBacktoLobby(10f));
+            }
         }
         if (Team1.Count == 0 && Team2.Count == 0 && Team3.Count == 0 && Team4.Count == 0 && Team5.Count == 0 &&
           Team6.Count != 0 && Team7.Count == 0 && Team8.Count == 0 && Team9.Count == 0 && Team10.Count == 0)
         {
             Debug.Log("Victory for team 6");
-            PlaySound(0);
-            NLH.showResults = true;
-            StartCoroutine(NLH.GoBacktoLobby(10f));
+            foreach (GameObject Winners in Team6)
+            {
+                Winners.GetComponent<NetworkCharacterInfo>().Victory.SetActive(true);
+                Winners.GetComponent<NetworkCharacterInfo>().PlaySound(0);
+                Winners.GetComponent<NetworkCharacterInfo>().NLH.showResults = true;
+                Winners.GetComponent<NetworkCharacterInfo>().StartCoroutine(NLH.GoBacktoLobby(10f));
+            }
         }
         if (Team1.Count == 0 && Team2.Count == 0 && Team3.Count == 0 && Team4.Count == 0 && Team5.Count == 0 &&
           Team6.Count == 0 && Team7.Count != 0 && Team8.Count == 0 && Team9.Count == 0 && Team10.Count == 0)
         {
             Debug.Log("Victory for team 7");
-            PlaySound(0);
-            NLH.showResults = true;
-            StartCoroutine(NLH.GoBacktoLobby(10f));
+            foreach (GameObject Winners in Team7)
+            {
+                Winners.GetComponent<NetworkCharacterInfo>().Victory.SetActive(true);
+                Winners.GetComponent<NetworkCharacterInfo>().PlaySound(0);
+                Winners.GetComponent<NetworkCharacterInfo>().NLH.showResults = true;
+                Winners.GetComponent<NetworkCharacterInfo>().StartCoroutine(NLH.GoBacktoLobby(10f));
+            }
         }
         if (Team1.Count == 0 && Team2.Count == 0 && Team3.Count == 0 && Team4.Count == 0 && Team5.Count == 0 &&
           Team6.Count == 0 && Team7.Count == 0 && Team8.Count != 0 && Team9.Count == 0 && Team10.Count == 0)
         {
             Debug.Log("Victory for team 8");
-            PlaySound(0);
-            NLH.showResults = true;
-            StartCoroutine(NLH.GoBacktoLobby(10f));
+            foreach (GameObject Winners in Team8)
+            {
+                Winners.GetComponent<NetworkCharacterInfo>().Victory.SetActive(true);
+                Winners.GetComponent<NetworkCharacterInfo>().PlaySound(0);
+                Winners.GetComponent<NetworkCharacterInfo>().NLH.showResults = true;
+                Winners.GetComponent<NetworkCharacterInfo>().StartCoroutine(NLH.GoBacktoLobby(10f));
+            }
         }
         if (Team1.Count == 0 && Team2.Count == 0 && Team3.Count == 0 && Team4.Count == 0 && Team5.Count == 0 &&
           Team6.Count == 0 && Team7.Count == 0 && Team8.Count == 0 && Team9.Count != 0 && Team10.Count == 0)
         {
             Debug.Log("Victory for team 9");
-            PlaySound(0);
-            NLH.showResults = true;
-            StartCoroutine(NLH.GoBacktoLobby(10f));
+            foreach (GameObject Winners in Team9)
+            {
+                Winners.GetComponent<NetworkCharacterInfo>().Victory.SetActive(true);
+                Winners.GetComponent<NetworkCharacterInfo>().PlaySound(0);
+                Winners.GetComponent<NetworkCharacterInfo>().NLH.showResults = true;
+                Winners.GetComponent<NetworkCharacterInfo>().StartCoroutine(NLH.GoBacktoLobby(10f));
+            }
         }
         if (Team1.Count == 0 && Team2.Count == 0 && Team3.Count == 0 && Team4.Count == 0 && Team5.Count == 0 &&
           Team6.Count == 0 && Team7.Count == 0 && Team8.Count == 0 && Team9.Count == 0 && Team10.Count != 0)
         {
             Debug.Log("Victory for team 10");
-            PlaySound(0);
-            NLH.showResults = true;
-            StartCoroutine(NLH.GoBacktoLobby(10f));
+            foreach (GameObject Winners in Team10)
+            {
+                Winners.GetComponent<NetworkCharacterInfo>().Victory.SetActive(true);
+                Winners.GetComponent<NetworkCharacterInfo>().PlaySound(0);
+                Winners.GetComponent<NetworkCharacterInfo>().NLH.showResults = true;
+                Winners.GetComponent<NetworkCharacterInfo>().StartCoroutine(NLH.GoBacktoLobby(10f));
+            }
         }
-    }
-
-    // Update is called once per frame
-    void Update () {
-
     }
 
     public void Init()
