@@ -30,7 +30,6 @@ public class AssignPlayerInfo : NetworkBehaviour {
 	public void Cmd_SpawnHead(GameObject go, GameObject pos)
 	{
 		GameObject HeadBall = Instantiate(go, pos.transform.position, Quaternion.identity) as GameObject;
-//		HeadBall.GetComponent<Renderer> ().material.mainTexture = go.GetComponent<PlayerInfo>().bodyparts [0].GetComponent<Renderer> ().material.mainTexture;
 		NetworkServer.Spawn(HeadBall);
 	}
 }

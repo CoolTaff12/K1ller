@@ -127,28 +127,6 @@ public class GrabAndToss : NetworkBehaviour
 		ballScript = bs.GetComponent<DodgeBallBehaviour> ();
 		ballScript.Rpc_GetPickedUp (go);
 	}
-//	/// <summary>
-//	/// Requests that the fake ball switches layer.
-//	/// </summary>
-//	/// <param name="go">fake ball object</param>
-//	[Command]
-//	void Cmd_toggleFake(GameObject go){
-//		Rpc_toggleFake (go);
-//	}
-//	/// <summary>
-//	/// Switches the layer of the fake ball
-//	/// </summary>
-//	/// <param name="go">fake ball object</param>
-//	[ClientRpc]
-//	void Rpc_toggleFake(GameObject go){
-//		if (holdingBall) {
-//			go.layer = 9;
-//		}
-//		if (!holdingBall) {
-//			go.GetComponent<Renderer> ().material.mainTexture = currentBall.GetComponent<Renderer> ().material.mainTexture;
-//			go.layer = 0;
-//		}
-//	}
 	/// <summary>
 	/// timer that lets the animation run a bit before proceeding.
 	/// </summary>

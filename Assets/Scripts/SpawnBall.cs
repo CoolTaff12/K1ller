@@ -19,6 +19,10 @@ public class SpawnBall : NetworkBehaviour {
 			CmdSpawnOnServer(SpeedingBall);	
 		}
 	}
+	/// <summary>
+	/// Spawns an object on the server.
+	/// </summary>
+	/// <param name="go">GameObject that will be spawned.</param>
 	[Command]
 	public void CmdSpawnOnServer(GameObject go){
 		NetworkServer.Spawn(go);

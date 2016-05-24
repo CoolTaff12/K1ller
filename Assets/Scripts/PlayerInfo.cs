@@ -131,7 +131,6 @@ public class PlayerInfo : NetworkBehaviour {
             NCI.GetComponent<NetworkCharacterInfo>().Rpc_CheckingList(gameObject);
             Debug.Log("Players name " + NCI.name);
         }
-        //  gameObject.GetComponent<PlayerInfo>().dead = true;
         gameObject.GetComponent<BoxCollider> ().enabled = false;
 
 

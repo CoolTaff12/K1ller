@@ -89,7 +89,6 @@ public class DodgeBallBehaviour : NetworkBehaviour {
         ParticlesAwareness.SetActive(false);
 		rb.velocity = Vector3.zero;
 		rb.angularVelocity = Vector3.zero;
-//		gameObject.layer = 9;
 
 	
 	}
@@ -109,7 +108,6 @@ public class DodgeBallBehaviour : NetworkBehaviour {
 		gat = null;
         ParticlesAwareness.SetActive(true);
         pickedUp = false;
-//		gameObject.layer = 0;
 	}
 
 }
